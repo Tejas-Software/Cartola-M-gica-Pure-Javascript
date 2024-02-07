@@ -1,0 +1,15 @@
+FONTES
+
+
+1) Fonte das palavras MÁGICO e VOCÊ: BigDots
+
+   Cor Azul da fonte das palavras MÁGICO e VOCÊ : #00FFFF
+
+2) Fonte dos números do painel de pontos: BigDots
+
+3) Fonte dos números do painel tempo: Agency FB Regular
+
+4) Fonte das palavras do painel palavra: Eurostile Bold
+
+   As cores das palavras do painel palava serão diversas.
+   

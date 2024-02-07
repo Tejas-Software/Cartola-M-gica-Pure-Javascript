@@ -1,0 +1,492 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="358px" height="123px" viewBox="0 0 358 123">
+<defs>
+<linearGradient id="Gradient_1" gradientUnits="userSpaceOnUse" x1="179.25" y1="13.787500000000001" x2="178.75" y2="109.11250000000001" spreadMethod="pad">
+<stop  offset="0%" stop-color="#CCCCCC"/>
+
+<stop  offset="12.156862745098039%" stop-color="#FCFBE5"/>
+
+<stop  offset="85.88235294117646%" stop-color="#F8F8E3"/>
+
+<stop  offset="100%" stop-color="#DCDCD4"/>
+</linearGradient>
+
+<radialGradient id="Gradient_2" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="12.350000000000003" fx="0" fy="0" gradientTransform="matrix( 0.9999999999999998, 0, 0, 0.9999999999999998, 10.6,11.15) " spreadMethod="pad">
+<stop  offset="0%" stop-color="#FCFBE5"/>
+
+<stop  offset="60%" stop-color="#FFFF66"/>
+
+<stop  offset="100%" stop-color="#FFCC33"/>
+</radialGradient>
+
+<g id="Layer0_0_MEMBER_0_FILL">
+<path fill="#AF8D5A" stroke="none" d="
+M 357.75 14.65
+Q 357.75 11.65 356.7 9.1 355.6 6.5 353.45 4.4
+L 353.4 4.35
+Q 349.1 0.15 343.2 0.15
+L 14.8 0.15
+Q 8.85 0.15 4.55 4.4 0.3 8.65 0.3 14.65
+L 0.3 108.35
+Q 0.3 114.35 4.55 118.6 8.85 122.9 14.8 122.9
+L 343.2 122.9
+Q 349.15 122.9 353.45 118.6
+L 353.45 118.65
+Q 355.6 116.5 356.7 113.95 357.75 111.35 357.75 108.35
+L 357.75 14.65 Z"/>
+</g>
+
+<g id="Layer0_0_MEMBER_1_FILL">
+<path fill="#FFCC66" stroke="none" d="
+M 353.45 4.4
+L 353.4 4.35
+Q 349.1 0.15 343.2 0.15
+L 14.8 0.15
+Q 8.85 0.15 4.55 4.4 0.3 8.65 0.3 14.65
+L 0.3 108.35
+Q 0.3 114.35 4.55 118.6 8.85 122.9 14.8 122.9
+L 343.2 122.9
+Q 349.15 122.9 353.45 118.6
+L 353.45 118.65
+Q 355.6 116.5 356.7 113.95 357.75 111.35 357.75 108.35
+L 357.75 14.65
+Q 357.75 11.65 356.7 9.1 355.6 6.5 353.45 4.4
+M 352.05 5.8
+L 352.05 5.85
+Q 353.9 7.6 354.85 9.85 355.75 12.05 355.75 14.65
+L 355.75 108.35
+Q 355.75 110.95 354.85 113.2 353.9 115.4 352.05 117.2 348.35 120.9 343.2 120.9
+L 14.8 120.9
+Q 9.65 120.9 5.95 117.2 2.3 113.55 2.3 108.35
+L 2.3 14.65
+Q 2.3 9.45 5.95 5.8 9.65 2.15 14.8 2.15
+L 343.2 2.15
+Q 348.3 2.15 352 5.8
+L 352 5.75 352.05 5.8 Z"/>
+
+<path fill="#AF8D5A" stroke="none" d="
+M 352.05 5.85
+L 352.05 5.8 352 5.75 352 5.8
+Q 348.3 2.15 343.2 2.15
+L 14.8 2.15
+Q 9.65 2.15 5.95 5.8 2.3 9.45 2.3 14.65
+L 2.3 108.35
+Q 2.3 113.55 5.95 117.2 9.65 120.9 14.8 120.9
+L 343.2 120.9
+Q 348.35 120.9 352.05 117.2 353.9 115.4 354.85 113.2 355.75 110.95 355.75 108.35
+L 355.75 14.65
+Q 355.75 12.05 354.85 9.85 353.9 7.6 352.05 5.85
+M 330.15 14.65
+Q 334.5 14.65 337.55 17.75 340.65 20.8 340.65 25.15
+L 340.65 97.85
+Q 340.65 102.2 337.55 105.25 334.5 108.35 330.15 108.35
+L 203.3 108.35
+Q 203.1 108.35 202.9 108.35
+L 27.85 108.35
+Q 23.5 108.35 20.45 105.25 17.35 102.2 17.35 97.85
+L 17.35 25.15
+Q 17.35 20.8 20.45 17.75 23.5 14.65 27.85 14.65
+L 330.15 14.65 Z"/>
+
+<path fill="url(#Gradient_1)" stroke="none" d="
+M 337.55 17.75
+Q 334.5 14.65 330.15 14.65
+L 27.85 14.65
+Q 23.5 14.65 20.45 17.75 17.35 20.8 17.35 25.15
+L 17.35 97.85
+Q 17.35 102.2 20.45 105.25 23.5 108.35 27.85 108.35
+L 202.9 108.35
+Q 203.1 108.35 203.3 108.35
+L 330.15 108.35
+Q 334.5 108.35 337.55 105.25 340.65 102.2 340.65 97.85
+L 340.65 25.15
+Q 340.65 20.8 337.55 17.75 Z"/>
+</g>
+
+<g id="LAMPADA_0_Layer0_0_FILL">
+<path fill="url(#Gradient_2)" stroke="none" d="
+M 22.7 11.35
+Q 22.7 6.65 19.35 3.3 16.05 0 11.35 0 6.65 0 3.3 3.3 0 6.65 0 11.35 0 16.05 3.3 19.35 6.65 22.7 11.35 22.7 16.05 22.7 19.35 19.35 22.7 16.05 22.7 11.35 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#Layer0_0_MEMBER_0_FILL"/>
+</g>
+
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#Layer0_0_MEMBER_1_FILL"/>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 18.2,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 32.25,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 46.3,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 60.35,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 74.4,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 88.45,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 102.5,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 116.55,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 130.6,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 144.65,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 158.7,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 172.75,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 18.2,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 32.3,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 46.4,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 60.5,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 74.6,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 88.7,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 102.8,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 116.9,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 131,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 145.1,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 159.2,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 187.4,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 173.3,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 200.85,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 214.9,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 228.95,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 243,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 257.05,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 271.1,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 285.15,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 299.2,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 313.25,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 328.05,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 201.5,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 215.6,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 229.7,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 243.8,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 257.9,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 272,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 286.1,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 300.2,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 314.3,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 328.6,109.95) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( -0.432708740234375, 0, 0, 0.432708740234375, 352.3,8) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( -0.432708740234375, 0, 0, 0.432708740234375, 353.5,21.9) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( -0.432708740234375, 0, 0, 0.432708740234375, 353.5,35.8) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( -0.432708740234375, 0, 0, 0.432708740234375, 353.5,49.7) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( -0.432708740234375, 0, 0, 0.432708740234375, 353.5,63.6) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( -0.432708740234375, 0, 0, 0.432708740234375, 353.5,77.5) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( -0.432708740234375, 0, 0, 0.432708740234375, 353.5,91.4) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( -0.432708740234375, 0, 0, 0.432708740234375, 352.3,105.55) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.432708740234375, 0, 0, 0.432708740234375, 186.8,3.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( -0.432708740234375, 0, 0, 0.432708740234375, 15.3,8) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( -0.432708740234375, 0, 0, 0.432708740234375, 14.7,21.9) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( -0.432708740234375, 0, 0, 0.432708740234375, 14.7,35.8) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( -0.432708740234375, 0, 0, 0.432708740234375, 14.7,49.7) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( -0.432708740234375, 0, 0, 0.432708740234375, 14.7,63.6) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( -0.432708740234375, 0, 0, 0.432708740234375, 14.7,77.5) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( -0.432708740234375, 0, 0, 0.432708740234375, 14.7,91.4) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( -0.432708740234375, 0, 0, 0.432708740234375, 15.3,105.55) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#LAMPADA_0_Layer0_0_FILL"/>
+</g>
+</g>
+</svg>
