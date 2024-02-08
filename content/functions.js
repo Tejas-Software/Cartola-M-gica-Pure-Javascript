@@ -55,4 +55,49 @@ export const insertImageWithHoverAndLink = (src, bottom, left, opacity, width, h
     
     document.body.appendChild(currentImage)
 }
+export const turnPhoneToPlay = () => {
+
+
+    let message = document.createElement("p");
+    message.id = "turnPhoneToPlay";
+    message.style.position = "absolute";
+    message.style.left = "5vw"
+    message.style.top = "1vh"
+    message.style.userSelect = "none"
+    message.style.color = "white";
+    message.style.textAlign = "center";
+    message.style.textShadow = "2pt 1pt 5pt black";
+    message.style.fontSize = "12vw"
+    message.style.fontFamily = "arial"
+    message.style.fontWeight = "bold"
+
+    message.innerText = "VIRE O DISPOSITIVO PARA JOGAR."
+
+    let brand_logo = document.createElement("img");
+    brand_logo.style.position = "absolute";
+    brand_logo.id = "brand_logo";
+    brand_logo.style.userSelect = "none"
+    brand_logo.style.left = "18vw"
+    brand_logo.style.bottom = "5vh"
+    brand_logo.style.opacity = "0.5"
+    brand_logo.style.width = "65vw"
+    brand_logo.src = '/content/tela_01/brand_logo.png'
+
+
+
+    document.body.append(message, brand_logo)
+}
+export const unrenderTurnPhoneToPlay = () => {
+
+    let element = document.getElementById('turnPhoneToPlay');
+    let brand_logo = document.getElementById('brand_logo')
+    if(element){
+        element.parentNode.removeChild(element);
+    }
+    if(brand_logo){
+        brand_logo.parentNode.removeChild(brand_logo);
+    }
+
+
+}
 
