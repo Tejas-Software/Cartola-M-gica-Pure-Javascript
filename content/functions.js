@@ -1,6 +1,6 @@
 export const createBackground = (image) => {
     document.body.style.width = "100vw";
-    document.body.style.height = "100vh"
+    document.body.style.height = "100vh"; 
     document.body.style.backgroundImage = `url(${image})`;
     document.body.style.backgroundPosition = "center";
     document.body.style.backgroundRepeat = "no-repeat";
@@ -11,6 +11,7 @@ export const createBackground = (image) => {
 export const insertImage = (src, bottom, left, opacity, width, height, zIndex) => {
     let currentImage = document.createElement("img");
     currentImage.src = src
+    currentImage.classList.add("image") 
     currentImage.style.opacity = opacity
     currentImage.style.userSelect = "none"
     currentImage.style.position = "absolute"
@@ -25,6 +26,7 @@ export const insertImageWithHoverAndLink = (src, bottom, left, opacity, width, h
   
     let currentImage = document.createElement("img"); 
     currentImage.src = src
+    currentImage.classList.add("image") 
     currentImage.style.opacity = opacity
     currentImage.style.position = "absolute"
     currentImage.style.bottom = bottom
