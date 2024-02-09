@@ -55,8 +55,8 @@ class ButtonStart {
 class ImageCartola {
     constructor(game){
         this.game = game;
-        this.width = (window.innerWidth * 0.5);
-        this.height = (window.innerHeight * 0.4);
+        this.width = window.innerWidth * 0.5;
+        this.height = this.width * 0.50;
         this.x = (window.innerWidth * 0.20)
         this.y = (window.innerHeight * -0.5) ;
         this.speed = 3.5;
@@ -69,7 +69,7 @@ class ImageCartola {
 
     tick(){
 
-        if(this.y <= (window.innerHeight * 0.05)){
+        if(this.y <= (window.innerHeight - (window.innerHeight * 0.90))){
             this.y += this.speed;
         }
     }
@@ -93,9 +93,9 @@ class ResolutionMessage {
 class ImageCartas {
     constructor(game){
         this.game = game;
-        this.width = (window.innerWidth * 0.5);
-        this.height = (window.innerHeight * 0.4);
-        this.x = (window.innerWidth * 0.25)
+        this.width = window.innerWidth * 0.6;
+        this.height = this.width * 0.50;
+        this.x = (window.innerWidth * 0.20)
         this.y = (window.innerHeight * 1.5) ;
         this.speed = 3.5;
         this.image = document.getElementById("image_cartas")
@@ -107,7 +107,7 @@ class ImageCartas {
 
     tick(){
 
-        if(this.y >= (window.innerHeight * 0.4)){
+        if(this.y >= (window.innerHeight - (window.innerHeight - (this.height)))){
             this.y -= this.speed;
         }
     }
@@ -134,17 +134,20 @@ class Game {
         this.ResolutionMessage = new ResolutionMessage(this)
     }
     render(context){
-        this.brand_logo.draw(context)
-        this.brand_logo.tick();
 
         this.ButtonStart.draw(context)
         this.ButtonStart.tick();
 
+        this.ImageCartas.draw(context)
+        this.ImageCartas.tick()
+
         this.ImageCartola.draw(context)
         this.ImageCartola.tick()
 
-        this.ImageCartas.draw(context)
-        this.ImageCartas.tick()
+        this.brand_logo.draw(context)
+        this.brand_logo.tick();
+
+
     }
     renderResolutionMessage(context){
         this.brand_logo.draw(context)
@@ -163,7 +166,7 @@ window.addEventListener('load', ()=>{
 
 
     const animate = () => {
-        if(canvas.width > 768 && canvas.height > 468) {
+        if(canvas.width > 650) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             game.render(ctx);
             requestAnimationFrame(animate);
