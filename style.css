@@ -13,3 +13,16 @@
     background: url('./content/tela_01/cenario.svg');
     background-size: cover;
 }
+
+#brand_logo{
+    display: none;
+}
+#button_start{
+    display: none;
+}
+#image_cartola{
+    display: none;
+}
+#image_cartas{
+    display: none;
+}

@@ -8,20 +8,21 @@ class Player {
 class BrandLogo {
     constructor(game){
         this.game = game;
-        this.width = 100;
-        this.height = (window.innerHeight / 10);
+        this.width = window.innerWidth * 0.25;
+        this.height = this.width * 0.20;
         this.x = (window.innerWidth / 100);
-        this.y = (window.innerHeight - 10) ;
+        this.y = window.innerWidth /  window.innerWidth * window.innerHeight ;
         this.speed = 1.5;
+        this.image = document.getElementById("brand_logo")
     }
 
     draw(context){
-        context.fillRect(this.x, this.y, this.width, this.height);
+        context.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 
     tick(){
 
-        if(this.y >= (window.innerHeight / 1.16)){
+        if(this.y >= (window.innerHeight - (this.height * 1.5))){
             this.y -= this.speed;
         }
     }
@@ -35,10 +36,12 @@ class ButtonStart {
         this.x = (window.innerWidth / 1.18);
         this.y = (window.innerHeight * 1.25) ;
         this.speed = 1.5;
+        this.image = document.getElementById("button_start")
+
     }
 
     draw(context){
-        context.fillRect(this.x, this.y, this.width, this.height);
+        context.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 
     tick(){
@@ -53,19 +56,20 @@ class ImageCartola {
     constructor(game){
         this.game = game;
         this.width = (window.innerWidth * 0.5);
-        this.height = (window.innerHeight * 0.2);
-        this.x = (window.innerWidth * 0.25)
+        this.height = (window.innerHeight * 0.4);
+        this.x = (window.innerWidth * 0.20)
         this.y = (window.innerHeight * -0.5) ;
         this.speed = 3.5;
+        this.image = document.getElementById("image_cartola")
     }
 
     draw(context){
-        context.fillRect(this.x, this.y, this.width, this.height);
+        context.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 
     tick(){
 
-        if(this.y <= (window.innerHeight * 0.15)){
+        if(this.y <= (window.innerHeight * 0.05)){
             this.y += this.speed;
         }
     }
@@ -90,19 +94,20 @@ class ImageCartas {
     constructor(game){
         this.game = game;
         this.width = (window.innerWidth * 0.5);
-        this.height = (window.innerHeight * 0.2);
+        this.height = (window.innerHeight * 0.4);
         this.x = (window.innerWidth * 0.25)
         this.y = (window.innerHeight * 1.5) ;
         this.speed = 3.5;
+        this.image = document.getElementById("image_cartas")
     }
 
     draw(context){
-        context.fillRect(this.x, this.y, this.width, this.height);
+        context.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 
     tick(){
 
-        if(this.y >= (window.innerHeight * 0.65)){
+        if(this.y >= (window.innerHeight * 0.4)){
             this.y -= this.speed;
         }
     }
@@ -142,6 +147,8 @@ class Game {
         this.ImageCartas.tick()
     }
     renderResolutionMessage(context){
+        this.brand_logo.draw(context)
+        this.brand_logo.tick();
         this.ResolutionMessage.draw(context)
     }
 }
@@ -156,7 +163,7 @@ window.addEventListener('load', ()=>{
 
 
     const animate = () => {
-        if(canvas.width > 650) {
+        if(canvas.width > 768 && canvas.height > 468) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             game.render(ctx);
             requestAnimationFrame(animate);
