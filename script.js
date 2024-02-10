@@ -21,8 +21,11 @@ class BrandLogo {
     }
 
     draw(context){
+        context.globalAlpha = 0.5; // Define a transparência para 50%
         context.drawImage(this.image, this.x, this.y, this.width, this.height);
+        context.globalAlpha = 1.0; // Restaura a opacidade para o padrão
     }
+    
 
     tick(){
 
@@ -204,9 +207,8 @@ window.addEventListener('load', ()=>{
 
     const game = new Game(canvas);
 
-
     const animate = () => {
-        if(canvas.width > 650 && canvas.height > 375) {
+        if(canvas.width > 650 && canvas.height > 350) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             game.render(ctx);
             requestAnimationFrame(animate);
@@ -229,8 +231,18 @@ window.addEventListener('load', ()=>{
         console.log(a.isColliding)
     }
 
-
     const hover_on_element = (hover_this_element) => {
+
+        canvas.addEventListener('click', function(e) {
+            e.preventDefault();
+    
+
+            if (start_button_hover.isColliding) {
+                window.location.href = 'https://www.example.com';
+            }
+
+        });
+        
 
         canvas.addEventListener('mousemove', function(event) {
 
