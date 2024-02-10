@@ -1,3 +1,6 @@
+let start_button_hover = {x: 0, y: 0, width: 0, height: 0}
+
+
 class Player {
     constructor(game){
         this.game = game;
@@ -31,24 +34,32 @@ class BrandLogo {
 class ButtonStart {
     constructor(game){
         this.game = game;
-        this.width = 100;
-        this.height = (window.innerHeight / 10);
+        this.width = (window.innerWidth * 0.10);
+        this.height = this.width * 0.4
         this.x = (window.innerWidth / 1.18);
         this.y = (window.innerHeight * 1.25) ;
         this.speed = 1.5;
         this.image = document.getElementById("button_start")
-
     }
+    
 
     draw(context){
+
         context.drawImage(this.image, this.x, this.y, this.width, this.height);
+
     }
 
     tick(){
-
-        if(this.y >= (window.innerHeight / 1.3)){
+        if(this.y >= (window.innerHeight * 0.95) - this.height){
             this.y -= this.speed;
         }
+        if(this.x >= (window.innerWidth * 0.95) - this.width){
+            this.x -= this.speed;
+        }
+        start_button_hover.x = this.x
+        start_button_hover.y = this.y
+        start_button_hover.width = this.width
+        start_button_hover.height = this.height
     }
 }
 
@@ -59,7 +70,7 @@ class ImageCartola {
         this.height = this.width * 0.50;
         this.x = (window.innerWidth * 0.20)
         this.y = (window.innerHeight * -0.5) ;
-        this.speed = 3.5;
+        this.speed = 4.5;
         this.image = document.getElementById("image_cartola")
     }
 
@@ -69,7 +80,7 @@ class ImageCartola {
 
     tick(){
 
-        if(this.y <= (window.innerHeight - (window.innerHeight * 0.90))){
+        if(this.y <= (window.innerHeight - (window.innerHeight * 0.98))){
             this.y += this.speed;
         }
     }
@@ -97,7 +108,7 @@ class ImageCartas {
         this.height = this.width * 0.50;
         this.x = (window.innerWidth * 0.20)
         this.y = (window.innerHeight * 1.5) ;
-        this.speed = 3.5;
+        this.speed = 4.5;
         this.image = document.getElementById("image_cartas")
     }
 
@@ -107,7 +118,7 @@ class ImageCartas {
 
     tick(){
 
-        if(this.y >= (window.innerHeight - (window.innerHeight - (this.height)))){
+        if(this.y >= (window.innerHeight * 0.98) - this.height){
             this.y -= this.speed;
         }
     }
@@ -166,7 +177,7 @@ window.addEventListener('load', ()=>{
 
 
     const animate = () => {
-        if(canvas.width > 650) {
+        if(canvas.width > 650 && canvas.height > 375) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             game.render(ctx);
             requestAnimationFrame(animate);
@@ -178,6 +189,32 @@ window.addEventListener('load', ()=>{
 
     }
     animate();
+
+
+    const hover_on_element = (hover_this_element) => {
+
+        canvas.addEventListener('mousemove', function(event) {
+
+            let rect = canvas.getBoundingClientRect();
+            let mouseX = event.clientX - rect.left;
+            let mouseY = event.clientY - rect.top;
+    
+            console.log("Mx: " + mouseX);
+            console.log("Hx: " + hover_this_element.x);
+            
+            console.log("My: " + mouseY);
+            console.log("Hy " + hover_this_element.y);
+
+            if(mouseX >= hover_this_element.x && mouseX <= (hover_this_element.x + hover_this_element.width)){
+                console.log("colisão detectada no eixo X")
+            }
+        
+    
+        });
+    }
+    hover_on_element(start_button_hover);
+
+
 })
 
 window.addEventListener('resize', () => {location.reload();})
