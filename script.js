@@ -310,7 +310,7 @@ const BeginPlay = () => {
         const game = new Game(canvas);
         const animate = () => {
             /**ONLY RENDER THE GAME IF RESOLUTION FITS THESE REQUIREMENTS */
-            if(canvas.width > 650 && canvas.height > 350) {
+            if(canvas.width > 650) {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 game.render(ctx);
                 requestAnimationFrame(animate);
