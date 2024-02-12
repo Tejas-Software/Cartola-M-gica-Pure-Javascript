@@ -14,15 +14,12 @@
     background-size: cover;
 }
 
-#brand_logo{
+#button_back{
     display: none;
 }
-#button_start{
+#button_continue{
     display: none;
 }
-#image_cartola{
-    display: none;
-}
-#image_cartas{
+#image_magician{
     display: none;
 }

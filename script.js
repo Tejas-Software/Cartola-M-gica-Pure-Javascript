@@ -322,8 +322,6 @@ const BeginPlay = () => {
         }
         animate();
     
-
-
         /**CALL THIS FUNCTION WILL ACTIVATE THE HOVERING EFFECT ON THE ELEMENT PASSED AS PARAMETER */
         hover_on_element(start_button_hover, canvas);
     
