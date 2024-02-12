@@ -2,7 +2,7 @@
 
 /**add all variables (elements) that will be hovered here */
 let continue_button_hover = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
-let back_button_hover = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
+let doubt_button_hover = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
 /** */
 
 const checkMouseCollision = (a, b) => {
@@ -26,19 +26,20 @@ const hoverTransform = (element, e) => {
 
     if (element.isMouseColliding){
 
-        if(e.width <= e.initialWidth * 1.02) {
+        if(e.width <= e.initialWidth * 1.04) {
             e.width += 1;
-            e.height = e.width * 0.2
+            e.height += 1;
             document.body.style.cursor = "pointer"
         }
 
     } else {
-        if(e.width >= e.initialWidth) {
-            e.width -= 2;
-            e.height = e.width * 0.2
-            
+
+        if(e.width > e.initialWidth ) {
+            e.width -= 1;
+            e.height -= 1;
             document.body.style.cursor = "auto"
         }
+        
     }
 }
 const hover_on_element = (hover_this_element, canvas, link) => {
@@ -78,19 +79,19 @@ class Player {
         this.points = 0;
     }
 }
-class ButtonBack {
+class DoubtButton {
     constructor(game){
         this.game = game;
-        this.image = document.getElementById("button_back")
+        this.image = document.getElementById("doubt_button")
 
-        this.height = window.innerHeight * 0.7
-        this.width = this.height * 0.5
+        this.height = window.innerHeight * 0.1
+        this.width = this.height * 1
         
         this.initialWidth = this.width; /**INITIAL WIDTH IS USED TO HOVER ANIMATIONS */
 
-        this.x = (window.innerWidth / 100);
-        this.y = window.innerHeight - this.height * 0.01 ;
-        this.speed = 0.4;
+        this.x = window.innerWidth * 0.012
+        this.y = window.innerHeight * -0.1
+        this.speed = 1.4;
 
     }
 
@@ -104,8 +105,8 @@ class ButtonBack {
         /**THIS ANIMATION RUNS IN THE BEGINNING OF THE GAME */
         const begginingAnimation = (origin) => {
             if(origin === "fromBottom"){
-                if(this.y >= (window.innerHeight * 0.95) - this.height){
-                    this.y -= this.speed;
+                if(this.y < window.innerHeight * 0.012){
+                    this.y += this.speed;
                 }
 
             }
@@ -113,49 +114,7 @@ class ButtonBack {
         }
        begginingAnimation("fromBottom");
 
-       hoverTransform(back_button_hover, this);
-
-
-    }
-}
-class ButtonContinue {
-    constructor(game){
-        this.game = game;
-        this.image = document.getElementById("button_continue")
-
-        this.height = window.innerHeight * 0.21
-        this.width = this.height * 2
-
-        this.initialWidth = this.width; /**INITIAL WIDTH IS USED TO HOVER ANIMATIONS */
-        this.x = (window.innerWidth - this.width * 1.10);
-        this.y = window.innerHeight - this.height * 0.01 ;
-        this.speed = 0.4;
-
-    }
-    
-    draw(context){
-        context.drawImage(this.image, this.x, this.y, this.width, this.height);
-    }
-
-    tick(){
-
-        /**THIS ANIMATION RUNS IN THE BEGINNING OF THE GAME */
-        const begginingAnimation = (origin) => {
-
-            if(origin === "fromBottom"){
-                if(this.y >= (window.innerHeight * 0.95) - this.height){
-                    this.y -= this.speed;
-                }
-
-            }
-
-
-        }
-        begginingAnimation("fromBottom");
-
-
-        /**HOVER ANIMATION WHEN MOUSE OVER */
-        hoverTransform(continue_button_hover, this);
+       hoverTransform(doubt_button_hover, this);
 
 
     }
@@ -182,16 +141,52 @@ class ResolutionMessage {
     }
 
 }
-class ImageMagician {
+class TimePanel {
     constructor(game){
         this.game = game;
-        this.image = document.getElementById("image_magician")
+        this.image = document.getElementById("time_panel")
 
-        this.height = window.innerHeight * 0.95;
-        this.width = window.innerWidth * 0.6;
+        this.height = window.innerHeight * 0.1;
+        this.width = window.innerWidth * 0.13;
 
-        this.x = 0
-        this.y = window.innerHeight - this.height ;
+        this.x = window.innerWidth * 0.08
+        this.y = -50 ;
+        this.speed = 1.4;
+
+        this.opacity = 0;
+
+    }
+
+    draw(context){
+        context.drawImage(this.image, this.x, this.y, this.width, this.height);
+    }
+
+    tick(){
+
+        /**THIS ANIMATION RUNS IN THE BEGINNING OF THE GAME */
+        const begginingAnimation = (origin) => {
+            if(origin === "fromBottom"){
+                if(this.y < window.innerHeight * 0.012){
+                    this.y += this.speed;
+                }
+
+            }
+
+        }
+       begginingAnimation("fromBottom");
+
+    }
+}
+class MagicianPanel {
+    constructor(game){
+        this.game = game;
+        this.image = document.getElementById("magician_panel")
+
+        this.height = window.innerHeight * 0.25;
+        this.width = window.innerWidth * 0.12;
+
+        this.x = (window.innerWidth - this.width * 2.5) 
+        this.y = 0 ;
         this.speed = 4.5;
 
         this.opacity = 0;
@@ -218,16 +213,52 @@ class ImageMagician {
 
     }
 }
-class Rabbit {
+class YouPanel {
     constructor(game){
         this.game = game;
-        this.image = document.getElementById("rabbit")
+        this.image = document.getElementById("you_panel")
 
-        this.height = window.innerHeight;
-        this.width = window.innerWidth * 0.6;
+        this.height = window.innerHeight * 0.25;
+        this.width = window.innerWidth * 0.12;
 
-        this.x = (window.innerWidth * 0.35) 
+        this.x = (window.innerWidth - this.width * 1.25) 
         this.y = 0 ;
+        this.speed = 4.5;
+
+        this.opacity = 0;
+
+    }
+
+    draw(context){
+        context.globalAlpha = this.opacity;
+        context.drawImage(this.image, this.x, this.y, this.width, this.height);
+        context.globalAlpha = 1;
+    }
+
+    tick(){
+
+        const begginingAnimation = (origin) => {
+            console.log(this.y)
+            if(origin === "AppearGradient"){
+                if(this.opacity < 1){
+                    this.opacity += 0.009;
+                }
+            }
+        }
+        begginingAnimation("AppearGradient");
+
+    }
+}
+class Cartola {
+    constructor(game){
+        this.game = game;
+        this.image = document.getElementById("cartola")
+
+        this.height = window.innerHeight * 0.9;
+        this.width = this.height * 1;
+
+        this.x = (window.innerWidth * 0.5) - (this.width * 0.5) 
+        this.y = -100 ;
         this.speed = 4.5;
 
         this.opacity = 0;
@@ -268,10 +299,11 @@ class Game {
         this.height = this.canvas.height;
 
         /**GAME CLASS WILL EXECUTE AND OWN ALL THESE CLASSES */
-        this.back_button = new ButtonBack(this)
-        this.ButtonContinue = new ButtonContinue(this)
-        this.ImageMagician = new ImageMagician(this)
-        this.Rabbit = new Rabbit(this)
+        this.doubt_button = new DoubtButton(this)
+        this.YouPanel = new YouPanel(this)
+        this.TimePanel = new TimePanel(this)
+        this.MagicianPanel = new MagicianPanel(this)
+        this.Cartola = new Cartola(this)
         this.ResolutionMessage = new ResolutionMessage(this)
     }
     /**THIS METHOD WILL RENDER THE GAME */
@@ -279,17 +311,20 @@ class Game {
 
 
 
-        this.ImageMagician.draw(context);
-        this.ImageMagician.tick();
+        this.TimePanel.draw(context);
+        this.TimePanel.tick();
 
-        this.Rabbit.draw(context);
-        this.Rabbit.tick();
+        this.MagicianPanel.draw(context);
+        this.MagicianPanel.tick();
 
-        this.back_button.draw(context);
-        this.back_button.tick();
+        this.doubt_button.draw(context);
+        this.doubt_button.tick();
 
-        this.ButtonContinue.draw(context);
-        this.ButtonContinue.tick();
+        this.YouPanel.draw(context);
+        this.YouPanel.tick();
+
+        this.Cartola.draw(context);
+        this.Cartola.tick();
 
     }
     /**THIS METHOD WILL RENDER AN WARNING TO UPDATE THE RESOLUTION IF DOESN'T FIT THE REQUIRED MIN RESOLUTION */
@@ -342,7 +377,7 @@ const BeginPlay = () => {
     
         /**CALL THIS FUNCTION WILL ACTIVATE THE HOVERING EFFECT ON THE ELEMENT PASSED AS PARAMETER */
         hover_on_element(continue_button_hover, canvas, "../scene_5/");
-        hover_on_element(back_button_hover, canvas, "../scene_3")
+        hover_on_element(doubt_button_hover, canvas, "../scene_3")
     
     
     })

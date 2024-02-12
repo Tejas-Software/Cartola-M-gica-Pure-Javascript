@@ -14,15 +14,24 @@
     background-size: cover;
 }
 
-#button_back{
+#doubt_button{
     display: none;
 }
-#button_continue{
+#time_panel{
     display: none;
 }
 #image_magician{
     display: none;
 }
-#rabbit{
+#magician_panel{
+    display: none;
+}
+#you_panel{
+    display: none;
+}
+#word_panel{
+    display: none;
+}
+#cartola{
     display: none;
 }
