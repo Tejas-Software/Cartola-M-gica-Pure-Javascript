@@ -1,13 +1,15 @@
 /**THESE VARIABLES EXISTS TO EXECUTE THE HOVERING ANIMATION */
-let start_button_hover = {x: 0, y: 0, width: 0, height: 0, isColliding: false}
-const checkStartButtonHoverMouseCollision = (a, b) => {
+let start_button_hover = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
+const checkMouseCollision = (a, b, intermediate) => {
+
+    /**IF X AXIS IS INSIDE THE AREA OF THE OTHER ACTOR X AXIS */
+    /**IF Y AXIS IS INSIDE THE AREA OF THE OTHER ACTOR Y AXIS */
     if(a.x >= b.x && a.x <= (b.x + b.width) 
     && a.y >= b.y && a.y <= (b.y + b.height)){
-        start_button_hover.isColliding = true;
+        intermediate.isMouseColliding = true;
     } else {
-        start_button_hover.isColliding = false;
+        intermediate.isMouseColliding = false;
     }
-    console.log(a.isColliding)
 }
 /********************************************************** */
 
@@ -52,7 +54,7 @@ class BrandLogo {
             }
 
         }
-        begginingAnimation();
+        begginingAnimation("fromBottom");
 
 
     }
@@ -96,7 +98,7 @@ class ButtonStart {
 
 
 
-        
+
         /**THIS FUNCTION RUNS THE HOVER ANIMATION WHEN MOUSE OVER */
         const hoverTransform = () => {
 
@@ -106,7 +108,7 @@ class ButtonStart {
             start_button_hover.width = this.width
             start_button_hover.height = this.height
 
-            if (start_button_hover.isColliding){
+            if (start_button_hover.isMouseColliding){
 
                 if(this.width <= this.initialWidth * 1.1) {
                     this.width += 2;
@@ -142,6 +144,25 @@ class ResolutionMessage {
         context.fillRect(this.x, this.y, this.width, this.height);
     }
 
+}
+class ImageCartola {
+    constructor(game){
+        this.game = game;
+        this.width = window.innerWidth * 0.5;
+        this.height = this.width * 0.50;
+        this.x = (window.innerWidth * 0.20)
+        this.y = (window.innerHeight * -0.5) ;
+        this.speed = 4.5;
+        this.image = document.getElementById("image_cartola")
+    }
+    draw(context){
+        context.drawImage(this.image, this.x, this.y, this.width, this.height);
+    }
+    tick(){
+        if(this.y <= (window.innerHeight - (window.innerHeight * 0.98))){
+            this.y += this.speed;
+        }
+    }
 }
 class ImageCartas {
     constructor(game){
@@ -183,6 +204,7 @@ class Game {
 
         this.brand_logo = new BrandLogo(this)
         this.ButtonStart = new ButtonStart(this)
+        this.ImageCartola = new ImageCartola(this)
         this.ImageCartas = new ImageCartas(this)
         
         this.ResolutionMessage = new ResolutionMessage(this)
@@ -191,6 +213,9 @@ class Game {
 
         this.ButtonStart.draw(context)
         this.ButtonStart.tick();
+
+        this.ImageCartola.draw(context)
+        this.ImageCartola.tick(context)
 
         this.ImageCartas.draw(context)
         this.ImageCartas.tick()
@@ -248,7 +273,7 @@ const BeginPlay = () => {
                 e.preventDefault();
         
     
-                if (start_button_hover.isColliding) {
+                if (start_button_hover.isMouseColliding) {
                     window.location.href = './src/scenes/scene_1';
                 }
     
@@ -263,7 +288,7 @@ const BeginPlay = () => {
     
                 let mouseToCollide = {x: mouseX, y: mouseY }
     
-                checkStartButtonHoverMouseCollision(mouseToCollide, hover_this_element);
+                checkMouseCollision(mouseToCollide, hover_this_element, start_button_hover);
               
             });
         }
