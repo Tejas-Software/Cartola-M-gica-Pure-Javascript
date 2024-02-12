@@ -4,15 +4,15 @@
 let start_button_hover = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
 /** */
 
-const checkMouseCollision = (a, b, intermediate) => {
+const checkMouseCollision = (a, b) => {
 
     /**IF X AXIS IS INSIDE THE AREA OF THE OTHER ACTOR X AXIS */
     /**IF Y AXIS IS INSIDE THE AREA OF THE OTHER ACTOR Y AXIS */
     if(a.x >= b.x && a.x <= (b.x + b.width) 
     && a.y >= b.y && a.y <= (b.y + b.height)){
-        intermediate.isMouseColliding = true;
+        b.isMouseColliding = true;
     } else {
-        intermediate.isMouseColliding = false;
+        b.isMouseColliding = false;
     }
 }
 const hoverTransform = (element, e) => {
@@ -41,13 +41,13 @@ const hoverTransform = (element, e) => {
         }
     }
 }
-const hover_on_element = (hover_this_element, canvas, element) => {
+const hover_on_element = (hover_this_element, canvas) => {
     
     canvas.addEventListener('click', function(e) {
         e.preventDefault();
 
 
-        if (element.isMouseColliding) {
+        if (hover_this_element.isMouseColliding) {
             window.location.href = './src/scenes/scene_1';
         }
 
@@ -62,7 +62,7 @@ const hover_on_element = (hover_this_element, canvas, element) => {
 
         let mouseToCollide = {x: mouseX, y: mouseY }
 
-        checkMouseCollision(mouseToCollide, hover_this_element, element);
+        checkMouseCollision(mouseToCollide, hover_this_element);
       
     });
 }
@@ -322,10 +322,8 @@ const BeginPlay = () => {
         }
         animate();
     
-
-
         /**CALL THIS FUNCTION WILL ACTIVATE THE HOVERING EFFECT ON THE ELEMENT PASSED AS PARAMETER */
-        hover_on_element(start_button_hover, canvas, start_button_hover);
+        hover_on_element(start_button_hover, canvas);
     
     
     })

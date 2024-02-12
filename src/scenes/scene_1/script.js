@@ -1,98 +1,163 @@
-//ELEMENTS THAT WILL REACT TO MOUSE COLLISION 
-let start_button_hover = {x: 0, y: 0, width: 0, height: 0, isColliding: false}
+/**THESE VARIABLES EXISTS TO EXECUTE THE HOVERING ANIMATION */
+
+/**add all variables (elements) that will be hovered here */
+let continue_button_hover = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
+let back_button_hover = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
+/** */
+
+const checkMouseCollision = (a, b) => {
+
+    /**IF X AXIS IS INSIDE THE AREA OF THE OTHER ACTOR X AXIS */
+    /**IF Y AXIS IS INSIDE THE AREA OF THE OTHER ACTOR Y AXIS */
+    if(a.x >= b.x && a.x <= (b.x + b.width) 
+    && a.y >= b.y && a.y <= (b.y + b.height)){
+        b.isMouseColliding = true;
+    } else {
+        b.isMouseColliding = false;
+    }
+}
+const hoverTransform = (element, e) => {
+
+    //UPDATES ITS VARIABLE POSITION TO DEAL WITH RENDERING NEW FRAMES
+    element.x = e.x
+    element.y = e.y
+    element.width = e.width
+    element.height = e.height
+
+    if (element.isMouseColliding){
+
+        if(e.width <= e.initialWidth * 1.02) {
+            e.width += 1;
+            e.height = e.width * 0.2
+            document.body.style.cursor = "pointer"
+        }
+
+    } else {
+        if(e.width >= e.initialWidth) {
+            e.width -= 2;
+            e.height = e.width * 0.2
+            
+            document.body.style.cursor = "auto"
+        }
+    }
+}
+const hover_on_element = (hover_this_element, canvas, link) => {
+    
+    canvas.addEventListener('click', function(e) {
+        e.preventDefault();
 
 
-//ALL CLASSES THAT WILL BE RENDERED IN THE GAME
+        if (hover_this_element.isMouseColliding) {
+            window.location.href = link;
+        }
+
+    });
+    
+
+    canvas.addEventListener('mousemove', function(event) {
+
+        let rect = canvas.getBoundingClientRect();
+        let mouseX = event.clientX - rect.left;
+        let mouseY = event.clientY - rect.top;
+
+        let mouseToCollide = {x: mouseX, y: mouseY }
+
+        checkMouseCollision(mouseToCollide, hover_this_element);
+      
+    });
+}
+/********************************************************** */
+
+
+
+
+/**ALL CLASSES THAT WILL RUN IN THIS GAME */
 class Player {
     constructor(game){
         this.game = game;
         this.points = 0;
     }
 }
-class BrandLogo {
+class ButtonBack {
     constructor(game){
         this.game = game;
-        this.width = window.innerWidth * 0.25;
-        this.height = this.width * 0.20;
+        this.image = document.getElementById("button_back")
+
+        this.height = window.innerHeight * 0.7
+        this.width = this.height * 0.5
+        
+        this.initialWidth = this.width; /**INITIAL WIDTH IS USED TO HOVER ANIMATIONS */
+
         this.x = (window.innerWidth / 100);
-        this.y = window.innerWidth /  window.innerWidth * window.innerHeight ;
-        this.speed = 1.5;
-        this.image = document.getElementById("brand_logo")
+        this.y = window.innerHeight - this.height * 0.01 ;
+        this.speed = 0.4;
+
     }
 
     draw(context){
-        context.globalAlpha = 0.5; // Define a transparência para 50%
         context.drawImage(this.image, this.x, this.y, this.width, this.height);
-        context.globalAlpha = 1.0; // Restaura a opacidade para o padrão
     }
     
 
     tick(){
 
-        if(this.y >= (window.innerHeight - (this.height * 1.5))){
-            this.y -= this.speed;
+        /**THIS ANIMATION RUNS IN THE BEGINNING OF THE GAME */
+        const begginingAnimation = (origin) => {
+            if(origin === "fromBottom"){
+                if(this.y >= (window.innerHeight * 0.95) - this.height){
+                    this.y -= this.speed;
+                }
+
+            }
+
         }
+       begginingAnimation("fromBottom");
+
+       hoverTransform(back_button_hover, this);
+
+
     }
 }
-class ButtonStart {
+class ButtonContinue {
     constructor(game){
         this.game = game;
-        this.width = (window.innerWidth * 0.10);
-        this.height = this.width * 0.4
-        this.initialWidth = this.width;
-        this.x = (window.innerWidth / 1.18);
-        this.y = (window.innerHeight * 1.25) ;
-        this.speed = 1.5;
-        this.image = document.getElementById("button_start")
+        this.image = document.getElementById("button_continue")
+
+        this.height = window.innerHeight * 0.21
+        this.width = this.height * 2
+
+        this.initialWidth = this.width; /**INITIAL WIDTH IS USED TO HOVER ANIMATIONS */
+        this.x = (window.innerWidth - this.width * 1.10);
+        this.y = window.innerHeight - this.height * 0.01 ;
+        this.speed = 0.4;
+
     }
     
     draw(context){
-
         context.drawImage(this.image, this.x, this.y, this.width, this.height);
-
     }
 
     tick(){
 
+        /**THIS ANIMATION RUNS IN THE BEGINNING OF THE GAME */
         const begginingAnimation = (origin) => {
 
             if(origin === "fromBottom"){
                 if(this.y >= (window.innerHeight * 0.95) - this.height){
                     this.y -= this.speed;
                 }
-                if(this.x >= (window.innerWidth * 0.95) - this.width){
-                    this.x -= this.speed;
-                }
+
             }
+
 
         }
         begginingAnimation("fromBottom");
 
-        const hoverTransform = () => {
-            if (start_button_hover.isColliding){
 
-                if(this.width <= this.initialWidth * 1.1) {
-                    this.width += 2;
-                    this.height = this.width * 0.4
-                    document.body.style.cursor = "pointer"
-                }
+        /**HOVER ANIMATION WHEN MOUSE OVER */
+        hoverTransform(continue_button_hover, this);
 
-            } else {
-                if(this.width >= this.initialWidth) {
-                    this.width -= 2;
-                    this.height = this.width * 0.4
-                    this.y += 1;
-                    this.x += 1;
-                    document.body.style.cursor = "auto"
-                }
-            }
-        }
-        hoverTransform();
 
-        start_button_hover.x = this.x
-        start_button_hover.y = this.y
-        start_button_hover.width = this.width
-        start_button_hover.height = this.height
     }
 }
 class ResolutionMessage {
@@ -105,133 +170,143 @@ class ResolutionMessage {
     }
 
     draw(context){
-        context.fillRect(this.x, this.y, this.width, this.height);
+        // CENTER THE TEXT
+        const text = "Vire o dispositivo | Ajuste a resolução";
+        const textX = window.innerWidth * 0.06;
+        const textY = window.innerHeight * 0.35;
+
+        // DRAW TEXT
+        context.fillStyle = "white"; 
+        context.font = "5vw Arial"; 
+        context.fillText(text, textX, textY);
     }
 
 }
-class ImageCartas {
+class ImageMagician {
     constructor(game){
         this.game = game;
-        this.width = window.innerWidth * 0.6;
-        this.height = this.width * 0.50;
-        this.x = (window.innerWidth * 0.20)
-        this.y = (window.innerHeight * 1.5) ;
+        this.image = document.getElementById("image_magician")
+
+        this.height = window.innerHeight;
+        this.width = window.innerWidth * 0.8;
+
+        this.x = window.innerWidth * 0.15
+        this.y = 0 ;
         this.speed = 4.5;
-        this.image = document.getElementById("image_cartas")
+
+        this.opacity = 0;
+
     }
 
     draw(context){
+        context.globalAlpha = this.opacity;
         context.drawImage(this.image, this.x, this.y, this.width, this.height);
+        context.globalAlpha = 1;
     }
 
     tick(){
 
-        if(this.y >= (window.innerHeight * 0.98) - this.height){
-            this.y -= this.speed;
+        const begginingAnimation = (origin) => {
+            console.log(this.y)
+            if(origin === "AppearGradient"){
+                if(this.opacity < 1){
+                    this.opacity += 0.009;
+                }
+            }
         }
+        begginingAnimation("AppearGradient");
+
     }
 }
-class Background {
-}
-class Actors {
-}
+/**************************************** */
+
+
 
 
 // MAIN GAME CLASS THAT DEAL WITH ALL CLASSES
 class Game {
     constructor(canvas){
+        /**GAME CLASS WILL STORE THE CANVAS DATA */
         this.canvas = canvas;
         this.width = this.canvas.width;
         this.height = this.canvas.height;
 
-        this.brand_logo = new BrandLogo(this)
-        this.ButtonStart = new ButtonStart(this)
-        this.ImageCartas = new ImageCartas(this)
+        /**GAME CLASS WILL EXECUTE AND OWN ALL THESE CLASSES */
+        this.back_button = new ButtonBack(this)
+        this.ButtonContinue = new ButtonContinue(this)
+        this.ImageMagician = new ImageMagician(this)
         this.ResolutionMessage = new ResolutionMessage(this)
     }
+    /**THIS METHOD WILL RENDER THE GAME */
     render(context){
 
-        this.ButtonStart.draw(context)
-        this.ButtonStart.tick();
 
-        this.ImageCartas.draw(context)
-        this.ImageCartas.tick()
 
-        this.brand_logo.draw(context)
-        this.brand_logo.tick();
+        this.ImageMagician.draw(context);
+        this.ImageMagician.tick();
 
+        this.back_button.draw(context);
+        this.back_button.tick();
+
+        this.ButtonContinue.draw(context);
+        this.ButtonContinue.tick();
 
     }
+    /**THIS METHOD WILL RENDER AN WARNING TO UPDATE THE RESOLUTION IF DOESN'T FIT THE REQUIRED MIN RESOLUTION */
     renderResolutionMessage(context){
-        this.brand_logo.draw(context)
-        this.brand_logo.tick();
-        this.ResolutionMessage.draw(context)
+        this.ResolutionMessage.draw(context);
     }
 }
+/***************************************** */
 
-//RUN THE GAME WHEN EVERYTHING LOADS UP
-window.addEventListener('load', ()=>{
 
-    window.addEventListener('resize', () => {location.reload();})
 
-    const canvas = document.getElementById('canvas1');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth - 10;
-    canvas.height = window.innerHeight - 10;
 
-    const game = new Game(canvas);
+//THIS FUNCTIONS RUNS WHEN APPLICATION STARTS
+/******************************************** */
+const BeginPlay = () => {
 
-    const animate = () => {
-        if(canvas.width > 650 && canvas.height > 350) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            game.render(ctx);
-            requestAnimationFrame(animate);
-        } else {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            game.renderResolutionMessage(ctx);
-            requestAnimationFrame(animate);
-        }
+    /**THIS FUNCTION RUN AFTER EVERYTHING IS LOADED */
+    window.addEventListener('load', ()=>{
 
-    }
-    animate();
 
-    const checkMouseCollision = (a, b) => {
-        if(a.x >= b.x && a.x <= (b.x + b.width) 
-        && a.y >= b.y && a.y <= (b.y + b.height)){
-            start_button_hover.isColliding = true;
-        } else {
-            start_button_hover.isColliding = false;
-        }
-        console.log(a.isColliding)
-    }
 
-    const hover_on_element = (hover_this_element) => {
+        /**THIS FUNCTION RELOADS THE PAGE WHEN RESIZING THE SCREEN */
+        window.addEventListener('resize', () => {location.reload();})
 
-        canvas.addEventListener('click', function(e) {
-            e.preventDefault();
+
+
+        /**VARIABLE CANVAS IS DEFINED AND GET THE CANVAS ELEMENT FIXED INSIDE THE HTML */
+        const canvas = document.getElementById('canvas1');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth - 10;
+        canvas.height = window.innerHeight - 10;
     
 
-            if (start_button_hover.isColliding) {
-                window.location.href = './src/scenes/scene_1';
+
+        /**CALL THE GAME CLASS AND ANIMATE IT*/
+        const game = new Game(canvas);
+        const animate = () => {
+            /**ONLY RENDER THE GAME IF RESOLUTION FITS THESE REQUIREMENTS */
+            if(canvas.width > 650 && canvas.height > 350) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                game.render(ctx);
+                requestAnimationFrame(animate);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                game.renderResolutionMessage(ctx);
+                requestAnimationFrame(animate);
             }
+        }
+        animate();
+    
+        /**CALL THIS FUNCTION WILL ACTIVATE THE HOVERING EFFECT ON THE ELEMENT PASSED AS PARAMETER */
+        hover_on_element(continue_button_hover, canvas, "../scene_2/");
+        hover_on_element(back_button_hover, canvas, "/")
+    
+    
+    })
+}
+BeginPlay();
 
-        });
-        
-
-        canvas.addEventListener('mousemove', function(event) {
-
-            let rect = canvas.getBoundingClientRect();
-            let mouseX = event.clientX - rect.left;
-            let mouseY = event.clientY - rect.top;
-
-            let mouseToCollide = {x: mouseX, y: mouseY }
-
-            checkMouseCollision(mouseToCollide, hover_this_element);
-          
-        });
-    }
-    hover_on_element(start_button_hover);
-
-
-})
 
