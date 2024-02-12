@@ -258,7 +258,7 @@ class Cartola {
         this.width = this.height * 1;
 
         this.x = (window.innerWidth * 0.5) - (this.width * 0.5) 
-        this.y = -100 ;
+        this.y = window.innerHeight - (this.height * 1.25) ;
         this.speed = 4.5;
 
         this.opacity = 0;
