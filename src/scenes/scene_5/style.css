@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#canvas1 {
+    border: 5px solid black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    background: url('../../../content/tela_06/cenario.svg');
+    background-size: cover;
+}
+
+#doubt_button{
+    display: none;
+}
+#time_panel{
+    display: none;
+}
+#image_magician{
+    display: none;
+}
+#magician_panel{
+    display: none;
+}
+#you_panel{
+    display: none;
+}
+#word_panel{
+    display: none;
+}
+#cartola{
+    display: none;
+}
