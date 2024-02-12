@@ -1,8 +1,20 @@
-//ELEMENTS THAT WILL REACT TO MOUSE COLLISION 
+/**THESE VARIABLES EXISTS TO EXECUTE THE HOVERING ANIMATION */
 let start_button_hover = {x: 0, y: 0, width: 0, height: 0, isColliding: false}
+const checkStartButtonHoverMouseCollision = (a, b) => {
+    if(a.x >= b.x && a.x <= (b.x + b.width) 
+    && a.y >= b.y && a.y <= (b.y + b.height)){
+        start_button_hover.isColliding = true;
+    } else {
+        start_button_hover.isColliding = false;
+    }
+    console.log(a.isColliding)
+}
+/********************************************************** */
 
 
-//ALL CLASSES THAT WILL BE RENDERED IN THE GAME
+
+
+/**ALL CLASSES THAT WILL RUN IN THIS GAME */
 class Player {
     constructor(game){
         this.game = game;
@@ -12,38 +24,51 @@ class Player {
 class BrandLogo {
     constructor(game){
         this.game = game;
+        this.image = document.getElementById("brand_logo")
+
         this.width = window.innerWidth * 0.25;
         this.height = this.width * 0.20;
         this.x = (window.innerWidth / 100);
         this.y = window.innerWidth /  window.innerWidth * window.innerHeight ;
         this.speed = 1.5;
-        this.image = document.getElementById("brand_logo")
+
     }
 
     draw(context){
-        context.globalAlpha = 0.5; // Define a transparência para 50%
+        context.globalAlpha = 0.5; // defines 50% transparency
         context.drawImage(this.image, this.x, this.y, this.width, this.height);
-        context.globalAlpha = 1.0; // Restaura a opacidade para o padrão
+        context.globalAlpha = 1.0; // defines 0% transparency
     }
     
 
     tick(){
 
-        if(this.y >= (window.innerHeight - (this.height * 1.5))){
-            this.y -= this.speed;
+        /**THIS ANIMATION RUNS IN THE BEGINNING OF THE GAME */
+        const begginingAnimation = (origin) => {
+            if(origin === "fromBottom") {
+                if(this.y >= (window.innerHeight - (this.height * 1.5))){
+                    this.y -= this.speed;
+                }
+            }
+
         }
+        begginingAnimation();
+
+
     }
 }
 class ButtonStart {
     constructor(game){
         this.game = game;
+        this.image = document.getElementById("button_start")
+
         this.width = (window.innerWidth * 0.10);
         this.height = this.width * 0.4
         this.initialWidth = this.width;
         this.x = (window.innerWidth / 1.18);
         this.y = (window.innerHeight * 1.25) ;
         this.speed = 1.5;
-        this.image = document.getElementById("button_start")
+
     }
     
     draw(context){
@@ -54,6 +79,7 @@ class ButtonStart {
 
     tick(){
 
+        /**THIS ANIMATION RUNS IN THE BEGINNING OF THE GAME */
         const begginingAnimation = (origin) => {
 
             if(origin === "fromBottom"){
@@ -68,7 +94,18 @@ class ButtonStart {
         }
         begginingAnimation("fromBottom");
 
+
+
+        
+        /**THIS FUNCTION RUNS THE HOVER ANIMATION WHEN MOUSE OVER */
         const hoverTransform = () => {
+
+            //UPDATES ITS VARIABLE POSITION TO DEAL WITH RENDERING NEW FRAMES
+            start_button_hover.x = this.x
+            start_button_hover.y = this.y
+            start_button_hover.width = this.width
+            start_button_hover.height = this.height
+
             if (start_button_hover.isColliding){
 
                 if(this.width <= this.initialWidth * 1.1) {
@@ -89,10 +126,7 @@ class ButtonStart {
         }
         hoverTransform();
 
-        start_button_hover.x = this.x
-        start_button_hover.y = this.y
-        start_button_hover.width = this.width
-        start_button_hover.height = this.height
+
     }
 }
 class ResolutionMessage {
@@ -135,6 +169,9 @@ class Background {
 }
 class Actors {
 }
+/**************************************** */
+
+
 
 
 // MAIN GAME CLASS THAT DEAL WITH ALL CLASSES
@@ -147,6 +184,7 @@ class Game {
         this.brand_logo = new BrandLogo(this)
         this.ButtonStart = new ButtonStart(this)
         this.ImageCartas = new ImageCartas(this)
+        
         this.ResolutionMessage = new ResolutionMessage(this)
     }
     render(context){
@@ -168,70 +206,72 @@ class Game {
         this.ResolutionMessage.draw(context)
     }
 }
+/***************************************** */
 
-//RUN THE GAME WHEN EVERYTHING LOADS UP
-window.addEventListener('load', ()=>{
 
-    window.addEventListener('resize', () => {location.reload();})
 
-    const canvas = document.getElementById('canvas1');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth - 10;
-    canvas.height = window.innerHeight - 10;
 
-    const game = new Game(canvas);
+//THIS FUNCTIONS RUNS WHEN APPLICATION STARTS
+/******************************************** */
+const BeginPlay = () => {
 
-    const animate = () => {
-        if(canvas.width > 650 && canvas.height > 350) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            game.render(ctx);
-            requestAnimationFrame(animate);
-        } else {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            game.renderResolutionMessage(ctx);
-            requestAnimationFrame(animate);
+    window.addEventListener('load', ()=>{
+
+        window.addEventListener('resize', () => {location.reload();})
+    
+        const canvas = document.getElementById('canvas1');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth - 10;
+        canvas.height = window.innerHeight - 10;
+    
+        const game = new Game(canvas);
+    
+        const animate = () => {
+            if(canvas.width > 650 && canvas.height > 350) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                game.render(ctx);
+                requestAnimationFrame(animate);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                game.renderResolutionMessage(ctx);
+                requestAnimationFrame(animate);
+            }
+    
         }
-
-    }
-    animate();
-
-    const checkMouseCollision = (a, b) => {
-        if(a.x >= b.x && a.x <= (b.x + b.width) 
-        && a.y >= b.y && a.y <= (b.y + b.height)){
-            start_button_hover.isColliding = true;
-        } else {
-            start_button_hover.isColliding = false;
-        }
-        console.log(a.isColliding)
-    }
-
-    const hover_on_element = (hover_this_element) => {
-
-        canvas.addEventListener('click', function(e) {
-            e.preventDefault();
+        animate();
     
 
-            if (start_button_hover.isColliding) {
-                window.location.href = './src/scenes/scene_1';
-            }
-
-        });
+    
+        const hover_on_element = (hover_this_element) => {
+    
+            canvas.addEventListener('click', function(e) {
+                e.preventDefault();
         
+    
+                if (start_button_hover.isColliding) {
+                    window.location.href = './src/scenes/scene_1';
+                }
+    
+            });
+            
+    
+            canvas.addEventListener('mousemove', function(event) {
+    
+                let rect = canvas.getBoundingClientRect();
+                let mouseX = event.clientX - rect.left;
+                let mouseY = event.clientY - rect.top;
+    
+                let mouseToCollide = {x: mouseX, y: mouseY }
+    
+                checkStartButtonHoverMouseCollision(mouseToCollide, hover_this_element);
+              
+            });
+        }
+        hover_on_element(start_button_hover);
+    
+    
+    })
+}
+BeginPlay();
 
-        canvas.addEventListener('mousemove', function(event) {
-
-            let rect = canvas.getBoundingClientRect();
-            let mouseX = event.clientX - rect.left;
-            let mouseY = event.clientY - rect.top;
-
-            let mouseToCollide = {x: mouseX, y: mouseY }
-
-            checkMouseCollision(mouseToCollide, hover_this_element);
-          
-        });
-    }
-    hover_on_element(start_button_hover);
-
-
-})
 
