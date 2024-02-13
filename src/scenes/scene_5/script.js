@@ -159,7 +159,14 @@ class TimePanel {
 
     draw(context){
         context.drawImage(this.image, this.x, this.y, this.width, this.height);
+        
+        context.font = `4vw agency`; 
+        context.fillStyle = 'white'; 
+        let text = '00:00'; 
+    
+        context.fillText(text, (this.width * 0.8) , this.height * 0.95);
     }
+    
 
     tick(){
 
@@ -189,20 +196,37 @@ class MagicianPanel {
         this.y = 0 ;
         this.speed = 4.5;
 
+        this.points = 0;
+
         this.opacity = 0;
 
     }
 
     draw(context){
+
+        
         context.globalAlpha = this.opacity;
         context.drawImage(this.image, this.x, this.y, this.width, this.height);
         context.globalAlpha = 1;
+
+
+        context.font = '2.5vw bigDots'; 
+        context.fillStyle = '#00FFFF'; 
+        let text = 'MÁGICO'; 
+    
+        context.fillText(text, this.x + (this.x * 0.017) , this.y + (this.height * 0.3));
+
+
+        context.font = '5.2vw bigDots'; 
+        context.fillStyle = 'white'; 
+        let textPoints = '000'; 
+    
+        context.fillText(textPoints, this.x + (this.x * 0.017) , this.y + (this.height * 0.89));
     }
 
     tick(){
 
         const begginingAnimation = (origin) => {
-            console.log(this.y)
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
                     this.opacity += 0.009;
@@ -233,12 +257,23 @@ class YouPanel {
         context.globalAlpha = this.opacity;
         context.drawImage(this.image, this.x, this.y, this.width, this.height);
         context.globalAlpha = 1;
+
+        context.font = '3.3vw bigDots'; 
+        context.fillStyle = '#00FFFF'; 
+        let text = 'VOCÊ'; 
+    
+        context.fillText(text, this.x + (this.x * 0.017) , this.y + (this.height * 0.335));
+
+        context.font = '5.2vw bigDots'; 
+        context.fillStyle = 'white'; 
+        let textPoints = '000'; 
+    
+        context.fillText(textPoints, this.x + (this.x * 0.014) , this.y + (this.height * 0.89));
     }
 
     tick(){
 
         const begginingAnimation = (origin) => {
-            console.log(this.y)
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
                     this.opacity += 0.009;
@@ -274,7 +309,55 @@ class Cartola {
     tick(){
 
         const begginingAnimation = (origin) => {
-            console.log(this.y)
+            if(origin === "AppearGradient"){
+                if(this.opacity < 1){
+                    this.opacity += 0.009;
+                }
+            }
+        }
+        begginingAnimation("AppearGradient");
+
+    }
+}
+class WordPanel {
+    constructor(game, number){
+        this.game = game;
+        this.image = document.getElementById("word_panel")
+
+        this.height = window.innerHeight * 0.13
+        this.width = this.height * 3.5
+
+        if(number === 1) { 
+            this.x = window.innerWidth * 0.02
+            this.y = window.innerHeight - (this.height * 1.2)
+        } else if (number === 2){
+            this.x = (window.innerWidth * 0.5) - (this.width * 0.5) 
+            this.y = window.innerHeight - (this.height * 1.2)
+        } else if (number === 3){
+            this.x = window.innerWidth - (this.width * 1.14)
+            this.y = window.innerHeight - (this.height * 1.2)
+        }
+
+
+        this.speed = 4.5;
+        
+        if(number === 1) { this.number === 1 }
+        if(number === 2) { this.number === 2 }
+        if(number === 3) { this.number === 3 }
+
+        this.opacity = 0;
+
+    }
+
+    draw(context){
+        context.globalAlpha = this.opacity;
+        context.drawImage(this.image, this.x, this.y, this.width, this.height);
+        context.globalAlpha = 1;
+    }
+
+    tick(){
+
+        const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
                     this.opacity += 0.009;
@@ -305,6 +388,10 @@ class Game {
         this.MagicianPanel = new MagicianPanel(this)
         this.Cartola = new Cartola(this)
         this.ResolutionMessage = new ResolutionMessage(this)
+
+        this.Word1 = new WordPanel(this, 1)
+        this.Word2 = new WordPanel(this, 2)
+        this.Word3 = new WordPanel(this, 3)
     }
     /**THIS METHOD WILL RENDER THE GAME */
     render(context){
@@ -325,6 +412,17 @@ class Game {
 
         this.Cartola.draw(context);
         this.Cartola.tick();
+
+        this.Word1.draw(context)
+        this.Word1.tick()
+
+        this.Word2.draw(context)
+        this.Word2.tick()
+
+        this.Word3.draw(context)
+        this.Word3.tick()
+
+        
 
     }
     /**THIS METHOD WILL RENDER AN WARNING TO UPDATE THE RESOLUTION IF DOESN'T FIT THE REQUIRED MIN RESOLUTION */
