@@ -6,7 +6,6 @@ let doubt_button_hover = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: fal
 /** */
 
 const checkMouseCollision = (a, b) => {
-
     /**IF X AXIS IS INSIDE THE AREA OF THE OTHER ACTOR X AXIS */
     /**IF Y AXIS IS INSIDE THE AREA OF THE OTHER ACTOR Y AXIS */
     if(a.x >= b.x && a.x <= (b.x + b.width) 
@@ -75,23 +74,31 @@ const hover_on_element = (hover_this_element, canvas, link) => {
 /**ALL CLASSES THAT WILL RUN IN THIS GAME */
 class Player {
     constructor(game){
-        this.game = game;
-        this.points = 0;
+        const setAttributes = () => {
+            this.game = game;
+            this.points = 0;
+        }
+        setAttributes();
     }
 }
 class DoubtButton {
     constructor(game){
-        this.game = game;
-        this.image = document.getElementById("doubt_button")
 
-        this.height = window.innerHeight * 0.1
-        this.width = this.height * 1
-        
-        this.initialWidth = this.width; /**INITIAL WIDTH IS USED TO HOVER ANIMATIONS */
+        const setAttributes = () => {
+            this.game = game;
+            this.image = document.getElementById("doubt_button")
+    
+            this.height = window.innerHeight * 0.1
+            this.width = this.height * 1
+            
+            this.initialWidth = this.width; /**INITIAL WIDTH IS USED TO HOVER ANIMATIONS */
+    
+            this.x = window.innerWidth * 0.012
+            this.y = window.innerHeight * -0.1
+            this.speed = 1.4;
+        }
+        setAttributes();
 
-        this.x = window.innerWidth * 0.012
-        this.y = window.innerHeight * -0.1
-        this.speed = 1.4;
 
     }
 
@@ -102,7 +109,6 @@ class DoubtButton {
 
     tick(){
 
-        /**THIS ANIMATION RUNS IN THE BEGINNING OF THE GAME */
         const begginingAnimation = (origin) => {
             if(origin === "fromBottom"){
                 if(this.y < window.innerHeight * 0.012){
@@ -112,65 +118,82 @@ class DoubtButton {
             }
 
         }
-       begginingAnimation("fromBottom");
+        begginingAnimation("fromBottom");
 
-       hoverTransform(doubt_button_hover, this);
+        hoverTransform(doubt_button_hover, this);
 
 
     }
 }
 class ResolutionMessage {
     constructor(game){
-        this.game = game;
-        this.width = (window.innerWidth * 0.5);
-        this.height = (window.innerHeight * 0.5);
-        this.x = (window.innerWidth * 0.25)
-        this.y = (window.innerHeight * 0.25) ;
+
+        const setAttributes = () => {
+            this.game = game;
+            this.width = (window.innerWidth * 0.5);
+            this.height = (window.innerHeight * 0.5);
+            this.x = (window.innerWidth * 0.25)
+            this.y = (window.innerHeight * 0.25) ;
+        }
+        setAttributes();
     }
 
     draw(context){
-        // CENTER THE TEXT
-        const text = "Vire o dispositivo | Ajuste a resolução";
-        const textX = window.innerWidth * 0.06;
-        const textY = window.innerHeight * 0.35;
 
-        // DRAW TEXT
-        context.fillStyle = "white"; 
-        context.font = "5vw Arial"; 
-        context.fillText(text, textX, textY);
+        const renderText = () => {
+            const text = "Vire o dispositivo | Ajuste a resolução";
+            const textX = window.innerWidth * 0.06;
+            const textY = window.innerHeight * 0.35;
+            context.fillStyle = "white"; 
+            context.font = "5vw Arial"; 
+            context.fillText(text, textX, textY);
+        }
+        renderText();
+
     }
 
 }
 class TimePanel {
     constructor(game){
-        this.game = game;
-        this.image = document.getElementById("time_panel")
-
-        this.height = window.innerHeight * 0.1;
-        this.width = window.innerWidth * 0.13;
-
-        this.x = window.innerWidth * 0.08
-        this.y = -50 ;
-        this.speed = 1.4;
-
-        this.opacity = 0;
-
+        const setAttributes = () => {
+            this.game = game;
+            this.image = document.getElementById("time_panel")
+    
+            this.height = window.innerHeight * 0.1;
+            this.width = window.innerWidth * 0.13;
+    
+            this.x = window.innerWidth * 0.08
+            this.y = -50 ;
+            this.speed = 1.4;
+    
+            this.opacity = 0;
+        }
+        setAttributes();
     }
 
     draw(context){
-        context.drawImage(this.image, this.x, this.y, this.width, this.height);
+
+
+        const renderImage = () => {
+            context.drawImage(this.image, this.x, this.y, this.width, this.height);
+        }
+        renderImage();
+
+
+        const renderTextTimer = () => {
+            context.font = `4vw agency`; 
+            context.fillStyle = 'white'; 
+            let text = '00:00'; 
+            context.fillText(text, (this.width * 0.8) , this.height * 0.95);
+        }
+        renderTextTimer();
         
-        context.font = `4vw agency`; 
-        context.fillStyle = 'white'; 
-        let text = '00:00'; 
-    
-        context.fillText(text, (this.width * 0.8) , this.height * 0.95);
+
     }
     
 
     tick(){
 
-        /**THIS ANIMATION RUNS IN THE BEGINNING OF THE GAME */
         const begginingAnimation = (origin) => {
             if(origin === "fromBottom"){
                 if(this.y < window.innerHeight * 0.012){
@@ -186,42 +209,55 @@ class TimePanel {
 }
 class MagicianPanel {
     constructor(game){
-        this.game = game;
-        this.image = document.getElementById("magician_panel")
 
-        this.height = window.innerHeight * 0.25;
-        this.width = window.innerWidth * 0.12;
+        const setAttributes = () => {
+            this.game = game;
+            this.image = document.getElementById("magician_panel")
+    
+            this.height = window.innerHeight * 0.25;
+            this.width = window.innerWidth * 0.12;
+    
+            this.x = (window.innerWidth - this.width * 2.5) 
+            this.y = 0 ;
+            this.speed = 4.5;
+    
+            this.points = 0;
+    
+            this.opacity = 0;
+        }
+        setAttributes();
 
-        this.x = (window.innerWidth - this.width * 2.5) 
-        this.y = 0 ;
-        this.speed = 4.5;
-
-        this.points = 0;
-
-        this.opacity = 0;
 
     }
 
     draw(context){
 
+        const renderImage = () => {
+            context.globalAlpha = this.opacity;
+            context.drawImage(this.image, this.x, this.y, this.width, this.height);
+            context.globalAlpha = 1;
+        }
+        renderImage();
         
-        context.globalAlpha = this.opacity;
-        context.drawImage(this.image, this.x, this.y, this.width, this.height);
-        context.globalAlpha = 1;
+
+        const renderTextTitle = () => {
+            context.font = '2.5vw bigDots'; 
+            context.fillStyle = '#00FFFF'; 
+            let text = 'MÁGICO'; 
+        
+            context.fillText(text, this.x + (this.x * 0.017) , this.y + (this.height * 0.3));
+        }
+        renderTextTitle()
 
 
-        context.font = '2.5vw bigDots'; 
-        context.fillStyle = '#00FFFF'; 
-        let text = 'MÁGICO'; 
-    
-        context.fillText(text, this.x + (this.x * 0.017) , this.y + (this.height * 0.3));
-
-
-        context.font = '5.2vw bigDots'; 
-        context.fillStyle = 'white'; 
-        let textPoints = '000'; 
-    
-        context.fillText(textPoints, this.x + (this.x * 0.017) , this.y + (this.height * 0.89));
+        const renderTextPoints = () => {
+            context.font = '5.2vw bigDots'; 
+            context.fillStyle = 'white'; 
+            let textPoints = '000'; 
+        
+            context.fillText(textPoints, this.x + (this.x * 0.017) , this.y + (this.height * 0.89));
+        }
+        renderTextPoints();
     }
 
     tick(){
@@ -239,36 +275,54 @@ class MagicianPanel {
 }
 class YouPanel {
     constructor(game){
-        this.game = game;
-        this.image = document.getElementById("you_panel")
 
-        this.height = window.innerHeight * 0.25;
-        this.width = window.innerWidth * 0.12;
-
-        this.x = (window.innerWidth - this.width * 1.25) 
-        this.y = 0 ;
-        this.speed = 4.5;
-
-        this.opacity = 0;
+        const setAttributes = () => {
+            this.game = game;
+            this.image = document.getElementById("you_panel")
+    
+            this.height = window.innerHeight * 0.25;
+            this.width = window.innerWidth * 0.12;
+    
+            this.x = (window.innerWidth - this.width * 1.25) 
+            this.y = 0 ;
+            this.speed = 4.5;
+    
+            this.opacity = 0;
+        }
+        setAttributes();
 
     }
 
     draw(context){
-        context.globalAlpha = this.opacity;
-        context.drawImage(this.image, this.x, this.y, this.width, this.height);
-        context.globalAlpha = 1;
 
-        context.font = '3.3vw bigDots'; 
-        context.fillStyle = '#00FFFF'; 
-        let text = 'VOCÊ'; 
-    
-        context.fillText(text, this.x + (this.x * 0.017) , this.y + (this.height * 0.335));
 
-        context.font = '5.2vw bigDots'; 
-        context.fillStyle = 'white'; 
-        let textPoints = '000'; 
+        const renderImage = () => {
+            context.globalAlpha = this.opacity;
+            context.drawImage(this.image, this.x, this.y, this.width, this.height);
+            context.globalAlpha = 1;
+        }
+        renderImage();
+
+
+        const renderTextTitle = () => {
+            context.font = '3.3vw bigDots'; 
+            context.fillStyle = '#00FFFF'; 
+            let text = 'VOCÊ'; 
+            context.fillText(text, this.x + (this.x * 0.017) , this.y + (this.height * 0.335));
+        }
+        renderTextTitle();
     
-        context.fillText(textPoints, this.x + (this.x * 0.014) , this.y + (this.height * 0.89));
+
+        const renderPoints = () => {
+            context.font = '5.2vw bigDots'; 
+            context.fillStyle = 'white'; 
+            let textPoints = '000'; 
+        
+            context.fillText(textPoints, this.x + (this.x * 0.014) , this.y + (this.height * 0.89));
+        }
+        renderPoints();
+
+
     }
 
     tick(){
@@ -321,38 +375,61 @@ class Cartola {
 }
 class WordPanel {
     constructor(game, number){
-        this.game = game;
-        this.image = document.getElementById("word_panel")
 
-        this.height = window.innerHeight * 0.13
-        this.width = this.height * 3.5
-
-        if(number === 1) { 
-            this.x = window.innerWidth * 0.02
-            this.y = window.innerHeight - (this.height * 1.2)
-        } else if (number === 2){
-            this.x = (window.innerWidth * 0.5) - (this.width * 0.5) 
-            this.y = window.innerHeight - (this.height * 1.2)
-        } else if (number === 3){
-            this.x = window.innerWidth - (this.width * 1.14)
-            this.y = window.innerHeight - (this.height * 1.2)
+        const setAttributes = () => {
+            this.game = game;
+            this.image = document.getElementById("word_panel")
+    
+            this.height = window.innerHeight * 0.13
+            this.width = this.height * 3.5
+    
+            //this.x and this.y and opacity is defined by these conditionals
+            if(number === 1) { 
+                this.x = window.innerWidth * 0.02
+                this.y = window.innerHeight - (this.height * 1.2)
+                this.opacity = 0;
+            } else if (number === 2){
+                this.x = (window.innerWidth * 0.5) - (this.width * 0.5) 
+                this.y = window.innerHeight - (this.height * 1.2)
+                this.opacity = 0;
+            } else if (number === 3){
+                this.x = window.innerWidth - (this.width * 1.14)
+                this.y = window.innerHeight - (this.height * 1.2)
+                this.opacity = 0;
+            }
+    
+            this.speed = 4.5;
+            
+            if(number === 1) { this.number === 1 }
+            if(number === 2) { this.number === 2 }
+            if(number === 3) { this.number === 3 }
         }
+        setAttributes();
 
-
-        this.speed = 4.5;
-        
-        if(number === 1) { this.number === 1 }
-        if(number === 2) { this.number === 2 }
-        if(number === 3) { this.number === 3 }
-
-        this.opacity = 0;
 
     }
 
-    draw(context){
-        context.globalAlpha = this.opacity;
-        context.drawImage(this.image, this.x, this.y, this.width, this.height);
-        context.globalAlpha = 1;
+    draw(context, number){
+
+        
+        const renderImage = () => {
+            context.globalAlpha = this.opacity;
+            context.drawImage(this.image, this.x, this.y, this.width, this.height);
+            context.globalAlpha = 1;
+        }
+        renderImage();
+
+
+        const renderText = () => {
+
+            if(number === 1) {
+
+            }
+
+        }
+
+
+ 
     }
 
     tick(){
