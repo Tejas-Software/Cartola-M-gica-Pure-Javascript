@@ -159,7 +159,14 @@ class TimePanel {
 
     draw(context){
         context.drawImage(this.image, this.x, this.y, this.width, this.height);
+        
+        context.font = `4vw agency`; 
+        context.fillStyle = 'white'; 
+        let text = '00:00'; 
+    
+        context.fillText(text, (this.width * 0.8) , this.height * 0.95);
     }
+    
 
     tick(){
 
@@ -189,14 +196,32 @@ class MagicianPanel {
         this.y = 0 ;
         this.speed = 4.5;
 
+        this.points = 0;
+
         this.opacity = 0;
 
     }
 
     draw(context){
+
+        
         context.globalAlpha = this.opacity;
         context.drawImage(this.image, this.x, this.y, this.width, this.height);
         context.globalAlpha = 1;
+
+
+        context.font = '2.5vw bigDots'; 
+        context.fillStyle = '#00FFFF'; 
+        let text = 'MÁGICO'; 
+    
+        context.fillText(text, this.x + (this.x * 0.017) , this.y + (this.height * 0.3));
+
+
+        context.font = '5.2vw bigDots'; 
+        context.fillStyle = 'white'; 
+        let textPoints = '000'; 
+    
+        context.fillText(textPoints, this.x + (this.x * 0.017) , this.y + (this.height * 0.89));
     }
 
     tick(){
@@ -232,6 +257,18 @@ class YouPanel {
         context.globalAlpha = this.opacity;
         context.drawImage(this.image, this.x, this.y, this.width, this.height);
         context.globalAlpha = 1;
+
+        context.font = '3.3vw bigDots'; 
+        context.fillStyle = '#00FFFF'; 
+        let text = 'VOCÊ'; 
+    
+        context.fillText(text, this.x + (this.x * 0.017) , this.y + (this.height * 0.335));
+
+        context.font = '5.2vw bigDots'; 
+        context.fillStyle = 'white'; 
+        let textPoints = '000'; 
+    
+        context.fillText(textPoints, this.x + (this.x * 0.014) , this.y + (this.height * 0.89));
     }
 
     tick(){
@@ -291,13 +328,13 @@ class WordPanel {
         this.width = this.height * 3.5
 
         if(number === 1) { 
-            this.x = window.innerWidth * 0.01
+            this.x = window.innerWidth * 0.02
             this.y = window.innerHeight - (this.height * 1.2)
         } else if (number === 2){
-            this.x = window.innerWidth * 0.36
+            this.x = (window.innerWidth * 0.5) - (this.width * 0.5) 
             this.y = window.innerHeight - (this.height * 1.2)
         } else if (number === 3){
-            this.x = window.innerWidth * 0.72
+            this.x = window.innerWidth - (this.width * 1.14)
             this.y = window.innerHeight - (this.height * 1.2)
         }
 
