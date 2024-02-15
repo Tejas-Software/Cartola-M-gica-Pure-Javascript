@@ -3,6 +3,9 @@
 /**add all variables (elements) that will be hovered here */
 let continue_button_hover = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
 let doubt_button_hover = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
+let word1 = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
+let word2 = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
+let word3 = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
 /** */
 
 const checkMouseCollision = (a, b) => {
@@ -15,7 +18,7 @@ const checkMouseCollision = (a, b) => {
         b.isMouseColliding = false;
     }
 }
-const hoverTransform = (element, e) => {
+const hoverTransformScaleAndCursor = (element, e) => {
 
     //UPDATES ITS VARIABLE POSITION TO DEAL WITH RENDERING NEW FRAMES
     element.x = e.x
@@ -45,7 +48,6 @@ const hover_on_element = (hover_this_element, canvas, link) => {
     
     canvas.addEventListener('click', function(e) {
         e.preventDefault();
-
 
         if (hover_this_element.isMouseColliding) {
             window.location.href = link;
@@ -120,7 +122,7 @@ class DoubtButton {
         }
         begginingAnimation("fromBottom");
 
-        hoverTransform(doubt_button_hover, this);
+        hoverTransformScaleAndCursor(doubt_button_hover, this);
 
 
     }
@@ -382,6 +384,9 @@ class WordPanel {
     
             this.height = window.innerHeight * 0.13
             this.width = this.height * 3.5
+
+            this.textX = window.innerWidth * 0.5;
+            this.textY = window.innerHeight * 0.5;
     
             //this.x and this.y and opacity is defined by these conditionals
             if(number === 1) { 
@@ -400,9 +405,9 @@ class WordPanel {
     
             this.speed = 4.5;
             
-            if(number === 1) { this.number === 1 }
-            if(number === 2) { this.number === 2 }
-            if(number === 3) { this.number === 3 }
+            if(number === 1) { this.number = 1 }
+            if(number === 2) { this.number = 2 }
+            if(number === 3) { this.number = 3 }
         }
         setAttributes();
 
@@ -420,6 +425,7 @@ class WordPanel {
         renderImage();
 
         const renderTextTimer = (text, color) => {
+
             if(text === "Maravilhosa"){
                 context.font = `${this.width * 0.168}px eurostyle`;
             } else if (text === "Perfeccionista") {
@@ -429,9 +435,10 @@ class WordPanel {
             }
 
             context.fillStyle = color; 
+            context.globalAlpha = this.opacity;
             let thisText = text; 
-            context.fillText(thisText, (this.x + this.width * 0.05) , (window.innerHeight - this.width * 0.15));  
-      }
+            context.fillText(thisText, this.textX , this.textY);  
+        }
         if(number === 1){
             renderTextTimer('Desmatamento', "#FF0000");
         } else if(number === 2){
@@ -439,15 +446,11 @@ class WordPanel {
         } else if(number === 3){
             renderTextTimer('Maravilhosa', "#009966");
         }
-
-
-
-
-
  
     }
 
     tick(){
+
 
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
@@ -457,6 +460,27 @@ class WordPanel {
             }
         }
         begginingAnimation("AppearGradient");
+
+
+        const appearFromHat = () => {
+
+            if(this.number !== 3){
+                if (this.textX > (this.x + this.width * 0.05)){
+                    this.textX -= 4.5;
+                }
+            } else {
+                if (this.textX < (this.x + this.width * 0.05)){
+                    this.textX += 3;
+                }
+            }
+
+            
+
+            if (this.textY < (window.innerHeight - this.width * 0.15)){
+                this.textY += 2;
+            }
+        }
+        appearFromHat();
 
     }
 }
