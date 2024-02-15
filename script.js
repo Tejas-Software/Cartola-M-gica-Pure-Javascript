@@ -2,6 +2,7 @@
 
 /**add all variables (elements) that will be hovered here */
 let start_button_hover = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
+let brand_logo_hover = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
 /** */
 
 const checkMouseCollision = (a, b) => {
@@ -324,6 +325,7 @@ const BeginPlay = () => {
     
         /**CALL THIS FUNCTION WILL ACTIVATE THE HOVERING EFFECT ON THE ELEMENT PASSED AS PARAMETER */
         hover_on_element(start_button_hover, canvas);
+        hover_on_element(brand_logo_hover, canvas);
     
     
     })
