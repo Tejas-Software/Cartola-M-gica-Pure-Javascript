@@ -13,6 +13,11 @@
     font-family: 'agency';
     src: url('../../../content/tela_06/fontes/agency/AGENCYR.TTF') format('truetype')
 }
+
+@font-face {
+    font-family: 'eurostyle';
+    src: url('../../../content/tela_06/fontes/eurostile/Eurostib.TTF') format('truetype')
+}
   
 
 #canvas1 {

@@ -419,12 +419,27 @@ class WordPanel {
         }
         renderImage();
 
-        const renderTextTimer = () => {
-            context.font = `${this.width * 0.19}px agency`; 
-            context.fillStyle = 'red'; 
-            let text = 'Desmatamento'; 
-            context.fillText(text, (this.x + this.width * 0.05) , (window.innerHeight - this.width * 0.14));        }
-        renderTextTimer();
+        const renderTextTimer = (text, color) => {
+            if(text === "Maravilhosa"){
+                context.font = `${this.width * 0.168}px eurostyle`;
+            } else if (text === "Perfeccionista") {
+                context.font = `${this.width * 0.145}px eurostyle`; 
+            } else if (text === "Desmatamento") {
+                context.font = `${this.width * 0.135}px eurostyle`; 
+            }
+
+            context.fillStyle = color; 
+            let thisText = text; 
+            context.fillText(thisText, (this.x + this.width * 0.05) , (window.innerHeight - this.width * 0.15));  
+      }
+        if(number === 1){
+            renderTextTimer('Desmatamento', "#FF0000");
+        } else if(number === 2){
+            renderTextTimer('Perfeccionista', "#0066FF");
+        } else if(number === 3){
+            renderTextTimer('Maravilhosa', "#009966");
+        }
+
 
 
 
@@ -490,13 +505,13 @@ class Game {
         this.Cartola.draw(context);
         this.Cartola.tick();
 
-        this.Word1.draw(context)
+        this.Word1.draw(context, 1)
         this.Word1.tick()
 
-        this.Word2.draw(context)
+        this.Word2.draw(context, 2)
         this.Word2.tick()
 
-        this.Word3.draw(context)
+        this.Word3.draw(context, 3)
         this.Word3.tick()
 
         
