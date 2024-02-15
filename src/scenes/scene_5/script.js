@@ -420,10 +420,10 @@ class WordPanel {
         renderImage();
 
         const renderTextTimer = () => {
-            context.font = `4vw agency`; 
+            context.font = `${this.width * 0.19}px agency`; 
             context.fillStyle = 'red'; 
             let text = 'Desmatamento'; 
-            context.fillText(text, window.innerWidth * 0.05 , window.innerHeight - (this.height * 0.5) );        }
+            context.fillText(text, (this.x + this.width * 0.05) , (window.innerHeight - this.width * 0.14));        }
         renderTextTimer();
 
 
