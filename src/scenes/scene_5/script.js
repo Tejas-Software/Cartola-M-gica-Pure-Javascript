@@ -419,14 +419,14 @@ class WordPanel {
         }
         renderImage();
 
+        const renderTextTimer = () => {
+            context.font = `4vw agency`; 
+            context.fillStyle = 'red'; 
+            let text = 'Desmatamento'; 
+            context.fillText(text, window.innerWidth * 0.05 , window.innerHeight - (this.height * 0.5) );        }
+        renderTextTimer();
 
-        const renderText = () => {
 
-            if(number === 1) {
-
-            }
-
-        }
 
 
  
