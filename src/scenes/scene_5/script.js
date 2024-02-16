@@ -75,6 +75,7 @@ let GameData = {}
 let doubtButton = document.getElementById("doubt_button")
 let showDoubtModal = false;
 let modalBackButton = document.getElementById("back_button");
+let modalText = document.getElementById("modal_message");
 
 /**ALL CLASSES THAT WILL RUN IN THIS GAME */
 class Player {
@@ -136,6 +137,26 @@ class DoubtButton extends Image {
 class BackButton extends Image {
     constructor(game, width, height, x, y, speed, image){
         super(game, width, height, x, y, speed, image);
+    }
+
+    renderModal(){
+        showDoubtModal = !showDoubtModal;
+        document.body.style.cursor = "pointer";
+    }
+
+    Tick(){
+        this.HoverTransformScale(GameData);
+        this.OnClick(this.renderModal, GameData)
+    }
+}
+class TextModal extends Image {
+    constructor(game, width, height, x, y, speed, image){
+        super(game, width, height, x, y, speed, image);
+    }
+
+
+    Tick(){
+        this.HoverTransformScale(GameData);
     }
 }
 class ResolutionMessage {
@@ -544,7 +565,8 @@ class Game {
         this.Word2 = new WordPanel(this, 2)
         this.Word3 = new WordPanel(this, 3)
 
-        this.BackButton = new Image(this, window.innerWidth * 0.06, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.01, 2, modalBackButton )
+        this.BackButton = new BackButton(this, window.innerWidth * 0.1, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.30, 2, modalBackButton )
+        this.TextModal = new TextModal(this, window.innerWidth * 0.5, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.15, 2, modalText )
     }
     /**THIS METHOD WILL RENDER THE GAME */
     render(context){
@@ -579,7 +601,13 @@ class Game {
 
         if(showDoubtModal){
             this.BackButton.BeginPlay(context);
+            this.BackButton.Tick();
+
+            this.TextModal.BeginPlay(context);
+            this.TextModal.Tick();
+
         }
+
 
         
 
