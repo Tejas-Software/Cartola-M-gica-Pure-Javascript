@@ -1,3 +1,4 @@
+import { CheckMouseCollision } from "../../../lib/Dynamics/Dynamics.js"
 import {Image} from "../../../lib/Image/Image.js"
 
 /**THESE VARIABLES EXISTS TO EXECUTE THE HOVERING ANIMATION */
@@ -440,6 +441,7 @@ class WordPanel {
     
             this.height = window.innerHeight * 0.13
             this.width = this.height * 3.5
+            this.initialWidth = this.height * 3.5
 
             this.textX = window.innerWidth * 0.5;
             this.textY = window.innerHeight * 0.5;
@@ -505,6 +507,21 @@ class WordPanel {
  
     }
 
+    HoverTransformScale(GameData){
+        
+        let bIsMouseColliding = CheckMouseCollision(this, GameData);
+        if (bIsMouseColliding && this.width <= this.initialWidth * 1.02) {
+            this.width += 1;
+            this.height += 1;
+            document.body.style.cursor = "pointer"
+        } else if (!bIsMouseColliding && this.width >= this.initialWidth){
+            this.width -= 1;
+            this.height -= 1;
+            document.body.style.cursor = "auto"
+        }
+
+    }
+
     tick(){
 
 
@@ -537,6 +554,8 @@ class WordPanel {
             }
         }
         appearFromHat();
+
+        this.HoverTransformScale(GameData)
 
     }
 }
