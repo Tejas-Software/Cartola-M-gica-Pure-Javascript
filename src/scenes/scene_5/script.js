@@ -1,8 +1,9 @@
+import {Image} from "../../../lib/Image/Image.js"
+
 /**THESE VARIABLES EXISTS TO EXECUTE THE HOVERING ANIMATION */
 
 /**add all variables (elements) that will be hovered here */
 let continue_button_hover = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
-let doubt_button_hover = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
 let word1 = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
 let word2 = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
 let word3 = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
@@ -70,8 +71,10 @@ const hover_on_element = (hover_this_element, canvas, link) => {
 }
 /********************************************************** */
 
-
-
+let GameData = {}
+let doubtButton = document.getElementById("doubt_button")
+let showDoubtModal = false;
+let modalBackButton = document.getElementById("back_button");
 
 /**ALL CLASSES THAT WILL RUN IN THIS GAME */
 class Player {
@@ -83,29 +86,31 @@ class Player {
         setAttributes();
     }
 }
-class DoubtButton {
-    constructor(game){
+class DoubtButton extends Image {
+    constructor(game, width, height, x, y, speed, image){
 
-        const setAttributes = () => {
-            this.game = game;
-            this.image = document.getElementById("doubt_button")
-    
-            this.height = window.innerHeight * 0.1
-            this.width = this.height * 1
-            
-            this.initialWidth = this.width; /**INITIAL WIDTH IS USED TO HOVER ANIMATIONS */
-    
-            this.x = window.innerWidth * 0.012
-            this.y = window.innerHeight * -0.1
-            this.speed = 1.4;
-        }
-        setAttributes();
+        super(game, width, height, x, y, speed, image);
+
+        this.showModal = false;
+
+        this.modalBackground = document.getElementById("black_background");
+        this.modalBackButton = document.getElementById("back_button");
+        this.modalText = document.getElementById("modal_message");
 
 
     }
 
-    draw(context){
-        context.drawImage(this.image, this.x, this.y, this.width, this.height);
+    BeginPlay(context){
+        super.BeginPlay(context); 
+
+        if(showDoubtModal){
+            context.drawImage(this.modalBackground, 0, 0, window.innerWidth, window.innerHeight);
+        }
+
+    }
+
+    renderModal(){
+        showDoubtModal = !showDoubtModal;
     }
     
 
@@ -122,9 +127,15 @@ class DoubtButton {
         }
         begginingAnimation("fromBottom");
 
-        hoverTransformScaleAndCursor(doubt_button_hover, this);
+        this.HoverTransformScale(GameData);
 
+        this.OnClick(this.renderModal, GameData);
 
+    }
+}
+class BackButton extends Image {
+    constructor(game, width, height, x, y, speed, image){
+        super(game, width, height, x, y, speed, image);
     }
 }
 class ResolutionMessage {
@@ -167,6 +178,10 @@ class TimePanel {
             this.x = window.innerWidth * 0.08
             this.y = -50 ;
             this.speed = 1.4;
+
+            this.milliseconds = 0;
+            this.seconds = 0;
+            this.minutes = 0;
     
             this.opacity = 0;
         }
@@ -183,9 +198,15 @@ class TimePanel {
 
 
         const renderTextTimer = () => {
+            let text;
             context.font = `4vw agency`; 
             context.fillStyle = 'white'; 
-            let text = '00:00'; 
+            if(this.seconds < 10 && this.minutes < 10){
+                text = `0${this.minutes}:0${this.seconds}`; 
+            } else if (this.seconds >= 10 && this.minutes < 10) {
+                text = `0${this.minutes}:${this.seconds}`
+            }
+
             context.fillText(text, (this.width * 0.8) , this.height * 0.95);
         }
         renderTextTimer();
@@ -195,6 +216,20 @@ class TimePanel {
     
 
     tick(){
+
+        this.milliseconds += 15;
+
+        if(this.milliseconds >= 1000){
+            this.seconds += 1;
+            this.milliseconds = 0;
+        }
+
+        if(this.seconds === 60){
+            this.minutes += 1;
+            this.seconds = 0;
+        }
+
+        console.log(this.seconds)
 
         const begginingAnimation = (origin) => {
             if(origin === "fromBottom"){
@@ -498,7 +533,7 @@ class Game {
         this.height = this.canvas.height;
 
         /**GAME CLASS WILL EXECUTE AND OWN ALL THESE CLASSES */
-        this.doubt_button = new DoubtButton(this)
+        this.doubt_button = new DoubtButton(this, window.innerWidth * 0.06, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.01, 2, doubtButton )
         this.YouPanel = new YouPanel(this)
         this.TimePanel = new TimePanel(this)
         this.MagicianPanel = new MagicianPanel(this)
@@ -508,6 +543,8 @@ class Game {
         this.Word1 = new WordPanel(this, 1)
         this.Word2 = new WordPanel(this, 2)
         this.Word3 = new WordPanel(this, 3)
+
+        this.BackButton = new Image(this, window.innerWidth * 0.06, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.01, 2, modalBackButton )
     }
     /**THIS METHOD WILL RENDER THE GAME */
     render(context){
@@ -520,8 +557,7 @@ class Game {
         this.MagicianPanel.draw(context);
         this.MagicianPanel.tick();
 
-        this.doubt_button.draw(context);
-        this.doubt_button.tick();
+
 
         this.YouPanel.draw(context);
         this.YouPanel.tick();
@@ -537,6 +573,13 @@ class Game {
 
         this.Word3.draw(context, 3)
         this.Word3.tick()
+
+        this.doubt_button.BeginPlay(context);
+        this.doubt_button.tick();
+
+        if(showDoubtModal){
+            this.BackButton.BeginPlay(context);
+        }
 
         
 
@@ -558,6 +601,8 @@ const BeginPlay = () => {
     /**THIS FUNCTION RUN AFTER EVERYTHING IS LOADED */
     window.addEventListener('load', ()=>{
 
+ 
+
 
 
         /**THIS FUNCTION RELOADS THE PAGE WHEN RESIZING THE SCREEN */
@@ -570,7 +615,8 @@ const BeginPlay = () => {
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth - 10;
         canvas.height = window.innerHeight - 10;
-    
+
+        GameData.Context = ctx;
 
 
         /**CALL THE GAME CLASS AND ANIMATE IT*/
@@ -588,10 +634,33 @@ const BeginPlay = () => {
             }
         }
         animate();
+
+        /**GETS MOUSE X AND Y POSITION*/
+        canvas.addEventListener('mousemove', function(event) {
+            let rect = canvas.getBoundingClientRect();
+            let x = event.clientX - rect.left;
+            let y = event.clientY - rect.top;
+            GameData.MouseX = x;
+            GameData.MouseY = y;       
+
+        });
+            /**GETS IF MOUSE IS CLICKED */
+            canvas.addEventListener('click', function(event) {
+                let rect = canvas.getBoundingClientRect();
+                let x = event.clientX - rect.left;
+                let y = event.clientY - rect.top;
+            GameData.Clicked = true;
+            setTimeout(() => {
+                GameData.Clicked = false;
+            }, 5);  
+
+             
+
+
+        });
     
         /**CALL THIS FUNCTION WILL ACTIVATE THE HOVERING EFFECT ON THE ELEMENT PASSED AS PARAMETER */
         hover_on_element(continue_button_hover, canvas, "../scene_5/");
-        hover_on_element(doubt_button_hover, canvas, "../scene_3")
     
     
     })
