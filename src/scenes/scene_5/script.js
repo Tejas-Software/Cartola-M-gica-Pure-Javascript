@@ -75,8 +75,13 @@ const hover_on_element = (hover_this_element, canvas, link) => {
 let GameData = {}
 let doubtButton = document.getElementById("doubt_button")
 let showDoubtModal = false;
+let showWrongAnswerModal = false;
+let showRightAnswerModal = false;
 let modalBackButton = document.getElementById("back_button");
 let modalText = document.getElementById("modal_message");
+let playerPoints = 0;
+let magicianPoints = 0;
+
 
 /**ALL CLASSES THAT WILL RUN IN THIS GAME */
 class Player {
@@ -250,8 +255,6 @@ class TimePanel {
             this.minutes += 1;
             this.seconds = 0;
         }
-
-        console.log(this.seconds)
 
         const begginingAnimation = (origin) => {
             if(origin === "fromBottom"){
@@ -433,6 +436,7 @@ class Cartola {
     }
 }
 class WordPanel {
+
     constructor(game, number){
 
         const setAttributes = () => {
@@ -445,6 +449,8 @@ class WordPanel {
 
             this.textX = window.innerWidth * 0.5;
             this.textY = window.innerHeight * 0.5;
+
+            this.discovered = false;
     
             //this.x and this.y and opacity is defined by these conditionals
             if(number === 1) { 
@@ -522,6 +528,26 @@ class WordPanel {
 
     }
 
+    OnClick(callback, GameData, number){
+        let bIsMouseColliding = CheckMouseCollision(this, GameData);
+        if(bIsMouseColliding && GameData.Clicked){
+            callback(number);
+        }
+
+    }
+
+    RenderModalAnswer(number){
+        if(!this.discovered){
+            if(number === 1){ showWrongAnswerModal = !showWrongAnswerModal}
+            if(number === 2){ showRightAnswerModal = !showRightAnswerModal; this.discovered = true;}
+            if(number === 3){ showRightAnswerModal = !showRightAnswerModal; this.discovered = true;}
+    
+            console.log(showWrongAnswerModal)
+            console.log(showRightAnswerModal)
+        }
+
+    }
+
     tick(){
 
 
@@ -557,7 +583,12 @@ class WordPanel {
 
         this.HoverTransformScale(GameData)
 
+        this.OnClick(this.RenderModalAnswer, GameData, this.number);
+
     }
+
+
+
 }
 /**************************************** */
 

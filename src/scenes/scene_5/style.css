@@ -48,6 +48,6 @@
 #word_panel{
     display: none;
 }
-#cartola{
+#cartola, #black_background, #modal_message, #back_button{
     display: none;
 }
