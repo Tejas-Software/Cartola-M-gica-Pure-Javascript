@@ -1,8 +1,10 @@
+import { CheckMouseCollision } from "../../../lib/Dynamics/Dynamics.js"
+import {Image} from "../../../lib/Image/Image.js"
+
 /**THESE VARIABLES EXISTS TO EXECUTE THE HOVERING ANIMATION */
 
 /**add all variables (elements) that will be hovered here */
 let continue_button_hover = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
-let doubt_button_hover = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
 /** */
 
 const checkMouseCollision = (a, b) => {
@@ -15,37 +17,10 @@ const checkMouseCollision = (a, b) => {
         b.isMouseColliding = false;
     }
 }
-const hoverTransform = (element, e) => {
-
-    //UPDATES ITS VARIABLE POSITION TO DEAL WITH RENDERING NEW FRAMES
-    element.x = e.x
-    element.y = e.y
-    element.width = e.width
-    element.height = e.height
-
-    if (element.isMouseColliding){
-
-        if(e.width <= e.initialWidth * 1.04) {
-            e.width += 1;
-            e.height += 1;
-            document.body.style.cursor = "pointer"
-        }
-
-    } else {
-
-        if(e.width > e.initialWidth ) {
-            e.width -= 1;
-            e.height -= 1;
-            document.body.style.cursor = "auto"
-        }
-        
-    }
-}
 const hover_on_element = (hover_this_element, canvas, link) => {
     
     canvas.addEventListener('click', function(e) {
         e.preventDefault();
-
 
         if (hover_this_element.isMouseColliding) {
             window.location.href = link;
@@ -68,6 +43,30 @@ const hover_on_element = (hover_this_element, canvas, link) => {
 }
 /********************************************************** */
 
+let GameData = {}
+let doubtButton = document.getElementById("doubt_button")
+let continueButton = document.getElementById("continue_button")
+let showDoubtModal = false;
+
+let showWrongAnswerModal = false;
+let showRightAnswerModal = false;
+let modalBackButton = document.getElementById("back_button");
+let modalText = document.getElementById("modal_message");
+let playerPoints = 0;
+let magicianPoints = 0;
+
+let word1Discovered = false;
+let word2Discovered = false;
+let word3Discovered = false;
+
+let canDoubtButtonHover = () => {
+    return showWrongAnswerModal === false && showRightAnswerModal === false && showDoubtModal === false; 
+}
+
+let canWordPanelBeClicked = () => {
+    return showRightAnswerModal === false && showWrongAnswerModal === false && showDoubtModal === false;
+}
+
 
 
 
@@ -81,29 +80,31 @@ class Player {
         setAttributes();
     }
 }
-class DoubtButton {
-    constructor(game){
+class DoubtButton extends Image {
+    constructor(game, width, height, x, y, speed, image){
 
-        const setAttributes = () => {
-            this.game = game;
-            this.image = document.getElementById("doubt_button")
-    
-            this.height = window.innerHeight * 0.1
-            this.width = this.height * 1
-            
-            this.initialWidth = this.width; /**INITIAL WIDTH IS USED TO HOVER ANIMATIONS */
-    
-            this.x = window.innerWidth * 0.012
-            this.y = window.innerHeight * -0.1
-            this.speed = 1.4;
-        }
-        setAttributes();
+        super(game, width, height, x, y, speed, image);
+
+        this.showModal = false;
+
+        this.modalBackground = document.getElementById("black_background");
+        this.modalBackButton = document.getElementById("back_button");
+        this.modalText = document.getElementById("modal_message");
 
 
     }
 
-    draw(context){
-        context.drawImage(this.image, this.x, this.y, this.width, this.height);
+    BeginPlay(context){
+        super.BeginPlay(context); 
+
+        if(showDoubtModal){
+            context.drawImage(this.modalBackground, 0, 0, window.innerWidth, window.innerHeight);
+        }
+
+    }
+
+    renderModal(){
+        showDoubtModal = true;
     }
     
 
@@ -120,9 +121,63 @@ class DoubtButton {
         }
         begginingAnimation("fromBottom");
 
-        hoverTransform(doubt_button_hover, this);
+        this.HoverTransformScale(GameData, [canDoubtButtonHover()])
+
+        this.OnClick(this.renderModal, GameData, [canDoubtButtonHover()]);
+
+    }
+}
+class BackButton extends Image {
+    constructor(game, width, height, x, y, speed, image){
+        super(game, width, height, x, y, speed, image);
+    }
+
+    renderModal(){
+        showDoubtModal = false;
+        document.body.style.cursor = "pointer";
+    }
+
+    Tick(){
+        this.HoverTransformScale(GameData);
+        this.OnClick(this.renderModal, GameData)
+    }
+}
+class ContinueButton extends Image {
+    constructor(game, width, height, x, y, speed, image){
+        super(game, width, height, x, y, speed, image);
+    }
 
 
+    Tick(){
+        this.HoverTransformScale(GameData);
+        this.OnClick(this.GoToLink(GameData, "../scene_6"), GameData)
+    }
+}
+class BackButtonModal extends Image {
+    constructor(game, width, height, x, y, speed, image){
+        super(game, width, height, x, y, speed, image);
+    }
+
+    renderModal(){
+        showWrongAnswerModal = false;
+        showRightAnswerModal = false;
+        showDoubtModal = false;
+        document.body.style.cursor = "pointer";
+    }
+
+    Tick(){
+        this.HoverTransformScale(GameData);
+        this.OnClick(this.renderModal, GameData)
+    }
+}
+class TextModal extends Image {
+    constructor(game, width, height, x, y, speed, image){
+        super(game, width, height, x, y, speed, image);
+    }
+
+
+    Tick(){
+        this.HoverTransformScale(GameData);
     }
 }
 class ResolutionMessage {
@@ -165,6 +220,10 @@ class TimePanel {
             this.x = window.innerWidth * 0.08
             this.y = -50 ;
             this.speed = 1.4;
+
+            this.milliseconds = 0;
+            this.seconds = 0;
+            this.minutes = 0;
     
             this.opacity = 0;
         }
@@ -181,9 +240,15 @@ class TimePanel {
 
 
         const renderTextTimer = () => {
+            let text;
             context.font = `4vw agency`; 
             context.fillStyle = 'white'; 
-            let text = '00:00'; 
+            if(this.seconds < 10 && this.minutes < 10){
+                text = `0${this.minutes}:0${this.seconds}`; 
+            } else if (this.seconds >= 10 && this.minutes < 10) {
+                text = `0${this.minutes}:${this.seconds}`
+            }
+
             context.fillText(text, (this.width * 0.8) , this.height * 0.95);
         }
         renderTextTimer();
@@ -193,6 +258,18 @@ class TimePanel {
     
 
     tick(){
+
+        this.milliseconds += 15;
+
+        if(this.milliseconds >= 1000){
+            this.seconds += 1;
+            this.milliseconds = 0;
+        }
+
+        if(this.seconds === 60){
+            this.minutes += 1;
+            this.seconds = 0;
+        }
 
         const begginingAnimation = (origin) => {
             if(origin === "fromBottom"){
@@ -253,7 +330,7 @@ class MagicianPanel {
         const renderTextPoints = () => {
             context.font = '5.2vw bigDots'; 
             context.fillStyle = 'white'; 
-            let textPoints = '000'; 
+            let textPoints = `${magicianPoints > 0 ? magicianPoints : "000"}`; 
         
             context.fillText(textPoints, this.x + (this.x * 0.017) , this.y + (this.height * 0.89));
         }
@@ -316,7 +393,7 @@ class YouPanel {
         const renderPoints = () => {
             context.font = '5.2vw bigDots'; 
             context.fillStyle = 'white'; 
-            let textPoints = '000'; 
+            let textPoints = `${playerPoints > 0 ? playerPoints : "000"}`; 
         
             context.fillText(textPoints, this.x + (this.x * 0.014) , this.y + (this.height * 0.89));
         }
@@ -374,14 +451,28 @@ class Cartola {
     }
 }
 class WordPanel {
+
     constructor(game, number){
 
         const setAttributes = () => {
             this.game = game;
             this.image = document.getElementById("word_panel")
+            this.imageError = document.getElementById("image_error")
+            this.imageRight = document.getElementById("image_right")
+            this.modalBackground = document.getElementById("black_background");
+            this.modalBackButton = document.getElementById("back_button");
+            this.magicianPanel = document.getElementById("magician_panel");
+            this.youPanel = document.getElementById("you_panel");
+
     
             this.height = window.innerHeight * 0.13
             this.width = this.height * 3.5
+            this.initialWidth = this.height * 3.5
+
+            this.textX = window.innerWidth * 0.5;
+            this.textY = window.innerHeight * 0.5;
+
+            this.discovered = false;
     
             //this.x and this.y and opacity is defined by these conditionals
             if(number === 1) { 
@@ -400,12 +491,11 @@ class WordPanel {
     
             this.speed = 4.5;
             
-            if(number === 1) { this.number === 1 }
-            if(number === 2) { this.number === 2 }
-            if(number === 3) { this.number === 3 }
+            if(number === 1) { this.number = 1 }
+            if(number === 2) { this.number = 2 }
+            if(number === 3) { this.number = 3 }
         }
         setAttributes();
-
 
     }
 
@@ -419,20 +509,285 @@ class WordPanel {
         }
         renderImage();
 
-        const renderTextTimer = () => {
-            context.font = `4vw agency`; 
-            context.fillStyle = 'red'; 
-            let text = 'Desmatamento'; 
-            context.fillText(text, window.innerWidth * 0.05 , window.innerHeight - (this.height * 0.5) );        }
-        renderTextTimer();
+        const renderTextTimer = (text, color) => {
 
+            if(text === "Maravilhosa"){
+                context.font = `${this.width * 0.168}px eurostyle`;
+            } else if (text === "Perfeccionista") {
+                context.font = `${this.width * 0.145}px eurostyle`; 
+            } else if (text === "Desmatamento") {
+                context.font = `${this.width * 0.135}px eurostyle`; 
+            }
 
-
-
+            context.fillStyle = color; 
+            context.globalAlpha = this.opacity;
+            let thisText = text; 
+            context.fillText(thisText, this.textX , this.textY);  
+        }
+        if(number === 1){
+            renderTextTimer('Desmatamento', "#FF0000");
+        } else if(number === 2){
+            renderTextTimer('Perfeccionista', "#0066FF");
+        } else if(number === 3){
+            renderTextTimer('Maravilhosa', "#009966");
+        }
  
     }
 
-    tick(){
+    HoverTransformScale(GameData, params){
+
+        let paramsLength = params?.length;
+        let trueParams = 0;
+
+        params.map((param)=>{if(param === true){trueParams+=1;}})
+
+        console.log(params.length)
+        console.log(trueParams)
+
+        if(paramsLength === trueParams){
+            let bIsMouseColliding = CheckMouseCollision(this, GameData);
+            if (bIsMouseColliding && this.width <= this.initialWidth * 1.02) {
+                this.width += 1;
+                this.height += 1;
+                document.body.style.cursor = "pointer"
+            } else if (!bIsMouseColliding && this.width >= this.initialWidth){
+                this.width -= 1;
+                this.height -= 1;
+                document.body.style.cursor = "auto"
+            }
+        }
+        
+
+
+    }
+
+    OnClick(callback, GameData, number, context, params){
+
+        let paramsLength = params?.length;
+        let trueParams = 0;
+
+        params?.map((param)=>{if(param === true){trueParams+=1;}})
+
+        console.log(params?.length)
+        console.log(trueParams)
+
+        if(params){
+            if(paramsLength === trueParams){
+                let bIsMouseColliding = CheckMouseCollision(this, GameData);
+                if(bIsMouseColliding && GameData.Clicked){
+                    callback(number, context);
+                }
+            }
+        } else {
+            let bIsMouseColliding = CheckMouseCollision(this, GameData);
+            if(bIsMouseColliding && GameData.Clicked){
+                callback(number, context);
+            }
+        }
+
+
+
+
+    }
+
+    RenderModalWrong(context){
+
+        context.drawImage(this.modalBackground, 0, 0, window.innerWidth, window.innerHeight);
+        context.drawImage(this.imageError, (window.innerWidth * 0.5) - (window.innerWidth * 0.18), (window.innerHeight * 0.1), (window.innerWidth * 0.5), (window.innerWidth * 0.5) * 0.3 );
+
+        const drawMagicianPanel = () => {
+
+            const renderImage = () => {
+                context.globalAlpha = this.opacity;
+                context.drawImage(this.magicianPanel, (window.innerWidth * 0.25), (window.innerHeight * 0.45), (window.innerWidth * 0.2), (window.innerHeight * 0.35));
+                context.globalAlpha = 1;
+            }
+            renderImage();
+            
+    
+            const renderTextTitle = () => {
+                context.font = '2.5vw bigDots'; 
+                context.fillStyle = '#00FFFF'; 
+                let text = 'MÁGICO'; 
+            
+                context.fillText(text, (window.innerWidth * 0.25) + ((window.innerWidth * 0.25) * 0.2) , (window.innerHeight * 0.45) + ((window.innerHeight * 0.45) * 0.25));
+            }
+            renderTextTitle()
+        }
+        drawMagicianPanel();
+
+        const renderTextPointsMagician = () => {
+            context.font = '5.2vw bigDots'; 
+            context.fillStyle = 'white'; 
+            let textPoints = `${magicianPoints}`; 
+        
+            context.fillText(textPoints,(window.innerWidth * 0.25) + ((window.innerWidth * 0.25) * 0.25) , (window.innerHeight * 0.65) + ((window.innerHeight * 0.45) * 0.25));
+        }
+        renderTextPointsMagician();
+
+
+
+
+
+        const drawYouPanel = () => {
+
+            const renderImage = () => {
+                context.globalAlpha = this.opacity;
+                context.drawImage(this.magicianPanel, (window.innerWidth * 0.55), (window.innerHeight * 0.45), (window.innerWidth * 0.2), (window.innerHeight * 0.35));
+                context.globalAlpha = 1;
+            }
+            renderImage();
+            
+    
+            const renderTextTitle = () => {
+                context.font = '2.5vw bigDots'; 
+                context.fillStyle = '#00FFFF'; 
+                let text = 'VOCÊ'; 
+            
+                context.fillText(text, (window.innerWidth * 0.25) + ((window.innerWidth * 0.5) * 0.75) , (window.innerHeight * 0.45) + ((window.innerHeight * 0.45) * 0.25));
+            }
+            renderTextTitle()
+        }
+        drawYouPanel();
+
+        const renderTextPointsYou = () => {
+            context.font = '5.2vw bigDots'; 
+            context.fillStyle = 'white'; 
+            let textPoints = `${playerPoints > 0 ? playerPoints : "000"}`; 
+        
+            context.fillText(textPoints,(window.innerWidth * 0.25) + ((window.innerWidth * 0.5) * 0.75) , (window.innerHeight * 0.65) + ((window.innerHeight * 0.45) * 0.25));
+        }
+        renderTextPointsYou();
+
+    }
+
+    RenderModalRight(context){
+
+        context.drawImage(this.modalBackground, 0, 0, window.innerWidth, window.innerHeight);
+        context.drawImage(this.imageRight, (window.innerWidth * 0.5) - this.width, (window.innerHeight * 0.1), (window.innerWidth * 0.5), (window.innerWidth * 0.5) * 0.3 );
+
+        const drawMagicianPanel = () => {
+
+            const renderImage = () => {
+                context.globalAlpha = this.opacity;
+                context.drawImage(this.magicianPanel, (window.innerWidth * 0.25), (window.innerHeight * 0.45), (window.innerWidth * 0.2), (window.innerHeight * 0.35));
+                context.globalAlpha = 1;
+            }
+            renderImage();
+            
+    
+            const renderTextTitle = () => {
+                context.font = '2.5vw bigDots'; 
+                context.fillStyle = '#00FFFF'; 
+                let text = 'MÁGICO'; 
+            
+                context.fillText(text, (window.innerWidth * 0.25) + ((window.innerWidth * 0.25) * 0.2) , (window.innerHeight * 0.45) + ((window.innerHeight * 0.45) * 0.25));
+            }
+            renderTextTitle()
+        }
+        drawMagicianPanel();
+
+        const renderTextPointsMagician = () => {
+            context.font = '5.2vw bigDots'; 
+            context.fillStyle = 'white'; 
+            let textPoints = `${magicianPoints}`; 
+        
+            context.fillText(textPoints,(window.innerWidth * 0.25) + ((window.innerWidth * 0.25) * 0.25) , (window.innerHeight * 0.65) + ((window.innerHeight * 0.45) * 0.25));
+        }
+        renderTextPointsMagician();
+
+
+        const drawYouPanel = () => {
+
+            const renderImage = () => {
+                context.globalAlpha = this.opacity;
+                context.drawImage(this.magicianPanel, (window.innerWidth * 0.55), (window.innerHeight * 0.45), (window.innerWidth * 0.2), (window.innerHeight * 0.35));
+                context.globalAlpha = 1;
+            }
+            renderImage();
+            
+    
+            const renderTextTitle = () => {
+                context.font = '2.5vw bigDots'; 
+                context.fillStyle = '#00FFFF'; 
+                let text = 'VOCÊ'; 
+            
+                context.fillText(text, (window.innerWidth * 0.25) + ((window.innerWidth * 0.5) * 0.75) , (window.innerHeight * 0.45) + ((window.innerHeight * 0.45) * 0.25));
+            }
+            renderTextTitle()
+        }
+        drawYouPanel();
+
+        const renderTextPointsYou = () => {
+            context.font = '5.2vw bigDots'; 
+            context.fillStyle = 'white'; 
+            let textPoints = `${playerPoints > 0 ? playerPoints : "000"}`; 
+        
+            context.fillText(textPoints,(window.innerWidth * 0.25) + ((window.innerWidth * 0.5) * 0.75) , (window.innerHeight * 0.65) + ((window.innerHeight * 0.45) * 0.25));
+        }
+        renderTextPointsYou();
+
+    }
+
+    RenderModalAnswer(number, context){
+
+        if(number === 1){
+            if(!word1Discovered){ word1Discovered = true;}
+            if(word1Discovered){
+                magicianPoints = 5;
+            }
+            showWrongAnswerModal = true;
+            showRightAnswerModal = false;
+            showDoubtModal = false;
+
+
+        } else if (number === 2){
+
+            if(!word2Discovered){
+                word2Discovered = true;
+            }
+
+            if(word2Discovered && !word3Discovered){
+                playerPoints = 5;
+
+            } else if (word2Discovered && word3Discovered){
+                playerPoints = 10;
+            }
+
+            showWrongAnswerModal = false;
+            showRightAnswerModal = true;
+            showDoubtModal = false;
+
+
+        } else if (number === 3) {
+
+
+            if(!word3Discovered){
+                word3Discovered = true;
+            }
+
+            if(word3Discovered && !word2Discovered){
+                playerPoints = 5;
+
+            } else if (word2Discovered && word3Discovered){
+                playerPoints = 10;
+            }
+
+            showWrongAnswerModal = false;
+            showRightAnswerModal = true;
+            showDoubtModal = false;
+
+        }
+        
+
+
+
+
+
+    }
+
+    tick(context){
+
 
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
@@ -443,7 +798,35 @@ class WordPanel {
         }
         begginingAnimation("AppearGradient");
 
+
+        const appearFromHat = () => {
+
+            if(this.number !== 3){
+                if (this.textX > (this.x + this.width * 0.05)){
+                    this.textX -= 4.5;
+                }
+            } else {
+                if (this.textX < (this.x + this.width * 0.05)){
+                    this.textX += 3;
+                }
+            }
+
+            
+
+            if (this.textY < (window.innerHeight - this.width * 0.15)){
+                this.textY += 2;
+            }
+        }
+        appearFromHat();
+
+        this.HoverTransformScale(GameData, [canDoubtButtonHover()])
+
+        this.OnClick(this.RenderModalAnswer, GameData, this.number, context, [canWordPanelBeClicked()]);
+
     }
+
+
+
 }
 /**************************************** */
 
@@ -459,7 +842,7 @@ class Game {
         this.height = this.canvas.height;
 
         /**GAME CLASS WILL EXECUTE AND OWN ALL THESE CLASSES */
-        this.doubt_button = new DoubtButton(this)
+        this.doubt_button = new DoubtButton(this, window.innerWidth * 0.06, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.01, 2, doubtButton )
         this.YouPanel = new YouPanel(this)
         this.TimePanel = new TimePanel(this)
         this.MagicianPanel = new MagicianPanel(this)
@@ -469,6 +852,13 @@ class Game {
         this.Word1 = new WordPanel(this, 1)
         this.Word2 = new WordPanel(this, 2)
         this.Word3 = new WordPanel(this, 3)
+
+        this.BackButton = new BackButton(this, window.innerWidth * 0.15, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.30, 2, modalBackButton )
+
+        this.ContinueButton = new ContinueButton(this, window.innerWidth * 0.2, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.78, window.innerHeight * 0.70, 2, continueButton )
+        
+        this.BackButtonModal = new BackButtonModal(this, window.innerWidth * 0.15, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.70, 2, modalBackButton )
+        this.TextModal = new TextModal(this, window.innerWidth * 0.5, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.15, 2, modalText )
     }
     /**THIS METHOD WILL RENDER THE GAME */
     render(context){
@@ -481,8 +871,6 @@ class Game {
         this.MagicianPanel.draw(context);
         this.MagicianPanel.tick();
 
-        this.doubt_button.draw(context);
-        this.doubt_button.tick();
 
         this.YouPanel.draw(context);
         this.YouPanel.tick();
@@ -490,14 +878,46 @@ class Game {
         this.Cartola.draw(context);
         this.Cartola.tick();
 
-        this.Word1.draw(context)
-        this.Word1.tick()
+        this.Word1.draw(context, 1)
+        this.Word1.tick(context)
 
-        this.Word2.draw(context)
-        this.Word2.tick()
+        this.Word2.draw(context, 2)
+        this.Word2.tick(context)
 
-        this.Word3.draw(context)
-        this.Word3.tick()
+        this.Word3.draw(context, 3)
+        this.Word3.tick(context)
+
+        this.doubt_button.BeginPlay(context);
+        this.doubt_button.tick();
+
+        if(showDoubtModal){
+            this.BackButton.BeginPlay(context);
+            this.BackButton.Tick();
+
+            this.TextModal.BeginPlay(context);
+            this.TextModal.Tick();
+
+        }
+
+        if(showWrongAnswerModal){
+            this.Word1.RenderModalWrong(context);
+            this.BackButtonModal.BeginPlay(context);
+            this.BackButtonModal.Tick();
+        }
+
+        if(showRightAnswerModal){
+            this.Word1.RenderModalRight(context);
+
+            if(playerPoints >= 10){
+                this.ContinueButton.BeginPlay(context);
+                this.ContinueButton.Tick();
+            } else {
+                this.BackButtonModal.BeginPlay(context);
+                this.BackButtonModal.Tick();
+            }
+
+        }
+
 
         
 
@@ -519,6 +939,8 @@ const BeginPlay = () => {
     /**THIS FUNCTION RUN AFTER EVERYTHING IS LOADED */
     window.addEventListener('load', ()=>{
 
+ 
+
 
 
         /**THIS FUNCTION RELOADS THE PAGE WHEN RESIZING THE SCREEN */
@@ -531,7 +953,8 @@ const BeginPlay = () => {
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth - 10;
         canvas.height = window.innerHeight - 10;
-    
+
+        GameData.Context = ctx;
 
 
         /**CALL THE GAME CLASS AND ANIMATE IT*/
@@ -549,10 +972,33 @@ const BeginPlay = () => {
             }
         }
         animate();
+
+        /**GETS MOUSE X AND Y POSITION*/
+        canvas.addEventListener('mousemove', function(event) {
+            let rect = canvas.getBoundingClientRect();
+            let x = event.clientX - rect.left;
+            let y = event.clientY - rect.top;
+            GameData.MouseX = x;
+            GameData.MouseY = y;       
+
+        });
+            /**GETS IF MOUSE IS CLICKED */
+            canvas.addEventListener('click', function(event) {
+                let rect = canvas.getBoundingClientRect();
+                let x = event.clientX - rect.left;
+                let y = event.clientY - rect.top;
+            GameData.Clicked = true;
+            setTimeout(() => {
+                GameData.Clicked = false;
+            }, 5);  
+
+             
+
+
+        });
     
         /**CALL THIS FUNCTION WILL ACTIVATE THE HOVERING EFFECT ON THE ELEMENT PASSED AS PARAMETER */
         hover_on_element(continue_button_hover, canvas, "../scene_5/");
-        hover_on_element(doubt_button_hover, canvas, "../scene_3")
     
     
     })
