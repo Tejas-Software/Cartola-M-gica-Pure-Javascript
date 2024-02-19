@@ -5,9 +5,6 @@ import {Image} from "../../../lib/Image/Image.js"
 
 /**add all variables (elements) that will be hovered here */
 let continue_button_hover = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
-let word1 = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
-let word2 = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
-let word3 = {x: 0, y: 0, width: 0, height: 0, isMouseColliding: false}
 /** */
 
 const checkMouseCollision = (a, b) => {
@@ -75,12 +72,22 @@ const hover_on_element = (hover_this_element, canvas, link) => {
 let GameData = {}
 let doubtButton = document.getElementById("doubt_button")
 let showDoubtModal = false;
+
+let showWordModalError = false;
+let showWordModalRight = false;
+
 let showWrongAnswerModal = false;
 let showRightAnswerModal = false;
 let modalBackButton = document.getElementById("back_button");
 let modalText = document.getElementById("modal_message");
 let playerPoints = 0;
 let magicianPoints = 0;
+
+let word1Discovered = false;
+let word2Discovered = false;
+let word3Discovered = false;
+
+
 
 
 /**ALL CLASSES THAT WILL RUN IN THIS GAME */
@@ -147,6 +154,23 @@ class BackButton extends Image {
 
     renderModal(){
         showDoubtModal = !showDoubtModal;
+        document.body.style.cursor = "pointer";
+    }
+
+    Tick(){
+        this.HoverTransformScale(GameData);
+        this.OnClick(this.renderModal, GameData)
+    }
+}
+class BackButtonModal extends Image {
+    constructor(game, width, height, x, y, speed, image){
+        super(game, width, height, x, y, speed, image);
+    }
+
+    renderModal(){
+        showWrongAnswerModal = false;
+        showRightAnswerModal = false;
+        showDoubtModal = false;
         document.body.style.cursor = "pointer";
     }
 
@@ -315,7 +339,7 @@ class MagicianPanel {
         const renderTextPoints = () => {
             context.font = '5.2vw bigDots'; 
             context.fillStyle = 'white'; 
-            let textPoints = '000'; 
+            let textPoints = `${magicianPoints > 0 ? magicianPoints : "000"}`; 
         
             context.fillText(textPoints, this.x + (this.x * 0.017) , this.y + (this.height * 0.89));
         }
@@ -378,7 +402,7 @@ class YouPanel {
         const renderPoints = () => {
             context.font = '5.2vw bigDots'; 
             context.fillStyle = 'white'; 
-            let textPoints = '000'; 
+            let textPoints = `${playerPoints > 0 ? playerPoints : "000"}`; 
         
             context.fillText(textPoints, this.x + (this.x * 0.014) , this.y + (this.height * 0.89));
         }
@@ -442,6 +466,13 @@ class WordPanel {
         const setAttributes = () => {
             this.game = game;
             this.image = document.getElementById("word_panel")
+            this.imageError = document.getElementById("image_error")
+            this.imageRight = document.getElementById("image_right")
+            this.modalBackground = document.getElementById("black_background");
+            this.modalBackButton = document.getElementById("back_button");
+            this.magicianPanel = document.getElementById("magician_panel");
+            this.youPanel = document.getElementById("you_panel");
+
     
             this.height = window.innerHeight * 0.13
             this.width = this.height * 3.5
@@ -474,7 +505,6 @@ class WordPanel {
             if(number === 3) { this.number = 3 }
         }
         setAttributes();
-
 
     }
 
@@ -528,27 +558,196 @@ class WordPanel {
 
     }
 
-    OnClick(callback, GameData, number){
+    OnClick(callback, GameData, number, context){
         let bIsMouseColliding = CheckMouseCollision(this, GameData);
         if(bIsMouseColliding && GameData.Clicked){
-            callback(number);
+            callback(number, context);
         }
 
     }
 
-    RenderModalAnswer(number){
-        if(!this.discovered){
-            if(number === 1){ showWrongAnswerModal = !showWrongAnswerModal}
-            if(number === 2){ showRightAnswerModal = !showRightAnswerModal; this.discovered = true;}
-            if(number === 3){ showRightAnswerModal = !showRightAnswerModal; this.discovered = true;}
+    RenderModalWrong(context){
+
+        context.drawImage(this.modalBackground, 0, 0, window.innerWidth, window.innerHeight);
+        context.drawImage(this.imageError, (window.innerWidth * 0.5) - (window.innerWidth * 0.18), (window.innerHeight * 0.1), (window.innerWidth * 0.5), (window.innerWidth * 0.5) * 0.3 );
+
+        const drawMagicianPanel = () => {
+
+            const renderImage = () => {
+                context.globalAlpha = this.opacity;
+                context.drawImage(this.magicianPanel, (window.innerWidth * 0.25), (window.innerHeight * 0.45), (window.innerWidth * 0.2), (window.innerHeight * 0.35));
+                context.globalAlpha = 1;
+            }
+            renderImage();
+            
     
-            console.log(showWrongAnswerModal)
-            console.log(showRightAnswerModal)
+            const renderTextTitle = () => {
+                context.font = '2.5vw bigDots'; 
+                context.fillStyle = '#00FFFF'; 
+                let text = 'MÁGICO'; 
+            
+                context.fillText(text, (window.innerWidth * 0.25) + ((window.innerWidth * 0.25) * 0.2) , (window.innerHeight * 0.45) + ((window.innerHeight * 0.45) * 0.25));
+            }
+            renderTextTitle()
         }
+        drawMagicianPanel();
+
+        const renderTextPointsMagician = () => {
+            context.font = '5.2vw bigDots'; 
+            context.fillStyle = 'white'; 
+            let textPoints = `${magicianPoints}`; 
+        
+            context.fillText(textPoints,(window.innerWidth * 0.25) + ((window.innerWidth * 0.25) * 0.25) , (window.innerHeight * 0.65) + ((window.innerHeight * 0.45) * 0.25));
+        }
+        renderTextPointsMagician();
+
+
+
+
+
+        const drawYouPanel = () => {
+
+            const renderImage = () => {
+                context.globalAlpha = this.opacity;
+                context.drawImage(this.magicianPanel, (window.innerWidth * 0.55), (window.innerHeight * 0.45), (window.innerWidth * 0.2), (window.innerHeight * 0.35));
+                context.globalAlpha = 1;
+            }
+            renderImage();
+            
+    
+            const renderTextTitle = () => {
+                context.font = '2.5vw bigDots'; 
+                context.fillStyle = '#00FFFF'; 
+                let text = 'VOCÊ'; 
+            
+                context.fillText(text, (window.innerWidth * 0.25) + ((window.innerWidth * 0.5) * 0.75) , (window.innerHeight * 0.45) + ((window.innerHeight * 0.45) * 0.25));
+            }
+            renderTextTitle()
+        }
+        drawYouPanel();
+
+        const renderTextPointsYou = () => {
+            context.font = '5.2vw bigDots'; 
+            context.fillStyle = 'white'; 
+            let textPoints = `${playerPoints > 0 ? playerPoints : "000"}`; 
+        
+            context.fillText(textPoints,(window.innerWidth * 0.25) + ((window.innerWidth * 0.5) * 0.75) , (window.innerHeight * 0.65) + ((window.innerHeight * 0.45) * 0.25));
+        }
+        renderTextPointsYou();
 
     }
 
-    tick(){
+    RenderModalRight(context){
+
+        context.drawImage(this.modalBackground, 0, 0, window.innerWidth, window.innerHeight);
+        context.drawImage(this.imageRight, (window.innerWidth * 0.5) - this.width, (window.innerHeight * 0.1), (window.innerWidth * 0.5), (window.innerWidth * 0.5) * 0.3 );
+
+        const drawMagicianPanel = () => {
+
+            const renderImage = () => {
+                context.globalAlpha = this.opacity;
+                context.drawImage(this.magicianPanel, (window.innerWidth * 0.25), (window.innerHeight * 0.45), this.width, this.width * 0.8);
+                context.globalAlpha = 1;
+            }
+            renderImage();
+            
+    
+            const renderTextTitle = () => {
+                context.font = '2.5vw bigDots'; 
+                context.fillStyle = '#00FFFF'; 
+                let text = 'MÁGICO'; 
+            
+                context.fillText(text, (window.innerWidth * 0.25) + ((window.innerWidth * 0.25) * 0.2) , (window.innerHeight * 0.45) + ((window.innerHeight * 0.45) * 0.25));
+            }
+            renderTextTitle()
+        }
+        drawMagicianPanel();
+
+        const renderTextPointsMagician = () => {
+            context.font = '5.2vw bigDots'; 
+            context.fillStyle = 'white'; 
+            let textPoints = `${magicianPoints}`; 
+        
+            context.fillText(textPoints,(window.innerWidth * 0.25) + ((window.innerWidth * 0.25) * 0.25) , (window.innerHeight * 0.65) + ((window.innerHeight * 0.45) * 0.25));
+        }
+        renderTextPointsMagician();
+
+
+
+
+
+        const drawYouPanel = () => {
+
+            const renderImage = () => {
+                context.globalAlpha = this.opacity;
+                context.drawImage(this.magicianPanel, (window.innerWidth * 0.55), (window.innerHeight * 0.45), this.width, this.width * 0.8);
+                context.globalAlpha = 1;
+            }
+            renderImage();
+            
+    
+            const renderTextTitle = () => {
+                context.font = '2.5vw bigDots'; 
+                context.fillStyle = '#00FFFF'; 
+                let text = 'VOCÊ'; 
+            
+                context.fillText(text, (window.innerWidth * 0.25) + ((window.innerWidth * 0.5) * 0.75) , (window.innerHeight * 0.45) + ((window.innerHeight * 0.45) * 0.25));
+            }
+            renderTextTitle()
+        }
+        drawYouPanel();
+
+        const renderTextPointsYou = () => {
+            context.font = '5.2vw bigDots'; 
+            context.fillStyle = 'white'; 
+            let textPoints = `${playerPoints > 0 ? playerPoints : "000"}`; 
+        
+            context.fillText(textPoints,(window.innerWidth * 0.25) + ((window.innerWidth * 0.5) * 0.75) , (window.innerHeight * 0.65) + ((window.innerHeight * 0.45) * 0.25));
+        }
+        renderTextPointsYou();
+
+    }
+
+    RenderModalAnswer(number, context){
+
+        if(number === 1){
+            if(!word1Discovered){ word1Discovered = true;}
+            if(magicianPoints <= 0){
+                magicianPoints += 5;
+            }
+            showWrongAnswerModal = true;
+            showRightAnswerModal = false;
+            showDoubtModal = false;
+
+
+        } else if (number === 2){
+            if(playerPoints <= 5){
+                playerPoints += 5;
+            }
+            if(!word2Discovered){ word2Discovered = true;}
+            showWrongAnswerModal = false;
+            showRightAnswerModal = true;
+            showDoubtModal = false;
+
+        } else if (number === 3) {
+            if(playerPoints <= 5){
+                playerPoints += 5;
+            }
+            if(!word3Discovered){ word3Discovered = true;}
+            showWrongAnswerModal = false;
+            showRightAnswerModal = true;
+            showDoubtModal = false;
+
+        }
+        
+
+
+
+
+
+    }
+
+    tick(context){
 
 
         const begginingAnimation = (origin) => {
@@ -583,7 +782,7 @@ class WordPanel {
 
         this.HoverTransformScale(GameData)
 
-        this.OnClick(this.RenderModalAnswer, GameData, this.number);
+        this.OnClick(this.RenderModalAnswer, GameData, this.number, context);
 
     }
 
@@ -616,6 +815,7 @@ class Game {
         this.Word3 = new WordPanel(this, 3)
 
         this.BackButton = new BackButton(this, window.innerWidth * 0.1, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.30, 2, modalBackButton )
+        this.BackButtonModal = new BackButtonModal(this, window.innerWidth * 0.1, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.70, 2, modalBackButton )
         this.TextModal = new TextModal(this, window.innerWidth * 0.5, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.15, 2, modalText )
     }
     /**THIS METHOD WILL RENDER THE GAME */
@@ -630,7 +830,6 @@ class Game {
         this.MagicianPanel.tick();
 
 
-
         this.YouPanel.draw(context);
         this.YouPanel.tick();
 
@@ -638,13 +837,13 @@ class Game {
         this.Cartola.tick();
 
         this.Word1.draw(context, 1)
-        this.Word1.tick()
+        this.Word1.tick(context)
 
         this.Word2.draw(context, 2)
-        this.Word2.tick()
+        this.Word2.tick(context)
 
         this.Word3.draw(context, 3)
-        this.Word3.tick()
+        this.Word3.tick(context)
 
         this.doubt_button.BeginPlay(context);
         this.doubt_button.tick();
@@ -655,6 +854,24 @@ class Game {
 
             this.TextModal.BeginPlay(context);
             this.TextModal.Tick();
+
+        }
+
+        if(showWrongAnswerModal){
+            this.Word1.RenderModalWrong(context);
+            this.BackButtonModal.BeginPlay(context);
+            this.BackButtonModal.Tick();
+        }
+
+        if(showRightAnswerModal){
+            this.Word1.RenderModalRight(context);
+
+            if(playerPoints >= 10){
+                console.log("foii")
+            } else {
+                this.BackButtonModal.BeginPlay(context);
+                this.BackButtonModal.Tick();
+            }
 
         }
 
@@ -730,7 +947,7 @@ const BeginPlay = () => {
             GameData.Clicked = true;
             setTimeout(() => {
                 GameData.Clicked = false;
-            }, 5);  
+            }, 15);  
 
              
 
