@@ -17,32 +17,6 @@ const checkMouseCollision = (a, b) => {
         b.isMouseColliding = false;
     }
 }
-const hoverTransformScaleAndCursor = (element, e) => {
-
-    //UPDATES ITS VARIABLE POSITION TO DEAL WITH RENDERING NEW FRAMES
-    element.x = e.x
-    element.y = e.y
-    element.width = e.width
-    element.height = e.height
-
-    if (element.isMouseColliding){
-
-        if(e.width <= e.initialWidth * 1.04) {
-            e.width += 1;
-            e.height += 1;
-            document.body.style.cursor = "pointer"
-        }
-
-    } else {
-
-        if(e.width > e.initialWidth ) {
-            e.width -= 1;
-            e.height -= 1;
-            document.body.style.cursor = "auto"
-        }
-        
-    }
-}
 const hover_on_element = (hover_this_element, canvas, link) => {
     
     canvas.addEventListener('click', function(e) {
@@ -71,10 +45,8 @@ const hover_on_element = (hover_this_element, canvas, link) => {
 
 let GameData = {}
 let doubtButton = document.getElementById("doubt_button")
+let continueButton = document.getElementById("continue_button")
 let showDoubtModal = false;
-
-let showWordModalError = false;
-let showWordModalRight = false;
 
 let showWrongAnswerModal = false;
 let showRightAnswerModal = false;
@@ -86,6 +58,14 @@ let magicianPoints = 0;
 let word1Discovered = false;
 let word2Discovered = false;
 let word3Discovered = false;
+
+let canDoubtButtonHover = () => {
+    return showWrongAnswerModal === false && showRightAnswerModal === false && showDoubtModal === false; 
+}
+
+let canWordPanelBeClicked = () => {
+    return showRightAnswerModal === false && showWrongAnswerModal === false && showDoubtModal === false;
+}
 
 
 
@@ -124,7 +104,7 @@ class DoubtButton extends Image {
     }
 
     renderModal(){
-        showDoubtModal = !showDoubtModal;
+        showDoubtModal = true;
     }
     
 
@@ -141,9 +121,9 @@ class DoubtButton extends Image {
         }
         begginingAnimation("fromBottom");
 
-        this.HoverTransformScale(GameData);
+        this.HoverTransformScale(GameData, [canDoubtButtonHover()])
 
-        this.OnClick(this.renderModal, GameData);
+        this.OnClick(this.renderModal, GameData, [canDoubtButtonHover()]);
 
     }
 }
@@ -153,13 +133,24 @@ class BackButton extends Image {
     }
 
     renderModal(){
-        showDoubtModal = !showDoubtModal;
+        showDoubtModal = false;
         document.body.style.cursor = "pointer";
     }
 
     Tick(){
         this.HoverTransformScale(GameData);
         this.OnClick(this.renderModal, GameData)
+    }
+}
+class ContinueButton extends Image {
+    constructor(game, width, height, x, y, speed, image){
+        super(game, width, height, x, y, speed, image);
+    }
+
+
+    Tick(){
+        this.HoverTransformScale(GameData);
+        this.OnClick(this.GoToLink(GameData, "../scene_6"), GameData)
     }
 }
 class BackButtonModal extends Image {
@@ -543,26 +534,59 @@ class WordPanel {
  
     }
 
-    HoverTransformScale(GameData){
-        
-        let bIsMouseColliding = CheckMouseCollision(this, GameData);
-        if (bIsMouseColliding && this.width <= this.initialWidth * 1.02) {
-            this.width += 1;
-            this.height += 1;
-            document.body.style.cursor = "pointer"
-        } else if (!bIsMouseColliding && this.width >= this.initialWidth){
-            this.width -= 1;
-            this.height -= 1;
-            document.body.style.cursor = "auto"
+    HoverTransformScale(GameData, params){
+
+        let paramsLength = params?.length;
+        let trueParams = 0;
+
+        params.map((param)=>{if(param === true){trueParams+=1;}})
+
+        console.log(params.length)
+        console.log(trueParams)
+
+        if(paramsLength === trueParams){
+            let bIsMouseColliding = CheckMouseCollision(this, GameData);
+            if (bIsMouseColliding && this.width <= this.initialWidth * 1.02) {
+                this.width += 1;
+                this.height += 1;
+                document.body.style.cursor = "pointer"
+            } else if (!bIsMouseColliding && this.width >= this.initialWidth){
+                this.width -= 1;
+                this.height -= 1;
+                document.body.style.cursor = "auto"
+            }
         }
+        
+
 
     }
 
-    OnClick(callback, GameData, number, context){
-        let bIsMouseColliding = CheckMouseCollision(this, GameData);
-        if(bIsMouseColliding && GameData.Clicked){
-            callback(number, context);
+    OnClick(callback, GameData, number, context, params){
+
+        let paramsLength = params?.length;
+        let trueParams = 0;
+
+        params?.map((param)=>{if(param === true){trueParams+=1;}})
+
+        console.log(params?.length)
+        console.log(trueParams)
+
+        if(params){
+            if(paramsLength === trueParams){
+                let bIsMouseColliding = CheckMouseCollision(this, GameData);
+                if(bIsMouseColliding && GameData.Clicked){
+                    callback(number, context);
+                }
+            }
+        } else {
+            let bIsMouseColliding = CheckMouseCollision(this, GameData);
+            if(bIsMouseColliding && GameData.Clicked){
+                callback(number, context);
+            }
         }
+
+
+
 
     }
 
@@ -646,7 +670,7 @@ class WordPanel {
 
             const renderImage = () => {
                 context.globalAlpha = this.opacity;
-                context.drawImage(this.magicianPanel, (window.innerWidth * 0.25), (window.innerHeight * 0.45), this.width, this.width * 0.8);
+                context.drawImage(this.magicianPanel, (window.innerWidth * 0.25), (window.innerHeight * 0.45), (window.innerWidth * 0.2), (window.innerHeight * 0.35));
                 context.globalAlpha = 1;
             }
             renderImage();
@@ -673,14 +697,11 @@ class WordPanel {
         renderTextPointsMagician();
 
 
-
-
-
         const drawYouPanel = () => {
 
             const renderImage = () => {
                 context.globalAlpha = this.opacity;
-                context.drawImage(this.magicianPanel, (window.innerWidth * 0.55), (window.innerHeight * 0.45), this.width, this.width * 0.8);
+                context.drawImage(this.magicianPanel, (window.innerWidth * 0.55), (window.innerHeight * 0.45), (window.innerWidth * 0.2), (window.innerHeight * 0.35));
                 context.globalAlpha = 1;
             }
             renderImage();
@@ -712,8 +733,8 @@ class WordPanel {
 
         if(number === 1){
             if(!word1Discovered){ word1Discovered = true;}
-            if(magicianPoints <= 0){
-                magicianPoints += 5;
+            if(word1Discovered){
+                magicianPoints = 5;
             }
             showWrongAnswerModal = true;
             showRightAnswerModal = false;
@@ -721,19 +742,37 @@ class WordPanel {
 
 
         } else if (number === 2){
-            if(playerPoints <= 5){
-                playerPoints += 5;
+
+            if(!word2Discovered){
+                word2Discovered = true;
             }
-            if(!word2Discovered){ word2Discovered = true;}
+
+            if(word2Discovered && !word3Discovered){
+                playerPoints = 5;
+
+            } else if (word2Discovered && word3Discovered){
+                playerPoints = 10;
+            }
+
             showWrongAnswerModal = false;
             showRightAnswerModal = true;
             showDoubtModal = false;
 
+
         } else if (number === 3) {
-            if(playerPoints <= 5){
-                playerPoints += 5;
+
+
+            if(!word3Discovered){
+                word3Discovered = true;
             }
-            if(!word3Discovered){ word3Discovered = true;}
+
+            if(word3Discovered && !word2Discovered){
+                playerPoints = 5;
+
+            } else if (word2Discovered && word3Discovered){
+                playerPoints = 10;
+            }
+
             showWrongAnswerModal = false;
             showRightAnswerModal = true;
             showDoubtModal = false;
@@ -780,9 +819,9 @@ class WordPanel {
         }
         appearFromHat();
 
-        this.HoverTransformScale(GameData)
+        this.HoverTransformScale(GameData, [canDoubtButtonHover()])
 
-        this.OnClick(this.RenderModalAnswer, GameData, this.number, context);
+        this.OnClick(this.RenderModalAnswer, GameData, this.number, context, [canWordPanelBeClicked()]);
 
     }
 
@@ -814,8 +853,11 @@ class Game {
         this.Word2 = new WordPanel(this, 2)
         this.Word3 = new WordPanel(this, 3)
 
-        this.BackButton = new BackButton(this, window.innerWidth * 0.1, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.30, 2, modalBackButton )
-        this.BackButtonModal = new BackButtonModal(this, window.innerWidth * 0.1, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.70, 2, modalBackButton )
+        this.BackButton = new BackButton(this, window.innerWidth * 0.15, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.30, 2, modalBackButton )
+
+        this.ContinueButton = new ContinueButton(this, window.innerWidth * 0.2, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.78, window.innerHeight * 0.70, 2, continueButton )
+        
+        this.BackButtonModal = new BackButtonModal(this, window.innerWidth * 0.15, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.70, 2, modalBackButton )
         this.TextModal = new TextModal(this, window.innerWidth * 0.5, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.15, 2, modalText )
     }
     /**THIS METHOD WILL RENDER THE GAME */
@@ -867,7 +909,8 @@ class Game {
             this.Word1.RenderModalRight(context);
 
             if(playerPoints >= 10){
-                console.log("foii")
+                this.ContinueButton.BeginPlay(context);
+                this.ContinueButton.Tick();
             } else {
                 this.BackButtonModal.BeginPlay(context);
                 this.BackButtonModal.Tick();
@@ -947,7 +990,7 @@ const BeginPlay = () => {
             GameData.Clicked = true;
             setTimeout(() => {
                 GameData.Clicked = false;
-            }, 15);  
+            }, 5);  
 
              
 

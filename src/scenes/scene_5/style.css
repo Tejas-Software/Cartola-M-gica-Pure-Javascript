@@ -48,6 +48,6 @@
 #word_panel{
     display: none;
 }
-#cartola, #black_background, #modal_message, #back_button{
+#cartola, #black_background, #modal_message, #back_button, #feedback_erro, #image_error, #image_right, #continue_button{
     display: none;
 }
