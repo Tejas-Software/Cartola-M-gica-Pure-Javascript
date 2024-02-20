@@ -207,7 +207,6 @@ class ImageMagician {
     tick(){
 
         const begginingAnimation = (origin) => {
-            console.log(this.y)
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
                     this.opacity += 0.009;
@@ -243,7 +242,7 @@ class Rabbit {
     tick(){
 
         const begginingAnimation = (origin) => {
-            console.log(this.y)
+    
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
                     this.opacity += 0.009;
