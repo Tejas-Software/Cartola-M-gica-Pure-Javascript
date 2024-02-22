@@ -1,11 +1,18 @@
 import { CheckMouseCollision } from "../../../lib/Dynamics/Dynamics.js"
 import {Image} from "../../../lib/Image/Image.js"
+import { ResolutionMessage } from "../../../lib/Messages/ResolutionMessage.js";
+import { ScorePanel } from "../../../lib/Panels/ScorePanel.js";
+import { TimerPanel } from "../../../lib/Timer/Timer.js";
 
 let GameData = {
     doubtButton: document.getElementById("doubt_button"),
     continueButton: document.getElementById("continue_button"),
     modalBackButton: document.getElementById("back_button"),
     modalText: document.getElementById("modal_message"),
+    modalBackground: document.getElementById("black_background"),
+    timerImage: document.getElementById("time_panel"),
+    magicianPanel: document.getElementById("magician_panel"),
+    cartolaImage: document.getElementById("cartola"),
     showDoubtModal: false,
     showWrongAnswerModal: false,
     showRightAnswerModal: false,
@@ -27,20 +34,13 @@ class DoubtButton extends Image {
 
         super(game, width, height, x, y, speed, image);
 
-        this.showModal = false;
-
-        this.modalBackground = document.getElementById("black_background");
-        this.modalBackButton = document.getElementById("back_button");
-        this.modalText = document.getElementById("modal_message");
-
-
     }
 
     BeginPlay(context){
         super.BeginPlay(context); 
 
         if(GameData.showDoubtModal){
-            context.drawImage(this.modalBackground, 0, 0, window.innerWidth, window.innerHeight);
+            context.drawImage(GameData.modalBackground, 0, 0, window.innerWidth, window.innerHeight);
         }
 
     }
@@ -69,6 +69,7 @@ class DoubtButton extends Image {
 
     }
 }
+
 class BackButton extends Image {
     constructor(game, width, height, x, y, speed, image){
         super(game, width, height, x, y, speed, image);
@@ -76,7 +77,8 @@ class BackButton extends Image {
 
     renderModal(){
         GameData.showDoubtModal = false;
-        document.body.style.cursor = "pointer";
+        GameData.showRightAnswerModal = false;
+        GameData.showWrongAnswerModal = false;
     }
 
     Tick(){
@@ -84,6 +86,7 @@ class BackButton extends Image {
         this.OnClick(this.renderModal, GameData)
     }
 }
+
 class ContinueButton extends Image {
     constructor(game, width, height, x, y, speed, image){
         super(game, width, height, x, y, speed, image);
@@ -95,6 +98,7 @@ class ContinueButton extends Image {
         this.OnClick(this.GoToLink(GameData, "../scene_18"), GameData)
     }
 }
+
 class BackButtonModal extends Image {
     constructor(game, width, height, x, y, speed, image){
         super(game, width, height, x, y, speed, image);
@@ -104,7 +108,6 @@ class BackButtonModal extends Image {
         GameData.showWrongAnswerModal = false;
         GameData.showRightAnswerModal = false;
         GameData.showDoubtModal = false;
-        document.body.style.cursor = "pointer";
     }
 
     Tick(){
@@ -112,174 +115,50 @@ class BackButtonModal extends Image {
         this.OnClick(this.renderModal, GameData)
     }
 }
+
 class TextModal extends Image {
     constructor(game, width, height, x, y, speed, image){
         super(game, width, height, x, y, speed, image);
     }
 
-
     Tick(){
         this.HoverTransformScale(GameData);
     }
 }
-class ResolutionMessage {
+
+class ThisResolutionMessage extends ResolutionMessage {
     constructor(game){
-
-        const setAttributes = () => {
-            this.game = game;
-            this.width = (window.innerWidth * 0.5);
-            this.height = (window.innerHeight * 0.5);
-            this.x = (window.innerWidth * 0.25)
-            this.y = (window.innerHeight * 0.25) ;
-        }
-        setAttributes();
-    }
-
-    draw(context){
-
-        const renderText = () => {
-            const text = "Vire o dispositivo | Ajuste a resolução";
-            const textX = window.innerWidth * 0.06;
-            const textY = window.innerHeight * 0.35;
-            context.fillStyle = "white"; 
-            context.font = "5vw Arial"; 
-            context.fillText(text, textX, textY);
-        }
-        renderText();
-
+        super(game)
     }
 
 }
-class TimePanel {
-    constructor(game){
-        const setAttributes = () => {
-            this.game = game;
-            this.image = document.getElementById("time_panel")
-    
-            this.height = window.innerHeight * 0.1;
-            this.width = window.innerWidth * 0.13;
-    
-            this.x = window.innerWidth * 0.08
-            this.y = -50 ;
-            this.speed = 1.4;
 
-            this.milliseconds = 0;
-            this.seconds = 0;
-            this.minutes = 0;
-    
-            this.opacity = 0;
-        }
-        setAttributes();
-    }
-
-    draw(context){
-
-
-        const renderImage = () => {
-            context.drawImage(this.image, this.x, this.y, this.width, this.height);
-        }
-        renderImage();
-
-
-        const renderTextTimer = () => {
-            let text;
-            context.font = `4vw agency`; 
-            context.fillStyle = 'white'; 
-            if(this.seconds < 10 && this.minutes < 10){
-                text = `0${this.minutes}:0${this.seconds}`; 
-            } else if (this.seconds >= 10 && this.minutes < 10) {
-                text = `0${this.minutes}:${this.seconds}`
-            }
-
-            context.fillText(text, (this.width * 0.8) , this.height * 0.95);
-        }
-        renderTextTimer();
-        
-
-    }
-    
-
-    tick(){
-
-        this.milliseconds += 15;
-
-        if(this.milliseconds >= 1000){
-            this.seconds += 1;
-            this.milliseconds = 0;
-        }
-
-        if(this.seconds === 60){
-            this.minutes += 1;
-            this.seconds = 0;
-        }
-
-        const begginingAnimation = (origin) => {
-            if(origin === "fromBottom"){
-                if(this.y < window.innerHeight * 0.012){
-                    this.y += this.speed;
-                }
-
-            }
-
-        }
-       begginingAnimation("fromBottom");
-
+class TimePanel extends TimerPanel{
+    constructor(game, image){
+        super(game, image)
     }
 }
-class MagicianPanel {
-    constructor(game){
 
-        const setAttributes = () => {
-            this.game = game;
-            this.image = document.getElementById("magician_panel")
-    
-            this.height = window.innerHeight * 0.25;
-            this.width = window.innerWidth * 0.12;
-    
-            this.x = (window.innerWidth - this.width * 2.5) 
-            this.y = 0 ;
-            this.speed = 4.5;
-    
-            this.points = 0;
-    
-            this.opacity = 0;
-        }
-        setAttributes();
-
-
+class MagicianPanel extends ScorePanel{
+    constructor(game, image, height, width, x, y, speed, score, opacity, titleText, titleFont, titleSize, titleColor, scoreFont, scoreTextSize, scoreTextColor){
+        super(game, image, height, width, x, y, speed, score, opacity, titleText, titleFont, titleSize, titleColor, scoreFont, scoreTextSize, scoreTextColor);
     }
 
-    draw(context){
+}
 
-        const renderImage = () => {
-            context.globalAlpha = this.opacity;
-            context.drawImage(this.image, this.x, this.y, this.width, this.height);
-            context.globalAlpha = 1;
-        }
-        renderImage();
-        
-
-        const renderTextTitle = () => {
-            context.font = '2.5vw bigDots'; 
-            context.fillStyle = '#00FFFF'; 
-            let text = 'MÁGICO'; 
-        
-            context.fillText(text, this.x + (this.x * 0.017) , this.y + (this.height * 0.3));
-        }
-        renderTextTitle()
-
-
-        const renderTextPoints = () => {
-            context.font = '5.2vw bigDots'; 
-            context.fillStyle = 'white'; 
-            let textPoints = `${GameData.magicianPoints > 0 ? GameData.magicianPoints : "000"}`; 
-        
-            context.fillText(textPoints, this.x + (this.x * 0.017) , this.y + (this.height * 0.89));
-        }
-        renderTextPoints();
+class YouPanel extends ScorePanel {
+    constructor(game, image, height, width, x, y, speed, score, opacity, titleText, titleFont, titleSize, titleColor, scoreFont, scoreTextSize, scoreTextColor){
+        super(game, image, height, width, x, y, speed, score, opacity, titleText, titleFont, titleSize, titleColor, scoreFont, scoreTextSize, scoreTextColor);
     }
 
-    tick(){
+}
+
+class Cartola extends Image {
+    constructor(game, width, height, x, y, speed, image){
+        super(game, width, height, x, y,  speed, image)
+    }
+
+    Tick(){
 
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
@@ -292,106 +171,7 @@ class MagicianPanel {
 
     }
 }
-class YouPanel {
-    constructor(game){
 
-        const setAttributes = () => {
-            this.game = game;
-            this.image = document.getElementById("you_panel")
-    
-            this.height = window.innerHeight * 0.25;
-            this.width = window.innerWidth * 0.12;
-    
-            this.x = (window.innerWidth - this.width * 1.25) 
-            this.y = 0 ;
-            this.speed = 4.5;
-    
-            this.opacity = 0;
-        }
-        setAttributes();
-
-    }
-
-    draw(context){
-
-
-        const renderImage = () => {
-            context.globalAlpha = this.opacity;
-            context.drawImage(this.image, this.x, this.y, this.width, this.height);
-            context.globalAlpha = 1;
-        }
-        renderImage();
-
-
-        const renderTextTitle = () => {
-            context.font = '3.3vw bigDots'; 
-            context.fillStyle = '#00FFFF'; 
-            let text = 'VOCÊ'; 
-            context.fillText(text, this.x + (this.x * 0.017) , this.y + (this.height * 0.335));
-        }
-        renderTextTitle();
-    
-
-        const renderPoints = () => {
-            context.font = '5.2vw bigDots'; 
-            context.fillStyle = 'white'; 
-            let textPoints = `${GameData.playerPoints > 0 ? GameData.playerPoints : "000"}`; 
-        
-            context.fillText(textPoints, this.x + (this.x * 0.014) , this.y + (this.height * 0.89));
-        }
-        renderPoints();
-
-
-    }
-
-    tick(){
-
-        const begginingAnimation = (origin) => {
-            if(origin === "AppearGradient"){
-                if(this.opacity < 1){
-                    this.opacity += 0.009;
-                }
-            }
-        }
-        begginingAnimation("AppearGradient");
-
-    }
-}
-class Cartola {
-    constructor(game){
-        this.game = game;
-        this.image = document.getElementById("cartola")
-
-        this.height = window.innerHeight * 0.9;
-        this.width = this.height * 1;
-
-        this.x = (window.innerWidth * 0.5) - (this.width * 0.5) 
-        this.y = window.innerHeight - (this.height * 1.25) ;
-        this.speed = 4.5;
-
-        this.opacity = 0;
-
-    }
-
-    draw(context){
-        context.globalAlpha = this.opacity;
-        context.drawImage(this.image, this.x, this.y, this.width, this.height);
-        context.globalAlpha = 1;
-    }
-
-    tick(){
-
-        const begginingAnimation = (origin) => {
-            if(origin === "AppearGradient"){
-                if(this.opacity < 1){
-                    this.opacity += 0.009;
-                }
-            }
-        }
-        begginingAnimation("AppearGradient");
-
-    }
-}
 class WordPanel {
 
     constructor(game, number){
@@ -484,8 +264,6 @@ class WordPanel {
 
         params.map((param)=>{if(param === true){trueParams+=1;}})
 
-        console.log(params.length)
-        console.log(trueParams)
 
         if(paramsLength === trueParams){
             let bIsMouseColliding = CheckMouseCollision(this, GameData);
@@ -511,8 +289,6 @@ class WordPanel {
 
         params?.map((param)=>{if(param === true){trueParams+=1;}})
 
-        console.log(params?.length)
-        console.log(trueParams)
 
         if(params){
             if(paramsLength === trueParams){
@@ -786,11 +562,12 @@ class Game {
 
         /**GAME CLASS WILL EXECUTE AND OWN ALL THESE CLASSES */
         this.doubt_button = new DoubtButton(this, window.innerWidth * 0.06, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.01, 2, GameData.doubtButton )
-        this.YouPanel = new YouPanel(this)
-        this.TimePanel = new TimePanel(this)
-        this.MagicianPanel = new MagicianPanel(this)
-        this.Cartola = new Cartola(this)
-        this.ResolutionMessage = new ResolutionMessage(this)
+       
+        this.TimerPanel = new TimePanel(this, GameData.timerImage)
+        this.MagicianPanel = new MagicianPanel(this, GameData.magicianPanel, window.innerHeight * 0.25, window.innerWidth * 0.12, window.innerWidth * 0.70, 0, 4.5, 0, 0, 'MÁGICO', 'bigDots', '2.5vw', "#00FFFF", "bigDots", "5.2vw", "white")
+        this.YouPanel = new YouPanel(this, GameData.magicianPanel, window.innerHeight * 0.25, window.innerWidth * 0.12, window.innerWidth * 0.85, 0, 4.5, 0, 0, 'VOCÊ', 'bigDots', '2.5vw', "#00FFFF", "bigDots", "5.2vw", "white")
+        this.Cartola = new Cartola(this, this.height * 1, window.innerHeight * 0.9,  (window.innerWidth * 0.48) - ((window.innerHeight * 0.9) * 0.5), window.innerHeight - (( window.innerHeight * 0.9) * 1.25), 4.5, GameData.cartolaImage)
+        this.ResolutionMessage = new ThisResolutionMessage(this)
 
         this.Word1 = new WordPanel(this, 1)
         this.Word2 = new WordPanel(this, 2)
@@ -806,20 +583,18 @@ class Game {
     /**THIS METHOD WILL RENDER THE GAME */
     render(context){
 
+        this.TimerPanel.draw(context);
+        this.TimerPanel.tick();
+
+        this.MagicianPanel.BeginPlay(context);
+        this.MagicianPanel.Tick(GameData.magicianPoints);
 
 
-        this.TimePanel.draw(context);
-        this.TimePanel.tick();
+        this.YouPanel.BeginPlay(context);
+        this.YouPanel.Tick(GameData.playerPoints);
 
-        this.MagicianPanel.draw(context);
-        this.MagicianPanel.tick();
-
-
-        this.YouPanel.draw(context);
-        this.YouPanel.tick();
-
-        this.Cartola.draw(context);
-        this.Cartola.tick();
+        this.Cartola.BeginPlay(context);
+        this.Cartola.Tick();
 
         this.Word1.draw(context, 1)
         this.Word1.tick(context)
@@ -933,16 +708,13 @@ const BeginPlay = () => {
             GameData.Clicked = true;
             setTimeout(() => {
                 GameData.Clicked = false;
-            }, 5);  
+            }, 15);  
 
              
 
 
         });
-    
-        /**CALL THIS FUNCTION WILL ACTIVATE THE HOVERING EFFECT ON THE ELEMENT PASSED AS PARAMETER */
-        hover_on_element(continue_button_hover, canvas, "../scene_15/");
-    
+   
     
     })
 }

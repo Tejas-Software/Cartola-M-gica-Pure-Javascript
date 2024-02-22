@@ -990,7 +990,7 @@ const BeginPlay = () => {
             GameData.Clicked = true;
             setTimeout(() => {
                 GameData.Clicked = false;
-            }, 5);  
+            }, 15);  
 
              
 
