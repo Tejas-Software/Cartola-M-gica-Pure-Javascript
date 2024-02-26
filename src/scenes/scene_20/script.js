@@ -16,13 +16,15 @@ let GameData = {
     showDoubtModal: false,
     showWrongAnswerModal: false,
     showRightAnswerModal: false,
+    showRightAnswerModalWord4: false,
+    Word4Visible: true,
     playerPoints: 0,
     magicianPoints: 0,
     word1Discovered: false,
     word2Discovered: false,
     word3Discovered: false,
     canDoubtButtonHover: () => {
-        return GameData.showWrongAnswerModal === false && GameData.showRightAnswerModal === false && GameData.showDoubtModal === false; 
+        return GameData.showWrongAnswerModal === false && GameData.showRightAnswerModal === false && GameData.showDoubtModal === false && GameData.showRightAnswerModalWord4 === false; 
     },
     canWordPanelBeClicked: () => {
         return GameData.showRightAnswerModal === false && GameData.showWrongAnswerModal === false && GameData.showDoubtModal === false;
@@ -116,6 +118,25 @@ class BackButtonModal extends Image {
     }
 }
 
+class BackButtonModalWord4 extends Image {
+    constructor(game, width, height, x, y, speed, image){
+        super(game, width, height, x, y, speed, image);
+    }
+
+    renderModal(){
+        GameData.showWrongAnswerModal = false;
+        GameData.showRightAnswerModal = false;
+        GameData.showRightAnswerModalWord4 = false;
+        GameData.showDoubtModal = false;
+        GameData.Word4Visible = false;
+    }
+
+    Tick(){
+        this.HoverTransformScale(GameData);
+        this.OnClick(this.renderModal, GameData)
+    }
+}
+
 class TextModal extends Image {
     constructor(game, width, height, x, y, speed, image){
         super(game, width, height, x, y, speed, image);
@@ -172,50 +193,48 @@ class Cartola extends Image {
     }
 }
 
-class WordPanel {
+class WordPanel4 {
 
     constructor(game, number){
 
         const setAttributes = () => {
+
             this.game = game;
-            this.image = document.getElementById("word_panel")
-            this.imageError = document.getElementById("image_error")
-            this.imageRight = document.getElementById("image_right")
+            this.image = document.getElementById("word_panel");
+            this.imageError = document.getElementById("image_error");
+            this.imageRight = document.getElementById("image_right");
             this.modalBackground = document.getElementById("black_background");
             this.modalBackButton = document.getElementById("back_button");
             this.magicianPanel = document.getElementById("magician_panel");
             this.youPanel = document.getElementById("you_panel");
+            this.isVisible = true;
 
-    
-            this.height = window.innerHeight * 0.13
-            this.width = this.height * 3.5
-            this.initialWidth = this.height * 3.5
+            this.height = window.innerHeight * 0.13;
+            this.width = this.height * 3.5;
+            this.initialWidth = this.height * 3.5;
 
-            this.textX = window.innerWidth * 0.5;
-            this.textY = window.innerHeight * 0.5;
+            this.textX = window.innerWidth - this.width;
+            this.textY = window.innerHeight - this.height * 0.5;
+
+            this.InitialTextX = this.textX
+            this.InitialTextY = this.textY
 
             this.discovered = false;
-    
-            //this.x and this.y and opacity is defined by these conditionals
-            if(number === 1) { 
-                this.x = window.innerWidth * 0.02
-                this.y = window.innerHeight - (this.height * 1.2)
-                this.opacity = 0;
-            } else if (number === 2){
-                this.x = (window.innerWidth * 0.5) - (this.width * 0.5) 
-                this.y = window.innerHeight - (this.height * 1.2)
-                this.opacity = 0;
-            } else if (number === 3){
-                this.x = window.innerWidth - (this.width * 1.14)
-                this.y = window.innerHeight - (this.height * 1.2)
-                this.opacity = 0;
-            }
+            this.canClick = true;
+
+            this.x = window.innerWidth - (this.width * 1.14)
+            this.InitialX = window.innerWidth - (this.width * 1.14)
+            this.y = window.innerHeight - (this.height * 1.2)
+            this.InitialY = window.innerHeight - (this.height * 1.2)
+            this.opacity = 0;
+            this.id = 3;
     
             this.speed = 4.5;
-            
-            if(number === 1) { this.number = 1 }
-            if(number === 2) { this.number = 2 }
-            if(number === 3) { this.number = 3 }
+        
+            this.number = 4;
+
+            this.YouPointAdded = false;
+
         }
         setAttributes();
 
@@ -244,16 +263,12 @@ class WordPanel {
             context.fillStyle = color; 
             context.globalAlpha = this.opacity;
             let thisText = text; 
-            context.fillText(thisText, X, this.textY);  
+            context.fillText(thisText, this.textX, this.textY);  
         }
 
-        if(number === 1){
-            renderTextTimer('Desenharam', "#FF0000", this.width, this.textX * 1.5);
-        } else if(number === 2){
-            renderTextTimer('Marmelada', "#0066FF", this.width, this.textX * 1.01);
-        } else if(number === 3){
-            renderTextTimer('Trabalharam', "#009966", this.width, this.textX * 1);
-        }
+
+        renderTextTimer('Trabalharam', "#009966", this.width, this.textX * 1);
+
  
     }
 
@@ -268,6 +283,7 @@ class WordPanel {
         if(paramsLength === trueParams){
             let bIsMouseColliding = CheckMouseCollision(this, GameData);
             if (bIsMouseColliding && this.width <= this.initialWidth * 1.02) {
+                this.currentHovering = this.id;
                 this.width += 1;
                 this.height += 1;
                 document.body.style.cursor = "pointer"
@@ -303,9 +319,6 @@ class WordPanel {
                 callback(number, context);
             }
         }
-
-
-
 
     }
 
@@ -343,10 +356,6 @@ class WordPanel {
             context.fillText(textPoints,(window.innerWidth * 0.25) + ((window.innerWidth * 0.25) * 0.25) , (window.innerHeight * 0.65) + ((window.innerHeight * 0.45) * 0.25));
         }
         renderTextPointsMagician();
-
-
-
-
 
         const drawYouPanel = () => {
 
@@ -446,6 +455,8 @@ class WordPanel {
         }
         renderTextPointsYou();
 
+
+
     }
 
     RenderModalAnswer(number, context){
@@ -498,11 +509,6 @@ class WordPanel {
 
         }
         
-
-
-
-
-
     }
 
     tick(context){
@@ -521,7 +527,7 @@ class WordPanel {
         const appearFromHat = () => {
 
             if(this.number !== 3){
-                if (this.textX > (this.x + this.width * 0.05)){
+                if (this.textX > (this.x + this.width * 0.05) ){
                     this.textX -= 4.5;
                 }
             } else {
@@ -538,21 +544,106 @@ class WordPanel {
         }
         appearFromHat();
 
-        this.HoverTransformScale(GameData, [GameData.canDoubtButtonHover()])
+        if(!GameData.showRightAnswerModalWord4){
+            this.HoverTransformScale(GameData, [GameData.canWordPanelBeClicked()])
+        }
 
-        this.OnClick(this.RenderModalAnswer, GameData, this.number, context, [GameData.canWordPanelBeClicked()]);
+        const dealWithModalRight = () => {
+            this.RenderModalRight(context)
+            GameData.showRightAnswerModalWord4 = true;
+            if(!this.YouPointAdded){
+                GameData.playerPoints += 5;
+                this.YouPointAdded = true;
+            }
+
+        }
+
+
+        const dragMe = () => {
+            if(GameData.isMouseDown){
+                if(this.currentHovering === this.id){
+                    this.x = GameData.MouseX - (this.width / 2);
+                    this.y = GameData.MouseY - (this.height / 2);
+                    this.textX = GameData.MouseX + (this.width * 0.1) - (this.width / 2);
+                    this.textY = GameData.MouseY + (this.height * 0.6) - (this.height / 2);
+                    GameData.selectedWord = 4;
+                }
+
+            } else if (!GameData.isMouseDown && GameData.selectedWord) {
+
+                if(this.currentHovering === this.id){
+                    this.x = this.InitialX;
+                    this.y = this.InitialY;
+                    this.textX = this.InitialTextX;
+                    this.textY = this.InitialTextY;   
+                }
+ 
+
+                if(GameData.wordInsideDropZone) {
+                    console.log("foi jogado dentro da zona de drop: " + GameData.selectedWord)
+                    if(GameData.selectedWord === 4){
+                        this.currentHovering = null;
+                        dealWithModalRight();
+                    }
+                }  
+
+            }
+        }
+        dragMe();
+
 
     }
 
 
 
 }
-/**************************************** */
+
+class InvisibleDropZone {
+
+    constructor(game) {
+        this.game = game;
+        this.width = window.innerWidth / 2;
+        this.height = window.innerHeight / 2; 
+        this.x = window.innerWidth / 2 - (this.width / 2); 
+        this.y = window.innerHeight / 2 - (this.height / 2); 
+
+        this.opacity = 0;
+    }
+
+    HoverTransformScale(GameData){
+
+
+        let bIsMouseColliding = CheckMouseCollision(this, GameData);
+        if (bIsMouseColliding && GameData.isMouseDown)  {
+            console.log("in drop zone")
+            console.log(GameData.selectedWord)
+            GameData.wordInsideDropZone = true;
+        } 
+
+        if(bIsMouseColliding && !GameData.isMouseDown) {
+            console.log(GameData.selectedWord)
+        }
+
+    }
+
+    draw(context) {
+        context.globalAlpha = this.opacity; 
+        context.fillStyle = 'black'; 
+        context.fillRect(this.x, this.y, this.width, this.height);
+        context.globalAlpha = 1; 
+    }
+
+    tick(){
+
+        this.HoverTransformScale(GameData)
+
+    }
+
+}
 
 
 
 
-// MAIN GAME CLASS THAT DEAL WITH ALL CLASSES
 class Game {
     constructor(canvas){
         /**GAME CLASS WILL STORE THE CANVAS DATA */
@@ -569,19 +660,22 @@ class Game {
         this.Cartola = new Cartola(this, this.height * 1, window.innerHeight * 0.9,  (window.innerWidth * 0.48) - ((window.innerHeight * 0.9) * 0.5), window.innerHeight - (( window.innerHeight * 0.9) * 1.25), 4.5, GameData.cartolaImage)
         this.ResolutionMessage = new ThisResolutionMessage(this)
 
-        this.Word1 = new WordPanel(this, 1)
-        this.Word2 = new WordPanel(this, 2)
-        this.Word3 = new WordPanel(this, 3)
+        this.Word3 = new WordPanel4(this, 3)
+        this.InvisibleDropZone = new InvisibleDropZone(this)
 
         this.BackButton = new BackButton(this, window.innerWidth * 0.15, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.30, 2, GameData.modalBackButton )
 
         this.ContinueButton = new ContinueButton(this, window.innerWidth * 0.2, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.78, window.innerHeight * 0.70, 2, GameData.continueButton )
         
         this.BackButtonModal = new BackButtonModal(this, window.innerWidth * 0.15, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.70, 2, GameData.modalBackButton )
+        this.BackButtonModalWord4 = new BackButtonModalWord4(this, window.innerWidth * 0.15, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.70, 2, GameData.modalBackButton )
         this.TextModal = new TextModal(this, window.innerWidth * 0.5, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.15, 2, GameData.modalText )
     }
     /**THIS METHOD WILL RENDER THE GAME */
     render(context){
+
+        this.doubt_button.BeginPlay(context);
+        this.doubt_button.tick();
 
         this.TimerPanel.draw(context);
         this.TimerPanel.tick();
@@ -596,17 +690,18 @@ class Game {
         this.Cartola.BeginPlay(context);
         this.Cartola.Tick();
 
-        this.Word1.draw(context, 1)
-        this.Word1.tick(context)
+        if(GameData.Word4Visible){
+            this.Word3.draw(context, 3)
+            this.Word3.tick(context)
+            
+        }
 
-        this.Word2.draw(context, 2)
-        this.Word2.tick(context)
 
-        this.Word3.draw(context, 3)
-        this.Word3.tick(context)
 
-        this.doubt_button.BeginPlay(context);
-        this.doubt_button.tick();
+        this.InvisibleDropZone.draw(context);
+        this.InvisibleDropZone.tick();
+
+
 
         if(GameData.showDoubtModal){
             this.BackButton.BeginPlay(context);
@@ -618,20 +713,18 @@ class Game {
         }
 
         if(GameData.showWrongAnswerModal){
-            this.Word1.RenderModalWrong(context);
             this.BackButtonModal.BeginPlay(context);
             this.BackButtonModal.Tick();
         }
 
-        if(GameData.showRightAnswerModal){
-            this.Word1.RenderModalRight(context);
+        if(GameData.showRightAnswerModalWord4){
 
             if(GameData.playerPoints >= 10){
                 this.ContinueButton.BeginPlay(context);
                 this.ContinueButton.Tick();
             } else {
-                this.BackButtonModal.BeginPlay(context);
-                this.BackButtonModal.Tick();
+                this.BackButtonModalWord4.BeginPlay(context);
+                this.BackButtonModalWord4.Tick();
             }
 
         }
@@ -645,13 +738,8 @@ class Game {
         this.ResolutionMessage.draw(context);
     }
 }
-/***************************************** */
 
 
-
-
-//THIS FUNCTIONS RUNS WHEN APPLICATION STARTS
-/******************************************** */
 const BeginPlay = () => {
 
     /**THIS FUNCTION RUN AFTER EVERYTHING IS LOADED */
@@ -700,19 +788,36 @@ const BeginPlay = () => {
             GameData.MouseY = y;       
 
         });
-            /**GETS IF MOUSE IS CLICKED */
-            canvas.addEventListener('click', function(event) {
-                let rect = canvas.getBoundingClientRect();
-                let x = event.clientX - rect.left;
-                let y = event.clientY - rect.top;
-            GameData.Clicked = true;
-            setTimeout(() => {
-                GameData.Clicked = false;
-            }, 15);  
+           
+        /**GETS IF MOUSE IS CLICKED */
+        canvas.addEventListener('click', function(event) {
+        let rect = canvas.getBoundingClientRect();
+        let x = event.clientX - rect.left;
+        let y = event.clientY - rect.top;
+        GameData.Clicked = true;
+        setTimeout(() => {
+            GameData.Clicked = false;
+        }, 15);  
+
+        
 
              
+        });
 
+        /**GETS IF MOUSE IS DOWN */
+        canvas.addEventListener('mousedown', function(event) {
+            
+            console.log("mouse is down")
+            GameData.isMouseDown = true;
+                 
+        });
 
+        /**GETS IF MOUSE IS DOWN */
+        canvas.addEventListener('mouseup', function(event) {
+            
+            console.log("mouse is up")
+            GameData.isMouseDown = false;
+                 
         });
    
     
