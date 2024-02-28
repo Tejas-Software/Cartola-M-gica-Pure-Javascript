@@ -110,6 +110,12 @@ class BackButtonModal extends Image {
         GameData.showWrongAnswerModal = false;
         GameData.showRightAnswerModal = false;
         GameData.showDoubtModal = false;
+
+        if(GameData.selectedWord === 4) {
+            GameData.Word4Visible = false;
+            GameData.selectedWord = null;
+        }
+
     }
 
     Tick(){
@@ -591,10 +597,14 @@ class WordPanel4 {
                 if (GameData.wordInsideDropZone) {
                     console.log("Word was dropped inside the drop zone");
                     // Perform appropriate actions when the word is dropped
-                    dealWithModalRight(); // You may need to adjust this based on your game logic
+                    this.RenderModalAnswer(this.number, GameData.Context); // Render the right modal
+                    GameData.showRightAnswerModal = true; // Set flag to keep the right modal open
                 }
+                // Clear the selectedWord flag
+                //GameData.selectedWord = null;
             }
         }
+        
         
 
         
@@ -671,7 +681,7 @@ class Game {
         this.Cartola = new Cartola(this, this.height * 1, window.innerHeight * 0.9,  (window.innerWidth * 0.48) - ((window.innerHeight * 0.9) * 0.5), window.innerHeight - (( window.innerHeight * 0.9) * 1.25), 4.5, GameData.cartolaImage)
         this.ResolutionMessage = new ThisResolutionMessage(this)
 
-        this.Word3 = new WordPanel4(this, 3)
+        this.Word4 = new WordPanel4(this, 3)
         this.InvisibleDropZone = new InvisibleDropZone(this)
 
         this.BackButton = new BackButton(this, window.innerWidth * 0.15, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.30, 2, GameData.modalBackButton )
@@ -702,9 +712,21 @@ class Game {
         this.Cartola.Tick();
 
         if(GameData.Word4Visible){
-            this.Word3.draw(context, 3)
-            this.Word3.tick(context)
+            this.Word4.draw(context, 3)
+            this.Word4.tick(context)
             
+        }
+
+        if (GameData.showRightAnswerModal) {
+
+            if(this.Word4.YouPointAdded === false){
+                GameData.playerPoints += 5;
+                this.Word4.YouPointAdded = true;
+            }
+
+            this.Word4.RenderModalRight(context); // Assuming wordPanel4 is the instance of WordPanel4
+            this.BackButtonModal.BeginPlay(context);
+            this.BackButtonModal.Tick();
         }
 
 
@@ -728,17 +750,6 @@ class Game {
             this.BackButtonModal.Tick();
         }
 
-        if(GameData.showRightAnswerModalWord4){
-
-            if(GameData.playerPoints >= 10){
-                this.ContinueButton.BeginPlay(context);
-                this.ContinueButton.Tick();
-            } else {
-                this.BackButtonModalWord4.BeginPlay(context);
-                this.BackButtonModalWord4.Tick();
-            }
-
-        }
 
 
         
