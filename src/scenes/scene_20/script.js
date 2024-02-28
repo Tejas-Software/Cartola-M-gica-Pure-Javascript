@@ -101,6 +101,8 @@ class BackButton extends Image {
         GameData.showRightAnswerModal = false;
         GameData.showWrongAnswerModal = false;
         GameData.showWrongAnswerModal4 = false;
+        GameData.showWrongAnswerModal3 = false;
+        GameData.showWrongModal3 = false;
     }
 
     Tick(){
@@ -140,6 +142,7 @@ class BackButtonModal extends Image {
         } else if (GameData.selectedWord === 3) {
             GameData.Word3Visible = false;
             GameData.selectedWord = null;
+            GameData.showWrongAnswerModal3 = false;
         } else if (GameData.selectedWord === 2) {
             GameData.Word2Visible = false;
             GameData.selectedWord = null;
@@ -270,6 +273,7 @@ class WordPanel2 {
             this.number = 2;
 
             this.YouPointAdded = false;
+            this.MagicianPointAdded = false;
 
         }
         setAttributes();
@@ -519,6 +523,7 @@ class WordPanel2 {
             GameData.showWrongAnswerModal = false;
             GameData.showRightAnswerModal2 = true;
             GameData.showDoubtModal = false;
+            GameData.Word2Visible = false;
 
 
         }
@@ -631,7 +636,6 @@ class WordPanel3 {
             this.modalBackButton = document.getElementById("back_button");
             this.magicianPanel = document.getElementById("magician_panel");
             this.youPanel = document.getElementById("you_panel");
-            this.isVisible = true;
 
             this.height = window.innerHeight * 0.13;
             this.width = this.height * 3.5;
@@ -884,11 +888,7 @@ class WordPanel3 {
     }
 
     RenderModalAnswer(number, context){
-
-     if (number === 3) {
-            GameData.showWrongAnswerModal3 = true;
-        }
-        
+        GameData.showWrongAnswerModal3 = true;        
     }
 
     tick(context){
@@ -1298,6 +1298,7 @@ class WordPanel4 {
 
         } else if (number === 4) {
             GameData.showWrongAnswerModal4 = true;
+            GameData.Word4Visible = false;
         }
         
     }
@@ -1438,8 +1439,6 @@ class InvisibleDropZone {
 }
 
 
-
-
 class Game {
     constructor(canvas){
         /**GAME CLASS WILL STORE THE CANVAS DATA */
@@ -1508,12 +1507,24 @@ class Game {
 
         if (GameData.showRightAnswerModal2) {
 
-            if(this.Word3.YouPointAdded === false){
+            if(this.Word2.YouPointAdded === false){
                 GameData.playerPoints += 5;
-                this.Word3.YouPointAdded = true;
+                this.Word2.YouPointAdded = true;
             }
 
-            this.Word3.RenderModalRight(context); 
+            this.Word2.RenderModalRight(context); 
+            this.BackButtonModal.BeginPlay(context);
+            this.BackButtonModal.Tick();
+        }
+
+        if (GameData.showWrongAnswerModal3) {
+
+            if(this.Word3.MagicianPointAdded === false){
+                GameData.magicianPoints += 5;
+                this.Word3.MagicianPointAdded = true;
+            }
+
+            this.Word3.RenderModalWrong(context); 
             this.BackButtonModal.BeginPlay(context);
             this.BackButtonModal.Tick();
         }
