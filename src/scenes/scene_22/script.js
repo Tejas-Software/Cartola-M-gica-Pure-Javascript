@@ -723,7 +723,7 @@ class WordPanel2 {
             context.fillText(thisText, textX, textY);
         };
     
-        renderTextTimer('Nevoeiro', "#009966", this.width, this.textX * 1);
+        renderTextTimer('Nevoeiro', "#FF0000", this.width, this.textX * 1);
     }
     
     
@@ -1092,7 +1092,7 @@ class WordPanel3 {
             context.fillText(thisText, textX, textY);
         };
     
-        renderTextTimer('Macaco', "#009966", this.width, this.textX * 1);
+        renderTextTimer('Macaco', "#0066FF", this.width, this.textX * 1);
     }
     
     HoverTransformScale(GameData, params){
@@ -1454,7 +1454,7 @@ class WordPanel4 {
             context.fillText(thisText, textX, textY);
         };
     
-        renderTextTimer('Sambódromo', "#009966", this.width, this.textX * 1);
+        renderTextTimer('Sambódromo', "#CC33CC", this.width, this.textX * 1);
     }
     
     HoverTransformScale(GameData, params){
@@ -1818,7 +1818,7 @@ class WordPanel5 {
             context.fillText(thisText, textX, textY);
         };
     
-        renderTextTimer('Espanha', "#009966", this.width, this.textX * 1);
+        renderTextTimer('Espanha', "#FF6600", this.width, this.textX * 1);
     }
     
     

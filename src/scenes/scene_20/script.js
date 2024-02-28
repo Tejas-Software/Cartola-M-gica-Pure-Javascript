@@ -691,7 +691,7 @@ class WordPanel2 {
             context.fillText(thisText, textX, textY);
         };
     
-        renderTextTimer('Desastroso', "#009966", this.width, this.textX * 1);
+        renderTextTimer('Desastroso', "#FF0000", this.width, this.textX * 1);
     }
     
     
@@ -1080,7 +1080,7 @@ class WordPanel3 {
             context.fillText(thisText, textX, textY);
         };
     
-        renderTextTimer('Bolacha', "#009966", this.width, this.textX * 1);
+        renderTextTimer('Bolacha', "#0066FF", this.width, this.textX * 1);
     }
     
     HoverTransformScale(GameData, params){
@@ -1442,7 +1442,7 @@ class WordPanel4 {
             context.fillText(thisText, textX, textY);
         };
     
-        renderTextTimer('Basquete', "#009966", this.width, this.textX * 1);
+        renderTextTimer('Basquete', "#CC33CC", this.width, this.textX * 1);
     }
     
     HoverTransformScale(GameData, params){
@@ -1855,7 +1855,7 @@ class WordPanel5 {
             context.fillText(thisText, textX, textY);
         };
     
-        renderTextTimer('Carinhoso', "#009966", this.width, this.textX * 1);
+        renderTextTimer('Carinhoso', "#FF6600", this.width, this.textX * 1);
     }
     
     

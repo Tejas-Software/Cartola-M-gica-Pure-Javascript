@@ -526,11 +526,11 @@ class WordPanel {
         }
 
         if(number === 1){
-            renderTextTimer('Desenharam', "#FF0000", this.width, this.textX * 1.5);
+            renderTextTimer('Desenharam', "#CC33CC", this.width, this.textX * 1.5);
         } else if(number === 2){
-            renderTextTimer('Marmelada', "#0066FF", this.width, this.textX * 1.01);
+            renderTextTimer('Marmelada', "#FF0000", this.width, this.textX * 1.01);
         } else if(number === 3){
-            renderTextTimer('Trabalharam', "#009966", this.width, this.textX * 1);
+            renderTextTimer('Trabalharam', "#0066FF", this.width, this.textX * 1);
         }
  
     }

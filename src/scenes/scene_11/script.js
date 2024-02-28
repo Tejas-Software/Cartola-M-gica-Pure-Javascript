@@ -526,11 +526,11 @@ class WordPanel {
         }
 
         if(number === 1){
-            renderTextTimer('Limpar', "#FF0000", this.width, this.textX * 1.5);
+            renderTextTimer('Limpar', "#CC33CC", this.width, this.textX * 1.5);
         } else if(number === 2){
-            renderTextTimer('Brinquedo', "#0066FF", this.width, this.textX * 1.01);
+            renderTextTimer('Brinquedo', "#FF0000", this.width, this.textX * 1.01);
         } else if(number === 3){
-            renderTextTimer('Rio de Janeiro', "#009966", this.width, this.textX * 1);
+            renderTextTimer('Rio de Janeiro', "#0066FF", this.width, this.textX * 1);
         }
  
     }
