@@ -18,6 +18,7 @@ let GameData = {
     showWrongAnswerModal: false,
     showRightAnswerModal: false,
     showRightAnswerModal4: false,
+    showWrongAnswerModal4:false,
     showRightAnswerModal3: false,
     Word4Visible: true,
     Word3Visible: true,
@@ -31,7 +32,7 @@ let GameData = {
     
     word3Discovered: false,
     canDoubtButtonHover: () => {
-        return GameData.showWrongAnswerModal === false && GameData.showRightAnswerModal === false && GameData.showDoubtModal === false && GameData.showRightAnswerModalWord4 === false; 
+        return GameData.showWrongAnswerModal === false && GameData.showRightAnswerModal === false && GameData.showDoubtModal === false; 
     },
     canWordPanelBeClicked: () => {
         return GameData.showRightAnswerModal === false && GameData.showWrongAnswerModal === false && GameData.showDoubtModal === false;
@@ -88,6 +89,7 @@ class BackButton extends Image {
         GameData.showDoubtModal = false;
         GameData.showRightAnswerModal = false;
         GameData.showWrongAnswerModal = false;
+        GameData.showWrongAnswerModal4 = false;
     }
 
     Tick(){
@@ -118,6 +120,7 @@ class BackButtonModal extends Image {
         GameData.showRightAnswerModal = false;
         GameData.showRightAnswerModal3 = false;
         GameData.showRightAnswerModal4 = false;
+        GameData.showWrongAnswerModal4 = false;
         GameData.showDoubtModal = false;
 
         if(GameData.selectedWord === 4) {
@@ -663,6 +666,7 @@ class WordPanel4 {
             this.number = 4;
 
             this.YouPointAdded = false;
+            this.MagicianPointAdded = false;
 
         }
         setAttributes();
@@ -890,7 +894,7 @@ class WordPanel4 {
     }
 
     RenderModalAnswer(number, context){
-
+        console.log("chego aqui ?", number)
         if(number === 1){
             if(!GameData.word1Discovered){ GameData.word1Discovered = true;}
             if(GameData.word1Discovered && !GameData.word2Discovered){
@@ -937,6 +941,8 @@ class WordPanel4 {
             GameData.showRightAnswerModal = false;
             GameData.showDoubtModal = false;
 
+        } else if (number === 4) {
+            GameData.showWrongAnswerModal4 = true;
         }
         
     }
@@ -1010,13 +1016,12 @@ class WordPanel4 {
                 
                 // Check if the word is dropped inside the drop zone
                 if (GameData.wordInsideDropZone) {
-                    console.log("Word was dropped inside the drop zone");
-                    // Perform appropriate actions when the word is dropped
-                    this.RenderModalAnswer(this.number, GameData.Context); // Render the right modal
-                    GameData.showRightAnswerModal4 = true; // Set flag to keep the right modal open
+
+
+                    this.RenderModalAnswer(this.number, GameData.Context); 
+                    //GameData.showRightAnswerModal4 = true; 
                 }
-                // Clear the selectedWord flag
-                //GameData.selectedWord = null;
+
             }
         }
         
@@ -1158,7 +1163,17 @@ class Game {
                 this.Word4.YouPointAdded = true;
             }
 
-            this.Word4.RenderModalRight(context); // Assuming wordPanel4 is the instance of WordPanel4
+            this.Word4.RenderModalRight(context); 
+            this.BackButtonModal.BeginPlay(context);
+            this.BackButtonModal.Tick();
+        } else if (GameData.showWrongAnswerModal4) {
+
+            if(this.Word4.MagicianPointAdded === false){
+                GameData.magicianPoints += 5;
+                this.Word4.MagicianPointAdded = true;
+            }
+
+            this.Word4.RenderModalWrong(context); 
             this.BackButtonModal.BeginPlay(context);
             this.BackButtonModal.Tick();
         }
