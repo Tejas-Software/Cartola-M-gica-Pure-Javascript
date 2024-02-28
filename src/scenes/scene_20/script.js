@@ -240,37 +240,38 @@ class WordPanel4 {
 
     }
 
-    draw(context, number){
-
-        
+    draw(context, number) {
+        // Draw the word panel
         const renderImage = () => {
             context.globalAlpha = this.opacity;
             context.drawImage(this.image, this.x, this.y, this.width, this.height);
             context.globalAlpha = 1;
-        }
+        };
         renderImage();
-
+    
+        // Draw the text inside the panel
         const renderTextTimer = (text, color, width, X) => {
-
-            if(text === "Trabalharam"){
+            if (text === "Trabalharam") {
                 context.font = `${width * 0.138}px eurostyle`;
             } else if (text === "Marmelada") {
-                context.font = `${width * 0.145}px eurostyle`; 
+                context.font = `${width * 0.145}px eurostyle`;
             } else if (text === "Desenharam") {
-                context.font = `${width * 0.135}px eurostyle`; 
+                context.font = `${width * 0.135}px eurostyle`;
             }
-
-            context.fillStyle = color; 
+    
+            context.fillStyle = color;
             context.globalAlpha = this.opacity;
-            let thisText = text; 
-            context.fillText(thisText, this.textX, this.textY);  
-        }
-
-
+            let thisText = text;
+            // Calculate text position relative to the panel
+            const textX = this.x + (this.width - context.measureText(thisText).width) / 2;
+            const textY = this.y + this.height * 0.5; // Adjust Y position as needed
+            context.fillText(thisText, textX, textY);
+        };
+    
         renderTextTimer('Trabalharam', "#009966", this.width, this.textX * 1);
-
- 
     }
+    
+    
 
     HoverTransformScale(GameData, params){
 
@@ -558,37 +559,46 @@ class WordPanel4 {
 
         }
 
+        const isMouseInsidePanel = () => {
+            // Check if the mouse position is within the bounds of the panel
+            return (
+                GameData.MouseX >= this.x &&
+                GameData.MouseX <= this.x + this.width &&
+                GameData.MouseY >= this.y &&
+                GameData.MouseY <= this.y + this.height
+            );
+        }
+
 
         const dragMe = () => {
-            if(GameData.isMouseDown){
-                if(this.currentHovering === this.id){
+            if (GameData.isMouseDown) {
+                if (this.currentHovering === this.id && isMouseInsidePanel()) {
+                    // Only initiate drag if mouse is hovering over the panel and is inside its bounds
                     this.x = GameData.MouseX - (this.width / 2);
                     this.y = GameData.MouseY - (this.height / 2);
                     this.textX = GameData.MouseX + (this.width * 0.1) - (this.width / 2);
                     this.textY = GameData.MouseY + (this.height * 0.6) - (this.height / 2);
                     GameData.selectedWord = 4;
                 }
-
-            } else if (!GameData.isMouseDown && GameData.selectedWord) {
-
-                if(this.currentHovering === this.id){
-                    this.x = this.InitialX;
-                    this.y = this.InitialY;
-                    this.textX = this.InitialTextX;
-                    this.textY = this.InitialTextY;   
+            } else if (!GameData.isMouseDown && GameData.selectedWord === 4) {
+                // Reset the position if the mouse is released
+                this.x = this.InitialX;
+                this.y = this.InitialY;
+                this.textX = this.InitialTextX;
+                this.textY = this.InitialTextY;
+                
+                // Check if the word is dropped inside the drop zone
+                if (GameData.wordInsideDropZone) {
+                    console.log("Word was dropped inside the drop zone");
+                    // Perform appropriate actions when the word is dropped
+                    dealWithModalRight(); // You may need to adjust this based on your game logic
                 }
- 
-
-                if(GameData.wordInsideDropZone) {
-                    console.log("foi jogado dentro da zona de drop: " + GameData.selectedWord)
-                    if(GameData.selectedWord === 4){
-                        this.currentHovering = null;
-                        dealWithModalRight();
-                    }
-                }  
-
             }
         }
+        
+
+        
+        
         dragMe();
 
 
@@ -620,8 +630,9 @@ class InvisibleDropZone {
             GameData.wordInsideDropZone = true;
         } 
 
-        if(bIsMouseColliding && !GameData.isMouseDown) {
+        if(!bIsMouseColliding || !GameData.isMouseDown) {
             console.log(GameData.selectedWord)
+            GameData.wordInsideDropZone = false;
         }
 
     }
