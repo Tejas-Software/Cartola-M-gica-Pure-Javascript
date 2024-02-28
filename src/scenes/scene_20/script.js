@@ -25,6 +25,9 @@ let GameData = {
     magicianPoints: 0,
     word1Discovered: false,
     word2Discovered: false,
+
+    isDragginWord4: false,
+    isDragginWord3: false,
     
     word3Discovered: false,
     canDoubtButtonHover: () => {
@@ -576,9 +579,10 @@ class WordPanel3 {
 
 
         const dragMe = () => {
-            if (GameData.isMouseDown) {
+            if (GameData.isMouseDown && !GameData.isDragginWord4) {
                 if (this.currentHovering === this.id && isMouseInsidePanel()) {
                     // Only initiate drag if mouse is hovering over the panel and is inside its bounds
+                    GameData.isDragginWord3 = true;
                     this.x = GameData.MouseX - (this.width / 2);
                     this.y = GameData.MouseY - (this.height / 2);
                     this.textX = GameData.MouseX + (this.width * 0.1) - (this.width / 2);
@@ -591,6 +595,7 @@ class WordPanel3 {
                 this.y = this.InitialY;
                 this.textX = this.InitialTextX;
                 this.textY = this.InitialTextY;
+                GameData.isDragginWord3 = false;
                 
                 // Check if the word is dropped inside the drop zone
                 if (GameData.wordInsideDropZone) {
@@ -985,9 +990,10 @@ class WordPanel4 {
 
 
         const dragMe = () => {
-            if (GameData.isMouseDown) {
+            if (GameData.isMouseDown && !GameData.isDragginWord3) {
                 if (this.currentHovering === this.id && isMouseInsidePanel()) {
                     // Only initiate drag if mouse is hovering over the panel and is inside its bounds
+                    GameData.isDragginWord4 = true;
                     this.x = GameData.MouseX - (this.width / 2);
                     this.y = GameData.MouseY - (this.height / 2);
                     this.textX = GameData.MouseX + (this.width * 0.1) - (this.width / 2);
@@ -1000,6 +1006,7 @@ class WordPanel4 {
                 this.y = this.InitialY;
                 this.textX = this.InitialTextX;
                 this.textY = this.InitialTextY;
+                GameData.isDragginWord4 = false;
                 
                 // Check if the word is dropped inside the drop zone
                 if (GameData.wordInsideDropZone) {
