@@ -17,8 +17,8 @@ let GameData = {
     showDoubtModal: false,
     showWrongAnswerModal: false,
     showRightAnswerModal: false,
-    showRightAnswerModalWord4: false,
-    showRightAnswerModalWord3: false,
+    showRightAnswerModal4: false,
+    showRightAnswerModal3: false,
     Word4Visible: true,
     Word3Visible: true,
     playerPoints: 0,
@@ -113,6 +113,8 @@ class BackButtonModal extends Image {
     renderModal(){
         GameData.showWrongAnswerModal = false;
         GameData.showRightAnswerModal = false;
+        GameData.showRightAnswerModal3 = false;
+        GameData.showRightAnswerModal4 = false;
         GameData.showDoubtModal = false;
 
         if(GameData.selectedWord === 4) {
@@ -478,9 +480,9 @@ class WordPanel3 {
         if(number === 1){
             if(!GameData.word1Discovered){ GameData.word1Discovered = true;}
             if(GameData.word1Discovered && !GameData.word2Discovered){
-                GameData.playerPoints = 5;
+                //GameData.playerPoints = 5;
             } else if (GameData.word1Discovered && GameData.word2Discovered){
-                GameData.playerPoints = 10;
+                //GameData.playerPoints = 10;
             }
             GameData.showWrongAnswerModal = false;
             GameData.showRightAnswerModal = true;
@@ -494,10 +496,10 @@ class WordPanel3 {
             }
 
             if(GameData.word2Discovered && !GameData.word1Discovered){
-                GameData.playerPoints = 5;
+                //GameData.playerPoints = 5;
 
             } else if (GameData.word2Discovered && GameData.word1Discovered){
-                GameData.playerPoints = 10;
+                //GameData.playerPoints = 10;
             }
 
             GameData.showWrongAnswerModal = false;
@@ -513,7 +515,7 @@ class WordPanel3 {
             }
 
             if(GameData.word3Discovered){
-                GameData.magicianPoints = 5;
+                //GameData.magicianPoints = 5;
 
             }
 
@@ -562,16 +564,6 @@ class WordPanel3 {
             this.HoverTransformScale(GameData, [GameData.canWordPanelBeClicked()])
         }
 
-        const dealWithModalRight = () => {
-            this.RenderModalRight(context)
-            GameData.showRightAnswerModalWord3 = true;
-            if(!this.YouPointAdded){
-                GameData.playerPoints += 5;
-                this.YouPointAdded = true;
-            }
-
-        }
-
         const isMouseInsidePanel = () => {
             // Check if the mouse position is within the bounds of the panel
             return (
@@ -605,7 +597,7 @@ class WordPanel3 {
                     console.log("Word was dropped inside the drop zone");
                     // Perform appropriate actions when the word is dropped
                     this.RenderModalAnswer(this.number, GameData.Context); // Render the right modal
-                    GameData.showRightAnswerModal = true; // Set flag to keep the right modal open
+                    GameData.showRightAnswerModal3 = true; // Set flag to keep the right modal open
                 }
                 // Clear the selectedWord flag
                 //GameData.selectedWord = null;
@@ -897,9 +889,9 @@ class WordPanel4 {
         if(number === 1){
             if(!GameData.word1Discovered){ GameData.word1Discovered = true;}
             if(GameData.word1Discovered && !GameData.word2Discovered){
-                GameData.playerPoints = 5;
+                //GameData.playerPoints = 5;
             } else if (GameData.word1Discovered && GameData.word2Discovered){
-                GameData.playerPoints = 10;
+                //GameData.playerPoints = 10;
             }
             GameData.showWrongAnswerModal = false;
             GameData.showRightAnswerModal = true;
@@ -913,10 +905,10 @@ class WordPanel4 {
             }
 
             if(GameData.word2Discovered && !GameData.word1Discovered){
-                GameData.playerPoints = 5;
+                //GameData.playerPoints = 5;
 
             } else if (GameData.word2Discovered && GameData.word1Discovered){
-                GameData.playerPoints = 10;
+                //GameData.playerPoints = 10;
             }
 
             GameData.showWrongAnswerModal = false;
@@ -932,7 +924,7 @@ class WordPanel4 {
             }
 
             if(GameData.word3Discovered){
-                GameData.magicianPoints = 5;
+                //GameData.magicianPoints = 5;
 
             }
 
@@ -981,16 +973,6 @@ class WordPanel4 {
             this.HoverTransformScale(GameData, [GameData.canWordPanelBeClicked()])
         }
 
-        const dealWithModalRight = () => {
-            this.RenderModalRight(context)
-            GameData.showRightAnswerModalWord4 = true;
-            if(!this.YouPointAdded){
-                GameData.playerPoints += 5;
-                this.YouPointAdded = true;
-            }
-
-        }
-
         const isMouseInsidePanel = () => {
             // Check if the mouse position is within the bounds of the panel
             return (
@@ -1024,7 +1006,7 @@ class WordPanel4 {
                     console.log("Word was dropped inside the drop zone");
                     // Perform appropriate actions when the word is dropped
                     this.RenderModalAnswer(this.number, GameData.Context); // Render the right modal
-                    GameData.showRightAnswerModal = true; // Set flag to keep the right modal open
+                    GameData.showRightAnswerModal4 = true; // Set flag to keep the right modal open
                 }
                 // Clear the selectedWord flag
                 //GameData.selectedWord = null;
@@ -1150,7 +1132,19 @@ class Game {
             
         }
 
-        if (GameData.showRightAnswerModal) {
+        if (GameData.showRightAnswerModal3) {
+
+            if(this.Word3.YouPointAdded === false){
+                GameData.playerPoints += 5;
+                this.Word3.YouPointAdded = true;
+            }
+
+            this.Word3.RenderModalRight(context); 
+            this.BackButtonModal.BeginPlay(context);
+            this.BackButtonModal.Tick();
+        }
+
+        if (GameData.showRightAnswerModal4) {
 
             if(this.Word4.YouPointAdded === false){
                 GameData.playerPoints += 5;
