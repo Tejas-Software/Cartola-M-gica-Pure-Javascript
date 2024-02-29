@@ -541,9 +541,7 @@ class WordPanel {
         let trueParams = 0;
 
         params.map((param)=>{if(param === true){trueParams+=1;}})
-
-        console.log(params.length)
-        console.log(trueParams)
+ 
 
         if(paramsLength === trueParams){
             let bIsMouseColliding = CheckMouseCollision(this, GameData);
@@ -568,9 +566,7 @@ class WordPanel {
         let trueParams = 0;
 
         params?.map((param)=>{if(param === true){trueParams+=1;}})
-
-        console.log(params?.length)
-        console.log(trueParams)
+ 
 
         if(params){
             if(paramsLength === trueParams){

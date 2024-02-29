@@ -334,7 +334,7 @@ class WordPanel1 {
 
         params.map((param)=>{if(param === true){trueParams+=1;}})
 
-        console.log(GameData.canClickWordPanels())
+ 
 
 
         if(paramsLength === trueParams && GameData.canClickWordPanels()){
@@ -1633,7 +1633,7 @@ class WordPanel4 {
     }
 
     RenderModalAnswer(number, context){
-        console.log("chego aqui ?", number)
+ 
         if(number === 1){
             if(!GameData.word1Discovered){ GameData.word1Discovered = true;}
             if(GameData.word1Discovered && !GameData.word2Discovered){
@@ -2163,13 +2163,12 @@ class InvisibleDropZone {
 
         let bIsMouseColliding = CheckMouseCollision(this, GameData);
         if (bIsMouseColliding && GameData.isMouseDown)  {
-            console.log("in drop zone")
-            console.log(GameData.selectedWord)
+ 
             GameData.wordInsideDropZone = true;
         } 
 
         if(!bIsMouseColliding || !GameData.isMouseDown) {
-            console.log(GameData.selectedWord)
+ 
             GameData.wordInsideDropZone = false;
         }
 
@@ -2454,7 +2453,7 @@ const BeginPlay = () => {
         /**GETS IF MOUSE IS DOWN */
         canvas.addEventListener('mousedown', function(event) {
             
-            console.log("mouse is down")
+ 
             GameData.isMouseDown = true;
                  
         });
@@ -2462,7 +2461,7 @@ const BeginPlay = () => {
         /**GETS IF MOUSE IS DOWN */
         canvas.addEventListener('mouseup', function(event) {
             
-            console.log("mouse is up")
+ 
             GameData.isMouseDown = false;
                  
         });
