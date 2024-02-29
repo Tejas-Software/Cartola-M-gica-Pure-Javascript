@@ -296,7 +296,7 @@ class MagicianPanel {
     
             this.x = (window.innerWidth - this.width * 2.5) 
             this.y = 0 ;
-            this.speed = 4.5;
+            this.speed = 10;
     
             this.points = 0;
     
@@ -362,7 +362,7 @@ class YouPanel {
     
             this.x = (window.innerWidth - this.width * 1.25) 
             this.y = 0 ;
-            this.speed = 4.5;
+            this.speed = 10;
     
             this.opacity = 0;
         }
@@ -425,7 +425,7 @@ class Cartola {
 
         this.x = (window.innerWidth * 0.5) - (this.width * 0.5) 
         this.y = window.innerHeight - (this.height * 1.25) ;
-        this.speed = 4.5;
+        this.speed = 10;
 
         this.opacity = 0;
 
@@ -442,7 +442,7 @@ class Cartola {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -489,7 +489,7 @@ class WordPanel {
                 this.opacity = 0;
             }
     
-            this.speed = 4.5;
+            this.speed = 10;
             
             if(number === 1) { this.number = 1 }
             if(number === 2) { this.number = 2 }
@@ -793,7 +793,7 @@ class WordPanel {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -804,18 +804,18 @@ class WordPanel {
 
             if(this.number !== 3){
                 if (this.textX > (this.x + this.width * 0.05)){
-                    this.textX -= 4.5;
+                    this.textX -= 18;
                 }
             } else {
                 if (this.textX < (this.x + this.width * 0.05)){
-                    this.textX += 3;
+                    this.textX += 12;
                 }
             }
 
             
 
             if (this.textY < (window.innerHeight - this.width * 0.15)){
-                this.textY += 2;
+                this.textY += 8;
             }
         }
         appearFromHat();
@@ -854,12 +854,12 @@ class Game {
         this.Word2 = new WordPanel(this, 2)
         this.Word3 = new WordPanel(this, 3)
 
-        this.BackButton = new BackButton(this, window.innerWidth * 0.15, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.30, 2, modalBackButton )
+        this.BackButton = new BackButton(this, window.innerWidth * 0.15, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.30, 10, modalBackButton )
 
-        this.ContinueButton = new ContinueButton(this, window.innerWidth * 0.2, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.78, window.innerHeight * 0.70, 2, continueButton )
+        this.ContinueButton = new ContinueButton(this, window.innerWidth * 0.2, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.78, window.innerHeight * 0.70, 10, continueButton )
         
-        this.BackButtonModal = new BackButtonModal(this, window.innerWidth * 0.15, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.70, 2, modalBackButton )
-        this.TextModal = new TextModal(this, window.innerWidth * 0.5, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.15, 2, modalText )
+        this.BackButtonModal = new BackButtonModal(this, window.innerWidth * 0.15, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.70, 10, modalBackButton )
+        this.TextModal = new TextModal(this, window.innerWidth * 0.5, (window.innerWidth * 0.1) * 0.5, window.innerWidth * 0.01, window.innerHeight * 0.15, 10, modalText )
     }
     /**THIS METHOD WILL RENDER THE GAME */
     render(context){

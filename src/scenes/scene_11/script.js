@@ -219,7 +219,7 @@ class TimePanel {
     
             this.x = window.innerWidth * 0.08
             this.y = -50 ;
-            this.speed = 1.4;
+            this.speed = 10;
 
             this.milliseconds = 0;
             this.seconds = 0;
@@ -296,7 +296,7 @@ class MagicianPanel {
     
             this.x = (window.innerWidth - this.width * 2.5) 
             this.y = 0 ;
-            this.speed = 4.5;
+            this.speed = 10;
     
             this.points = 0;
     
@@ -342,7 +342,8 @@ class MagicianPanel {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
+                    9;
                 }
             }
         }
@@ -362,7 +363,7 @@ class YouPanel {
     
             this.x = (window.innerWidth - this.width * 1.25) 
             this.y = 0 ;
-            this.speed = 4.5;
+            this.speed = 10;
     
             this.opacity = 0;
         }
@@ -407,7 +408,7 @@ class YouPanel {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -425,7 +426,7 @@ class Cartola {
 
         this.x = (window.innerWidth * 0.5) - (this.width * 0.5) 
         this.y = window.innerHeight - (this.height * 1.25) ;
-        this.speed = 4.5;
+        this.speed = 10;
 
         this.opacity = 0;
 
@@ -489,7 +490,7 @@ class WordPanel {
                 this.opacity = 0;
             }
     
-            this.speed = 4.5;
+            this.speed = 10;
             
             if(number === 1) { this.number = 1 }
             if(number === 2) { this.number = 2 }
@@ -804,18 +805,18 @@ class WordPanel {
 
             if(this.number !== 3){
                 if (this.textX > (this.x + this.width * 0.05)){
-                    this.textX -= 4.5;
+                    this.textX -= 18;
                 }
             } else {
                 if (this.textX < (this.x + this.width * 0.05)){
-                    this.textX += 3;
+                    this.textX += 6;
                 }
             }
 
             
 
             if (this.textY < (window.innerHeight - this.width * 0.15)){
-                this.textY += 2;
+                this.textY += 8;
             }
         }
         appearFromHat();
