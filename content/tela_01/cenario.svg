@@ -1,0 +1,317 @@
+<?xml version="1.0"?>
+<svg width="1200" height="675" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" version="1.1">
+ <defs>
+  <radialGradient cx="0" cy="0" fx="0" fy="0" gradientTransform="matrix( 1, 0, 0, 1, 644.95,326.5) " gradientUnits="userSpaceOnUse" id="Gradient_1" r="759.15" spreadMethod="pad">
+   <stop offset="0%" stop-color="#5DDFFF"/>
+   <stop offset="18.823529411764707%" stop-color="#00C9FD"/>
+   <stop offset="41.96078431372549%" stop-color="#0099FF"/>
+   <stop offset="100%" stop-color="#003399"/>
+  </radialGradient>
+  <linearGradient id="Gradient_2" spreadMethod="pad" x1="0" x2="1" y1="0.58" y2="0.45">
+   <stop offset="8.627450980392156%" stop-color="#510505"/>
+   <stop offset="47.84313725490196%" stop-color="#FF0000"/>
+   <stop offset="72.94117647058823%" stop-color="#FF0000"/>
+   <stop offset="100%" stop-color="#990000"/>
+  </linearGradient>
+  <linearGradient id="Gradient_3" spreadMethod="pad" x1="0" x2="1" y1="0.5" y2="0.5">
+   <stop offset="0%" stop-color="#000000"/>
+   <stop offset="26.274509803921568%" stop-color="#333333"/>
+   <stop offset="58.8235294117647%" stop-color="#333333"/>
+   <stop offset="83.52941176470588%" stop-color="#000000"/>
+   <stop offset="100%" stop-color="#000000"/>
+  </linearGradient>
+  <radialGradient cx="0" cy="0" fx="0" fy="0" gradientTransform="matrix( 0.9999999999999999, 0, 0, 0.9999999999999999, 161.85,32.85) " gradientUnits="userSpaceOnUse" id="Gradient_4" r="161.5" spreadMethod="pad">
+   <stop offset="0%" stop-color="#000000"/>
+   <stop offset="68.62745098039215%" stop-color="#333333"/>
+   <stop offset="88.23529411764706%" stop-color="#2E2E2E"/>
+   <stop offset="100%" stop-color="#121212"/>
+  </radialGradient>
+  <linearGradient id="Gradient_5" spreadMethod="pad" x1="0" x2="1.03" y1="0.5" y2="0.5">
+   <stop offset="0%" stop-color="#0066CC"/>
+   <stop offset="23.92156862745098%" stop-color="#0047AD"/>
+   <stop offset="41.568627450980394%" stop-color="#0099FF"/>
+   <stop offset="70.58823529411765%" stop-color="#003399"/>
+   <stop offset="88.23529411764706%" stop-color="#0066FF"/>
+   <stop offset="100%" stop-color="#003399"/>
+  </linearGradient>
+  <linearGradient id="Gradient_6" spreadMethod="pad" x1="0.94" x2="0.04" y1="0.57" y2="0.6">
+   <stop offset="0%" stop-color="#050505" stop-opacity="0"/>
+   <stop offset="26.274509803921568%" stop-color="#FFFFFF"/>
+   <stop offset="75.68627450980392%" stop-color="#FFFFFF"/>
+   <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="Gradient_7" spreadMethod="pad" x1="35.77" x2="-78.14" y1="-326.41" y2="-186.65">
+   <stop offset="0%" stop-color="#070707" stop-opacity="0"/>
+   <stop offset="10.196078431372548%" stop-color="#FFFF99"/>
+   <stop offset="39.21568627450981%" stop-color="#FFFFFF"/>
+   <stop offset="61.96078431372549%" stop-color="#EAEAEA"/>
+   <stop offset="93.72549019607843%" stop-color="#FFFF66"/>
+   <stop offset="100%" stop-color="#12314C" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="Gradient_8" spreadMethod="pad" x1="184.87" x2="-402.65" y1="-1854.74" y2="-1062.71">
+   <stop offset="10.196078431372548%" stop-color="#FFFF99"/>
+   <stop offset="39.21568627450981%" stop-color="#FFFFFF"/>
+   <stop offset="61.96078431372549%" stop-color="#EAEAEA"/>
+   <stop offset="93.72549019607843%" stop-color="#FFFF66"/>
+  </linearGradient>
+  <linearGradient id="Gradient_9" spreadMethod="pad" x1="0.65" x2="0.13" y1="0.62" y2="-0.04">
+   <stop offset="10.196078431372548%" stop-color="#FFFF99"/>
+   <stop offset="63.13725490196079%" stop-color="#FFFFFF"/>
+   <stop offset="100%" stop-color="#EAEAEA"/>
+  </linearGradient>
+  <linearGradient id="Gradient_10" spreadMethod="pad" x1="0.77" x2="0.3" y1="0.84" y2="0.08">
+   <stop offset="10.196078431372548%" stop-color="#FFFF99"/>
+   <stop offset="63.13725490196079%" stop-color="#FFFFFF"/>
+   <stop offset="100%" stop-color="#EAEAEA"/>
+  </linearGradient>
+  <linearGradient id="Gradient_11" spreadMethod="pad" x1="0.79" x2="0.49" y1="0.89" y2="0.12">
+   <stop offset="10.196078431372548%" stop-color="#FFFF99"/>
+   <stop offset="63.13725490196079%" stop-color="#FFFFFF"/>
+   <stop offset="100%" stop-color="#EAEAEA"/>
+  </linearGradient>
+  <linearGradient id="Gradient_12" spreadMethod="pad" x1="0.96" x2="0.5" y1="0.88" y2="0.12">
+   <stop offset="10.196078431372548%" stop-color="#FFFF99"/>
+   <stop offset="63.13725490196079%" stop-color="#FFFFFF"/>
+   <stop offset="100%" stop-color="#EAEAEA"/>
+  </linearGradient>
+  <linearGradient id="Gradient_13" spreadMethod="pad" x1="0.2" x2="0.64" y1="0.82" y2="-0.37">
+   <stop offset="10.196078431372548%" stop-color="#FFFF99"/>
+   <stop offset="63.13725490196079%" stop-color="#FFFFFF"/>
+   <stop offset="100%" stop-color="#EAEAEA"/>
+  </linearGradient>
+  <linearGradient id="Gradient_14" spreadMethod="pad" x1="6.24" x2="4.86" y1="-15.24" y2="-132.97">
+   <stop offset="10.196078431372548%" stop-color="#FFFF99"/>
+   <stop offset="63.13725490196079%" stop-color="#FFFFFF"/>
+   <stop offset="100%" stop-color="#EAEAEA"/>
+  </linearGradient>
+  <linearGradient id="Gradient_15" spreadMethod="pad" x1="0.86" x2="0.43" y1="0.89" y2="0.12">
+   <stop offset="10.196078431372548%" stop-color="#FFFF99"/>
+   <stop offset="63.13725490196079%" stop-color="#FFFFFF"/>
+   <stop offset="100%" stop-color="#EAEAEA"/>
+  </linearGradient>
+  <linearGradient id="Gradient_16" spreadMethod="pad" x1="0.58" x2="0.24" y1="0.58" y2="-0.15">
+   <stop offset="10.196078431372548%" stop-color="#FFFF99"/>
+   <stop offset="63.13725490196079%" stop-color="#FFFFFF"/>
+   <stop offset="100%" stop-color="#EAEAEA"/>
+  </linearGradient>
+  <linearGradient id="Gradient_17" spreadMethod="pad" x1="0.17" x2="-0.84" y1="0.87" y2="0.13">
+   <stop offset="10.196078431372548%" stop-color="#FFFF99"/>
+   <stop offset="63.13725490196079%" stop-color="#FFFFFF"/>
+   <stop offset="100%" stop-color="#EAEAEA"/>
+  </linearGradient>
+  <linearGradient id="Gradient_18" spreadMethod="pad" x1="0.73" x2="0.45" y1="0.74" y2="-0.15">
+   <stop offset="10.196078431372548%" stop-color="#FFFF99"/>
+   <stop offset="63.13725490196079%" stop-color="#FFFFFF"/>
+   <stop offset="100%" stop-color="#EAEAEA"/>
+  </linearGradient>
+  <linearGradient id="Gradient_19" spreadMethod="pad" x1="0.8" x2="0.33" y1="0.89" y2="-0.19">
+   <stop offset="10.196078431372548%" stop-color="#FFFF99"/>
+   <stop offset="63.13725490196079%" stop-color="#FFFFFF"/>
+   <stop offset="100%" stop-color="#EAEAEA"/>
+  </linearGradient>
+  <linearGradient id="Gradient_20" spreadMethod="pad" x1="0.48" x2="0.59" y1="0.69" y2="0.01">
+   <stop offset="10.196078431372548%" stop-color="#FFFF99"/>
+   <stop offset="63.13725490196079%" stop-color="#FFFFFF"/>
+   <stop offset="100%" stop-color="#EAEAEA"/>
+  </linearGradient>
+  <radialGradient cx="0" cy="0" fx="0" fy="0" gradientTransform="matrix( 0.9961497393093935, -0.08766810636615183, 0.08197617567759434, 0.9966446898040507, 603.05,337.95) " gradientUnits="userSpaceOnUse" id="Gradient_21" r="202.04" spreadMethod="pad">
+   <stop offset="0%" stop-color="#000000"/>
+   <stop offset="68.62745098039215%" stop-color="#333333"/>
+   <stop offset="88.23529411764706%" stop-color="#2E2E2E"/>
+   <stop offset="100%" stop-color="#121212"/>
+  </radialGradient>
+  <filter color-interpolation-filters="sRGB" height="140%" id="Filter_1" width="140%" x="-20%" y="-20%">
+   <feColorMatrix in="SourceGraphic" result="result1" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.09 0"/>
+  </filter>
+  <filter color-interpolation-filters="sRGB" height="140%" id="Filter_2" width="140%" x="-20%" y="-20%">
+   <feColorMatrix in="SourceGraphic" result="result1" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.19 0"/>
+  </filter>
+  <filter color-interpolation-filters="sRGB" height="140%" id="Filter_3" width="140%" x="-20%" y="-20%">
+   <feColorMatrix in="SourceGraphic" result="result1" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.1 0"/>
+  </filter>
+  <filter color-interpolation-filters="sRGB" height="140%" id="Filter_4" width="140%" x="-20%" y="-20%">
+   <feColorMatrix in="SourceGraphic" result="result1" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.56 0"/>
+  </filter>
+  <filter color-interpolation-filters="sRGB" height="140%" id="Filter_5" width="140%" x="-20%" y="-20%">
+   <feColorMatrix in="SourceGraphic" result="result1" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.31 0"/>
+  </filter>
+  <filter color-interpolation-filters="sRGB" height="140%" id="Filter_6" width="140%" x="-20%" y="-20%">
+   <feColorMatrix in="SourceGraphic" result="result1" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.37 0"/>
+  </filter>
+  <filter color-interpolation-filters="sRGB" height="140%" id="Filter_7" width="140%" x="-20%" y="-20%">
+   <feColorMatrix in="SourceGraphic" result="result1" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0"/>
+  </filter>
+  <filter color-interpolation-filters="sRGB" height="140%" id="Filter_8" width="140%" x="-20%" y="-20%">
+   <feColorMatrix in="SourceGraphic" result="result1" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.51 0"/>
+  </filter>
+  <g id="Layer11_0_FILL">
+   <path d="m1232.25,689.7l0,-714.2l-1253.9,0l0,714.2l1253.9,0z" fill="url(#Gradient_1)" id="svg_1"/>
+  </g>
+  <g id="S_mbolo_4_0_Layer0_0_FILL">
+   <path d="m429.7,714.2l103.5,0l118.55,-212.5l-222.05,212.5m-308.5,0l-63.6,69.3l172.95,18.7l406.8,-345.8l-5.1,-6.75l-632.25,211.55l121.2,53m553.85,-286.3l15.85,-12.05l-589.7,38.9l-68,72.4l28.8,34.4l613.05,-133.65m37.9,19.55l-4.5,0l-64.3,266.75l68.8,0l0,-266.75m-19.7,-33.35l10.35,-7.8l-2.15,-2.85l-614.9,-124.25l23.2,104.15l583.5,30.75m50,41l-11.3,-14l-8.2,2.4l79.75,270.7l83.95,0l-144.2,-259.1m-2.4,-37.8l-6.95,6.35l265.1,290.55l140.25,0l-398.4,-296.9m-27.9,-25.4l0,-391.9l-111.1,0l111.1,391.9m-43.25,-27.6l39.3,29.25l-219.05,-393.55l-115.15,0l294.9,364.3m21.95,27.05l-21.95,-27.05l-488.8,-364.3l-59.7,0l0,151.45l570.45,239.9m239.95,-391.35l-115.3,0l-87.8,364.05l203.1,-364.05m308.5,0l-165.9,0l-349.3,378.95l5.4,7.1l509.8,-386.05m115,714.2l0,-72.75l-569.8,-210.75l469.55,283.5l100.25,0m0,-180.5l0,-117.85l-591.35,0l591.35,117.85m0,-200.5l0,-91.65l-597.7,170.5l0.75,2.7l596.95,-81.55m0,-188.9l0,-127.2l-597.2,379.5l597.2,-252.3z" fill="#FFFFFF" id="svg_2"/>
+  </g>
+  <g id="S_mbolo_21_0_Layer0_0_FILL">
+   <path d="m348.15,10.8q-2,-7.25 -20.25,-9.6q-5.5,-0.75 -12.3,-0.95q-6.95,-0.35 -15.25,-0.2q-9.45,0.15 -19.95,0.75q-0.9,0.1 -1.75,0.25l0.5,-0.2q-0.3,0 -0.65,0.05q-41.55,2.35 -99.5,10.75q-41.55,6.05 -76.1,13.55q-0.4,0.05 -0.65,0.1q-7.4,1.65 -14.45,3.35q-18.45,4.35 -34.6,9.15q-6.55,1.9 -12.2,3.75q-36.9,11.75 -40.55,19.2q-0.25,0.5 -0.35,1.05q-0.15,0.65 0.1,1.35q-1.2,13.55 5.1,16.4q10.55,3.85 25.85,6.85q3.3,0.6 6.9,1.2q6.55,1.1 13.4,1.95q1.35,0.2 2.75,0.35q5.3,0.65 10.9,1.2q5.15,0.45 10.45,0.8q0.55,2.75 1.15,5.55q0.55,2.8 1.1,5.75q0.4,2.55 0.85,5.25q1.25,7.5 2.25,15.2q1.15,8.65 2,17.4q2,20.85 2.25,42.7q0.4,40.65 -5.15,84.85q-0.3,2.45 -0.6,5q-1.05,5.8 1.05,10.1q2.05,3.95 6.7,6.15q11.05,5.35 24,9q3.95,1.15 8.05,2.15q10.85,2.6 22.85,4.1q3.1,0.35 6.2,0.65q19.75,2 40.2,1.2q0.25,0 0.5,0q0.2,-0.05 0.45,-0.05q14.25,-0.7 28.85,-2.8q0.25,-0.05 0.5,-0.1q0.3,-0.05 0.65,-0.1q27.25,-4.05 50.95,-12.3q4.85,-1.7 9.5,-3.55q3.15,-1.3 6.15,-2.6q18.55,-8.1 32.75,-18.2q3.6,-2.55 7.05,-5.3q6.3,-5.15 11.65,-10.9q6,-6.4 2.5,-13.6q-1.25,-2.65 -2.35,-5.3q-8.15,-18.5 -14.9,-34.7q-3.55,-8.45 -6.65,-16.2q-18.8,-46.3 -24.4,-69.95q-0.6,-2.5 -1.1,-4.85q-1.4,-6.15 -2.4,-11.4q-0.5,-2.25 -0.85,-4.35q-2.65,-16.2 -1.25,-23.6q1.9,-0.7 12.25,-4.9q10.3,-4.3 29.95,-14q19.7,-9.8 19.75,-20.5q0.05,-0.75 0.1,-1.45q0.25,-10.3 0.25,-12.95l0,-0.15l-0.2,-2.35z" fill="#000000" id="svg_3"/>
+  </g>
+  <g id="Layer8_0_FILL">
+   <path d="m682.85,290.5q-0.9,0.1 -1.75,0.25l0.5,-0.2q-0.3,0 -0.65,0.05q-41.55,2.35 -99.5,10.75q-41.55,6.05 -76.1,13.55q-0.4,0.05 -0.65,0.1q-7.4,1.65 -14.45,3.35q-18.45,4.35 -34.6,9.15q-6.55,1.9 -12.2,3.75q-36.9,11.75 -40.55,19.2q-0.25,0.5 -0.35,1.05q-0.15,0.65 0.1,1.35q-1.2,13.55 5.1,16.4q10.55,3.85 25.85,6.85q3.3,0.6 6.9,1.2q6.55,1.1 13.4,1.95q1.35,0.2 2.75,0.35q5.3,0.65 10.9,1.2q5.15,0.45 10.45,0.8q0.55,2.75 1.15,5.55q0.55,2.8 1.1,5.75q0.4,2.55 0.85,5.25q1.25,7.5 2.25,15.2q1.15,8.65 2,17.4q2,20.85 2.25,42.7q0.4,40.65 -5.15,84.85q-0.3,2.45 -0.6,5q-1.05,5.8 1.05,10.1q2.05,3.95 6.7,6.15q11.05,5.35 24,9q3.95,1.15 8.05,2.15q10.85,2.6 22.85,4.1q3.1,0.35 6.2,0.65q19.75,2 40.2,1.2q14.95,-0.7 30.3,-2.95q27.65,-4.05 51.6,-12.4q4.85,-1.7 9.5,-3.55q3.15,-1.3 6.15,-2.6q18.55,-8.1 32.75,-18.2q3.6,-2.55 7.05,-5.3q6.3,-5.15 11.65,-10.9q6,-6.4 2.5,-13.6q-1.25,-2.65 -2.35,-5.3q-8.15,-18.5 -14.9,-34.7q-3.55,-8.45 -6.65,-16.2q-18.8,-46.3 -24.4,-69.95q-0.6,-2.5 -1.1,-4.85q-1.4,-6.15 -2.4,-11.4q-0.5,-2.25 -0.85,-4.35q-2.65,-16.2 -1.25,-23.6q1.9,-0.7 12.25,-4.9q10.3,-4.3 29.95,-14q19.7,-9.8 19.75,-20.5q0.05,-0.75 0.1,-1.45q0.24,-10.3 0.25,-13l0,-0.1l-0.2,-2.35q-2,-7.25 -20.25,-9.6q-5.5,-0.75 -12.3,-0.95q-6.95,-0.35 -15.25,-0.2q-9.45,0.15 -19.95,0.75z" fill="#000000" id="svg_4"/>
+  </g>
+  <g id="S_mbolo_2_0_Layer0_0_FILL">
+   <path d="m0.85,29.3l0.15,-2.55q-0.25,0.4 -0.35,0.85q-0.15,0.5 -0.05,1.05q0.05,0.3 0.25,0.65m191.15,59.55q-10.05,2.35 -20.6,3.7q-22.65,2.85 -48.05,1.05q-5.65,-0.4 -11.4,-1.05q-8.35,-0.9 -16.95,-2.3q-5.1,-0.85 -10.3,-1.8q-2.55,-0.5 -5.05,-1q-4.15,-0.85 -8.35,-1.8q-5.35,-1.2 -11.05,-2.6q0.25,6.95 0.25,14q0,16.75 -1.5,34.2q-2.8,32.4 -10.6,67.15q-0.45,1.95 -0.9,3.95q-1.3,4.55 0.1,8.1q1.3,3.3 4.85,5.45q8.4,5.1 18.4,9q3.05,1.2 6.25,2.3q8.45,2.9 17.9,5.05q2.4,0.5 4.85,1q15.6,3.1 31.95,4q11.95,0.6 24.35,0q22.3,-1.1 42.05,-5.9q4,-1 7.85,-2.1q2.6,-0.8 5.1,-1.6q15.4,-5 27.45,-11.95q3.1,-1.8 6,-3.7q5.45,-3.65 10.15,-7.8q5.25,-4.65 3,-10.6q-0.75,-2.25 -1.45,-4.45q-5.05,-15.35 -9.2,-28.75q-2.15,-7 -4.05,-13.45q-11.4,-38.3 -14.05,-57.55q-0.3,-2.05 -0.5,-3.95q-0.65,-5 -1.05,-9.25q-5.1,2.5 -10.4,4.65q-1.4,0.55 -2.85,1.1q-4.1,1.6 -8.3,2.95q-6.8,2.25 -13.9,3.95z" fill="#000000" id="svg_5"/>
+   <path d="m171.4,92.55q10.55,-1.35 20.6,-3.7q7.1,-1.7 13.9,-3.95q4.2,-1.35 8.3,-2.95q1.45,-0.55 2.85,-1.1q5.3,-2.15 10.4,-4.65q-0.2,-1.85 -0.3,-3.55q-0.9,-13.1 0.8,-18.9q-10.1,2.25 -21.1,3.95q-8.6,1.35 -17.75,2.35q-25.55,2.7 -55.25,2.7q-6.25,0 -12.3,-0.1q-20.75,-0.45 -39.3,-2.25q-0.15,0 -0.35,0q-0.75,-0.1 -1.45,-0.15q-10.85,-1.15 -20.95,-2.75q-0.55,-0.1 -1.1,-0.15q0.25,2.25 0.5,4.5q0.2,2.3 0.4,4.65q0.15,2.1 0.3,4.25q0.45,6.1 0.65,12.3q5.7,1.4 11.05,2.6q4.2,0.95 8.35,1.8q2.5,0.5 5.05,1q5.2,0.95 10.3,1.8q8.6,1.4 16.95,2.3q5.75,0.65 11.4,1.05q25.4,1.8 48.05,-1.05z" fill="url(#Gradient_2)" id="svg_6"/>
+   <path d="m227,0.5q0.05,0.05 0.15,0.1l0.4,-0.1q-0.25,0 -0.55,0z" fill="#A4A3A3" id="svg_7"/>
+   <path d="m281.5,16.5q-0.15,0.45 -0.4,0.95q-4.45,9.3 -38.2,19.65q-2.45,0.75 -5,1.5q-2.4,0.65 -4.85,1.25q-19.65,5.05 -45.2,8q-16.5,1.9 -35.45,2.95q-6.3,0.35 -12.85,0.6q-9.6,0.4 -18.65,0.5q-13.75,0.15 -26.15,-0.35q-6.15,-0.25 -11.9,-0.6q-1.1,-0.1 -2.2,-0.15q-10.45,-0.8 -19.8,-2.05q-9.35,-1.3 -17.55,-3.1q-3.35,-0.75 -6.5,-1.55q-2.55,-0.65 -4.9,-1.3q-20.45,-5.55 -27.55,-10.1q-2.7,-1.7 -3.35,-5.95l-0.15,2.55q-0.2,-0.35 -0.25,-0.65q-2,10.75 2.8,13.45q8.15,3.9 20.05,7.45q2.6,0.75 5.4,1.5q5.15,1.4 10.55,2.6q1.05,0.25 2.15,0.5q4.2,0.9 8.6,1.75q4.05,0.75 8.25,1.45q0.55,0.05 1.1,0.15q10.1,1.6 20.95,2.75q0.7,0.05 1.45,0.15q0.2,0 0.35,0q18.55,1.8 39.3,2.25q6.05,0.1 12.3,0.1q29.7,0 55.25,-2.7q9.15,-1 17.75,-2.35q11,-1.7 21.1,-3.95q1.55,-0.4 10.1,-2.95q8.55,-2.6 24.95,-8.85q16.4,-6.25 17.3,-14.8q0.1,-0.6 0.2,-1.15q1,-8.35 1.2,-10.4q-0.05,0.4 -0.2,0.9z" fill="url(#Gradient_3)" id="svg_8"/>
+   <path d="m281.7,13.7q-1.05,-5.9 -15.4,-9.2q-4.3,-1 -9.7,-1.7q-5.5,-0.8 -12.15,-1.3q-7.5,-0.6 -15.9,-0.95q-0.75,0 -1.4,0.05q-0.1,-0.05 -0.15,-0.1q-33.25,-1.35 -80.05,0.9q-33.55,1.6 -61.65,4.95q-0.3,0 -0.5,0.05q-6.05,0.7 -11.8,1.5q-15,2.05 -28.25,4.65q-5.35,1.05 -10,2.05q-30.3,6.55 -33.75,12.15q0.65,4.25 3.35,5.95q7.1,4.55 27.55,10.1q2.35,0.65 4.9,1.3q3.15,0.8 6.5,1.55q8.2,1.8 17.55,3.1q9.35,1.25 19.8,2.05q1.1,0.05 2.2,0.15q5.75,0.35 11.9,0.6q12.4,0.5 26.15,0.35q9.05,-0.1 18.65,-0.5q6.55,-0.25 12.85,-0.6q18.95,-1.05 35.45,-2.95q25.55,-2.95 45.2,-8q2.45,-0.6 4.85,-1.25q2.55,-0.75 5,-1.5q33.75,-10.35 38.2,-19.65q0.25,-0.5 0.4,-0.95q0.1,-1 0.2,-2.8m-58.45,4.8q-0.85,5.85 -17.1,10.2q-16.25,4.3 -48.1,6.4q-31.9,2.1 -44.05,2.2q-5.1,0.05 -9.7,0q-13,-0.2 -22.45,-1.25q-0.4,-0.05 -0.75,-0.05q-20.2,-2.3 -22.4,-6.7q-2.25,-4.5 12.2,-8.65q5.1,-1.5 13.5,-2.8q15.5,-2.45 42.3,-4.35q17.95,-1.3 33.6,-1.9q20.35,-0.8 42.1,0.15q21.7,0.9 20.85,6.75z" fill="url(#Gradient_4)" id="svg_9"/>
+   <path d="m206.15,28.7q16.25,-4.35 17.1,-10.2q0.85,-5.85 -20.85,-6.75q-21.75,-0.95 -42.1,-0.15q-15.65,0.6 -33.6,1.9q-26.8,1.9 -42.3,4.35q-8.4,1.3 -13.5,2.8q-14.45,4.15 -12.2,8.65q2.2,4.4 22.4,6.7q0.35,0 0.75,0.05q9.45,1.05 22.45,1.25q4.6,0.05 9.7,0q12.15,-0.1 44.05,-2.2q31.85,-2.1 48.1,-6.4z" fill="url(#Gradient_5)" id="svg_10"/>
+   <path d="m281.7,15.6l0,-1.9q-0.1,1.8 -0.2,2.8q0.15,-0.5 0.2,-0.9z" fill="#A3A2A2" id="svg_11"/>
+  </g>
+  <g id="S_mbolo_1_0_Layer0_0_FILL">
+   <path d="m36.05,2.5q-14.45,0.9 -36.05,0.6l8.1,174.55q11.95,0.6 24.35,0q22.3,-1.1 42.05,-5.9q4,-1 7.85,-2.1l-12.85,-169.65q-19.05,1.6 -33.45,2.5z" fill="url(#Gradient_6)" id="svg_12"/>
+  </g>
+  <g id="Layer6_0_FILL">
+   <path d="m590.3,344.15l-0.6,0.1q2.48,-0.36 4.9,-0.8l0,-0.05q-1.84,0.34 -3.7,0.65l-0.6,0.1z" fill="url(#Gradient_7)" id="svg_13"/>
+   <path d="m589.7,344.25l0.6,-0.1l-0.95,0.15l0.35,-0.05z" fill="url(#Gradient_8)" id="svg_14"/>
+  </g>
+  <g id="S_mbolo_7_0_Layer0_0_FILL">
+   <path d="m121.2,0l-106.05,0l301.45,393.8q4.35,6.5 31.2,6.85l-226.6,-400.65z" fill="url(#Gradient_9)" id="svg_15"/>
+  </g>
+  <g id="S_mbolo_8_0_Layer0_0_FILL">
+   <path d="m121.95,0l-121.95,2l208.8,401.05q0.5,-0.05 12,-0.65q11.54,-0.61 25.3,-1.95l-124.15,-400.45z" fill="url(#Gradient_10)" id="svg_16"/>
+  </g>
+  <g id="S_mbolo_9_0_Layer0_0_FILL">
+   <path d="m155.25,395.95l-55.35,-395.95l-144.05,0l160,401.7q14.05,-1.65 29.6,-4.1l6.15,-1.05q1.8,-0.3 3.65,-0.6z" fill="url(#Gradient_11)" id="svg_17"/>
+  </g>
+  <g id="S_mbolo_10_0_Layer0_0_FILL">
+   <path d="m89.6,0l-89.6,1.5l66.9,394.55q20.55,-3.9 37.3,-8.5l-14.6,-387.55z" fill="url(#Gradient_12)" id="svg_18"/>
+  </g>
+  <g id="S_mbolo_12_0_Layer0_0_FILL">
+   <path d="m9.95,385.6l8.55,0q27.85,-9.05 24.85,-18.55l145.8,-365.35l-189.15,0l9.95,383.9z" fill="url(#Gradient_13)" id="svg_19"/>
+   <path d="m10.05,388.1q3.07,-0.49 8.45,-2.5l-8.55,0l0.1,2.5z" fill="url(#Gradient_14)" id="svg_20"/>
+  </g>
+  <g id="S_mbolo_20_0_Layer0_0_FILL">
+   <path d="m95.45,0l-60.4,0l124.95,401.7q9.18,-1.08 19,-2.5l-83.55,-399.2z" fill="url(#Gradient_15)" id="svg_21"/>
+  </g>
+  <g id="S_mbolo_13_0_Layer0_0_FILL">
+   <path d="m208.35,401q7.1,1.05 43.8,-1.95l-119.45,-399.05l-191.35,0l267,401z" fill="url(#Gradient_16)" id="svg_22"/>
+  </g>
+  <g id="S_mbolo_14_0_Layer0_0_FILL">
+   <path d="m257.6,396.45q17.59,9.38 40.55,12.2l50.15,-398.5l-117.95,-13.75l27.25,400.05z" fill="url(#Gradient_17)" id="svg_23"/>
+  </g>
+  <g id="S_mbolo_15_0_Layer0_0_FILL">
+   <path d="m47.15,408.95q22.46,-1.51 40.5,-5.45l-56.45,-437.85l-177.75,21.95l193.7,421.35z" fill="url(#Gradient_18)" id="svg_24"/>
+  </g>
+  <g id="S_mbolo_16_0_Layer0_0_FILL">
+   <path d="m43.95,443.1l-22.4,-434.1l-122.15,-21.55l100.1,463.2q18.2,-2.7 44.45,-7.55z" fill="url(#Gradient_19)" id="svg_25"/>
+  </g>
+  <g id="S_mbolo_17_0_Layer0_0_FILL">
+   <path d="m170.4,0l-170.4,0l40.95,455.95q48.01,-11.27 47,-22.05l82.45,-433.9z" fill="url(#Gradient_20)" id="svg_26"/>
+  </g>
+  <g id="logo_click_0_Layer0_0_FILL">
+   <path d="m46.15,22.75q0,-0.15 0,-0.25q-0.3,-9.1 -6.75,-15.6q-6.75,-6.9 -16.35,-6.9q-9.55,0 -16.3,6.9q-6.75,6.8 -6.75,16.55q0,0.55 0.05,1.1q0,0.2 0,0.4q0.05,0.7 0.1,1.35q0.3,1.95 0.85,3.8q0.1,0.4 0.2,0.7q1.8,4.9 5.5,8.6q3.35,3.25 6.25,4.55q0.5,0.2 0.95,0.4l0,0.1q4.3,1.7 9.2,1.7q6.15,0 11.6,-3.05q0.3,0.15 0.55,0.3q4.5,2.2 8.05,2.65q1.9,0.3 2.85,-0.1l0,-23.2m-25.1,-13.9q0.75,0.7 0.75,1.55l0,8.6q0.45,-1.7 2.15,-1.7q0.95,0 1.6,0.7q0.7,0.55 0.7,1.4l0,1.8q0.15,-1 1,-1.4q0.45,-0.2 1.2,-0.2q0.7,0 1.2,0.2q0.5,0.25 0.75,0.75q0.4,0.55 0.4,1.9l0,1.6q0.2,-1.4 0.85,-1.9q0.3,-0.25 1.25,-0.25q1,0 1.7,0.65q0.55,0.65 0.55,1.5l0.1,4.15q0,3.75 -2.35,6.55q-2.55,3.05 -6.55,3.05l-0.1,0q-5.6,0 -8.55,-3.7q-2.25,-2.95 -5.3,-12.2q-0.4,-0.95 0,-1.55q0.35,-0.5 1.05,-0.5q0.75,0 1.5,0.5q1.35,0.75 2.3,3.8l0,-13.75q0,-0.95 0.75,-1.6q0.65,-0.6 1.5,-0.6q0.85,0 1.55,0.65m82.7,35.4q1.9,-1.9 1.9,-4.55l0,-18.3l-6.55,0l0,24.75q2.75,0 4.65,-1.9m-16.95,-20.6q-0.2,-2 -1,-3.85q-0.9,-2.1 -2.65,-3.9q-4.05,-4.1 -10.9,-4.1q-6.75,0 -10.9,4.5q-1.5,1.55 -2.45,3.5q-2,4 -2,9.65q0,8.45 4.25,13.2q4.05,4.45 11,4.45q6.05,0 10,-3.5q3.5,-3.25 4.65,-8.9l-5.8,0q-1.15,0 -1.55,1.1q-0.85,2.55 -2.65,3.9q-1.9,1.35 -4.45,1.35q-4.2,0 -6.35,-3.5q-2,-3.05 -2,-8q0,-6.35 2.95,-9.4q0.15,-0.2 0.35,-0.35q2.1,-1.9 5.05,-1.9q3.5,0 5.45,1.9q1.05,1.1 1.65,2.85q0.3,1 1.45,1l5.9,0m9.15,-11.55q-2.75,0 -4.55,1.6q-1.9,1.7 -1.9,4.35l0,28.1l6.45,0l0,-34.05m9.7,6.6l0,-6.6l-6.55,0l0,6.6l6.55,0m18.85,11.5l6,0q-0.4,-5.2 -4.2,-7.65q-2.9,-1.8 -6.8,-1.8q-6,0 -9.05,3.85q-2.85,3.55 -2.85,9.9q0,4.9 2.3,8.15q2.95,4.2 9.2,4.2q6,0 9,-3.9q2.1,-2.6 2.4,-5.8l-6,0q-0.65,0 -0.75,0.65q-0.3,1.35 -1.25,2.35q-1.2,1.25 -3.1,1.25q-3.2,0 -4.35,-2.95q-0.7,-1.8 -0.7,-5.1q0,-2.85 1.05,-4.75q1.35,-2.35 4.1,-2.35q1.9,-0.2 3,1.05q0.9,0.85 1.25,2.25l0,0.1q0.1,0.55 0.75,0.55m25.8,-8.8q-2.9,0 -4.9,2.15l-6.3,7.25l0,-18.7l-6.55,0l0,34.05l6.55,0l0,-7.8l2.8,-2.85l5.85,10.65l7.9,0l-9.05,-15.15l8.75,-9.6l-5.05,0m12.55,22.95q1.9,-2 1.9,-4.65l0,-18.3l-6.55,0l0,24.85q2.75,0 4.65,-1.9m1.9,-25.65l0,-6.6l-6.55,0l0,6.6l6.55,0m26.15,-6.6l-6.55,0l0,12.5l-0.05,0q-2.55,-3.85 -7.25,-3.85q-4.35,0 -7.2,3.1q-3,3.5 -3,9.7q0,5.6 2.35,9.2q2.85,4.1 8.05,4.1q2.2,0 4,-0.8q2.1,-1.05 3.25,-3.05l0,3.25l5,0q0.55,0 0.95,-0.5q0.45,-0.35 0.45,-0.95l0,-32.7m-12,29.4q-2.9,0 -4.3,-2.65q-1.15,-2.1 -1.15,-4.85q0,-3.3 1.25,-5.3q1.5,-2.35 4.35,-2.35q3.05,0 4.45,2.55q1.15,1.95 1.15,5.4q0,3.05 -1.3,5q-1.6,2.2 -4.45,2.2m44.1,2.85q1.9,-2 1.9,-4.65l0,-18.3l-6.5,0l0,24.85q2.7,0 4.6,-1.9m-10.55,-21.05q-2.95,-2.55 -7.65,-2.55q-7.05,0 -10.1,5.1q-1.8,3.25 -1.8,7.4q0,13.6 12.35,13.6q3.6,0 6.45,-1.75q3.3,-2.1 4.45,-6.15l-5.95,0q-0.7,0 -0.95,0.55q-0.5,1.05 -1.65,1.6q-1.1,0.5 -2.35,0.5q-3.45,0 -4.75,-2.3q-0.85,-1.3 -1.05,-3.8l17.05,0l0,-1.1q0,-7.6 -4.05,-11.1m-4.55,3.9q1.6,1.4 1.9,4.05l-10.15,0q0.55,-5.2 5.15,-5.2q1.75,0 3.1,1.15m17,-8.75l0,-6.05l-6.5,0l0,6.05l6.5,0m23.4,9.5q0,-2.4 -1.2,-4q-0.9,-1.1 -2.4,-1.9q-2.65,-1.3 -6.25,-1.3q-4.75,0 -7.2,1.5q-3.45,2 -4,7.1l5.7,0q0.55,0 0.75,-0.55l0,-0.1q0.65,-2.75 3.9,-2.75q1.8,0 2.75,0.4q1.5,0.65 1.5,2.45q0,1.7 -2.25,2l-5.9,0.85q-3.2,0.55 -5.1,2.45q-2.1,2.1 -2.1,5.5q0,3.6 2.35,5.6q2.1,1.65 5.2,1.65q2.95,0 5.15,-1.25q1.25,-0.7 2.85,-2.4l0,0.1q0.2,1.25 1.15,2.1q0.85,0.85 2.05,0.85l3.05,0l0,-18.3m-13.95,8.5q0.95,-0.65 3.15,-1q3.4,-0.5 4.35,-1.35l0,3.25q0,2.05 -1.8,3.5q-1.7,1.35 -3.95,1.35q-1.15,0 -2.05,-0.6q-1,-0.85 -1,-2.4q0,-1.85 1.3,-2.75z" fill="#FFFFFF" id="svg_27"/>
+  </g>
+  <g id="Layer0_0_FILL">
+   <path d="m678.7,315.15q-0.61,4.71 -20.65,12.3q-20,7.65 -59.5,13.75q-39.55,6.15 -54.65,7.6q-6.35,0.6 -12.05,1.05q-16.25,1.2 -28.15,0.9q-0.5,0 -0.95,0.05q-25.4,-0.7 -28.6,-5.9q-0.55,-0.95 -3.55,-1.05l-1.95,0l0,2.55q-0.05,0.95 0.55,1.9q3.35,5.2 30,5.9q0.45,-0.05 1,-0.05q12.45,0.3 29.5,-0.9q6,-0.45 12.65,-1.05q15.85,-1.45 57.35,-7.6q41.4,-6.1 62.2,-13.2q20.75,-7.25 21.2,-14.65q0.1,-0.6 -0.1,-1.15l0,-4.55l-2.55,0q-1.14,-0.61 -1.75,4.1z" fill="url(#Gradient_21)" id="svg_28"/>
+  </g>
+ </defs>
+ <g class="layer">
+  <title>Layer 1</title>
+  <g id="svg_29" transform="matrix( 1, 0, 0, 1, 0,0) ">
+   <use id="svg_30" xlink:href="#Layer11_0_FILL"/>
+  </g>
+  <g id="svg_31" transform="matrix( 1, 0, 0, 1, -122.85,-24.5) ">
+   <g id="svg_32" transform="matrix( 1, 0, 0, 1, 0,0) ">
+    <use filter="url(#Filter_1)" id="svg_33" xlink:href="#S_mbolo_4_0_Layer0_0_FILL"/>
+   </g>
+  </g>
+  <g id="svg_34" transform="matrix( 1, 0, 0, 1, 395.45,296.7) ">
+   <g id="svg_35" transform="matrix( 1, 0, 0, 1, 0,0) ">
+    <use filter="url(#Filter_2)" id="svg_36" xlink:href="#S_mbolo_21_0_Layer0_0_FILL"/>
+   </g>
+  </g>
+  <g id="svg_37" transform="matrix( 1, 0, 0, 1, 0,0) ">
+   <use id="svg_38" xlink:href="#Layer8_0_FILL"/>
+  </g>
+  <g id="svg_39" transform="matrix( 1.2441864013671875, -0.1200103759765625, 0.1200103759765625, 1.2441864013671875, 398.45,317.25) ">
+   <g id="svg_40" transform="matrix( 1, 0, 0, 1, 0,0) ">
+    <use id="svg_41" xlink:href="#S_mbolo_2_0_Layer0_0_FILL"/>
+   </g>
+   <g id="svg_42" transform="matrix( 1, 0, 0, 1, 123.7,59.6) ">
+    <g id="svg_43" transform="matrix( 1, 0, 0, 1, 0,0) ">
+     <use filter="url(#Filter_3)" id="svg_44" xlink:href="#S_mbolo_1_0_Layer0_0_FILL"/>
+    </g>
+   </g>
+  </g>
+  <g id="svg_45" transform="matrix( 1, 0, 0, 1, 0,0) ">
+   <use id="svg_46" xlink:href="#Layer6_0_FILL"/>
+  </g>
+  <g id="svg_47" transform="matrix( 1, 0, 0, 1, 159.15,-48.45) ">
+   <g id="svg_48" transform="matrix( 1, 0, 0, 1, 0,0) ">
+    <use filter="url(#Filter_4)" id="svg_49" xlink:href="#S_mbolo_7_0_Layer0_0_FILL"/>
+   </g>
+  </g>
+  <g id="svg_50" transform="matrix( 1, 0, 0, 1, 303.35,-50.85) ">
+   <g id="svg_51" transform="matrix( 1, 0, 0, 1, 0,0) ">
+    <use filter="url(#Filter_5)" id="svg_52" xlink:href="#S_mbolo_8_0_Layer0_0_FILL"/>
+   </g>
+  </g>
+  <g id="svg_53" transform="matrix( 1, 0, 0, 1, 434.15,-52.5) ">
+   <g id="svg_54" transform="matrix( 1, 0, 0, 1, 0,0) ">
+    <use filter="url(#Filter_5)" id="svg_55" xlink:href="#S_mbolo_9_0_Layer0_0_FILL"/>
+   </g>
+  </g>
+  <g id="svg_56" transform="matrix( 1, 0, 0, 1, 537.4,-54.15) ">
+   <g id="svg_57" transform="matrix( 1, 0, 0, 1, 0,0) ">
+    <use filter="url(#Filter_5)" id="svg_58" xlink:href="#S_mbolo_10_0_Layer0_0_FILL"/>
+   </g>
+  </g>
+  <g id="svg_59" transform="matrix( 1, 0, 0, 1, 635.05,-56) "/>
+  <g id="svg_60" transform="matrix( 1, 0, 0, 1, 634.85,-55.8) ">
+   <g id="svg_61" transform="matrix( 1, 0, 0, 1, 0,0) ">
+    <use filter="url(#Filter_5)" id="svg_62" xlink:href="#S_mbolo_12_0_Layer0_0_FILL"/>
+   </g>
+  </g>
+  <g id="svg_63" transform="matrix( 1, 0, 0, 1, 543,-54.95) ">
+   <g id="svg_64" transform="matrix( 1, 0, 0, 1, 0,0) ">
+    <use filter="url(#Filter_5)" id="svg_65" xlink:href="#S_mbolo_10_0_Layer0_0_FILL"/>
+   </g>
+  </g>
+  <g id="svg_66" transform="matrix( 1, 0, 0, 1, 400.95,-53.65) ">
+   <g id="svg_67" transform="matrix( 1, 0, 0, 1, 0,0) ">
+    <use filter="url(#Filter_5)" id="svg_68" xlink:href="#S_mbolo_20_0_Layer0_0_FILL"/>
+   </g>
+  </g>
+  <g id="svg_69" transform="matrix( 1, 0, -0.090118408203125, 1, 465.9,-59.15) ">
+   <g id="svg_70" transform="matrix( 1, 0, 0, 1, 0,0) ">
+    <use filter="url(#Filter_5)" id="svg_71" xlink:href="#S_mbolo_20_0_Layer0_0_FILL"/>
+   </g>
+  </g>
+  <g id="svg_72" transform="matrix( 1, 0, 0, 1, 294.3,-48.85) ">
+   <g id="svg_73" transform="matrix( 1, 0, 0, 1, 0,0) ">
+    <use filter="url(#Filter_4)" id="svg_74" xlink:href="#S_mbolo_13_0_Layer0_0_FILL"/>
+   </g>
+  </g>
+  <g id="svg_75" transform="matrix( -1, 0, 0, 1, 924.05,-72.35) ">
+   <g id="svg_76" transform="matrix( 1, 0, 0, 1, 0,0) ">
+    <use filter="url(#Filter_6)" id="svg_77" xlink:href="#S_mbolo_14_0_Layer0_0_FILL"/>
+   </g>
+  </g>
+  <g id="svg_78" transform="matrix( 1, 0, 0, 1, 497.8,-59.05) ">
+   <g id="svg_79" transform="matrix( 1, 0, 0, 1, 0,0) ">
+    <use filter="url(#Filter_7)" id="svg_80" xlink:href="#S_mbolo_15_0_Layer0_0_FILL"/>
+   </g>
+  </g>
+  <g id="svg_81" transform="matrix( 1, 0, 0, 1, 584.55,-106.05) ">
+   <g id="svg_82" transform="matrix( 1, 0, 0, 1, 0,0) ">
+    <use filter="url(#Filter_8)" id="svg_83" xlink:href="#S_mbolo_16_0_Layer0_0_FILL"/>
+   </g>
+  </g>
+  <g id="svg_84" transform="matrix( 1, 0, 0, 1, 590.3,-120.7) ">
+   <g id="svg_85" transform="matrix( 1, 0, 0, 1, 0,0) ">
+    <use filter="url(#Filter_6)" id="svg_86" xlink:href="#S_mbolo_17_0_Layer0_0_FILL"/>
+   </g>
+  </g>
+  <g id="svg_90" transform="matrix( 1, 0, 0, 1, 0,0) ">
+   <use id="svg_91" xlink:href="#Layer0_0_FILL"/>
+  </g>
+ </g>
+</svg>
