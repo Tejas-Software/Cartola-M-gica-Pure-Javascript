@@ -150,7 +150,7 @@ class ContinueButton extends Image {
 
     Tick(){
         this.HoverTransformScale(GameData);
-        this.OnClick(this.GoToLink(GameData, "../scene_6"), GameData)
+        this.OnClick(this.GoToLink(GameData, "../scene_12"), GameData)
     }
 }
 class BackButtonModal extends Image {
@@ -509,27 +509,28 @@ class WordPanel {
         }
         renderImage();
 
-        const renderTextTimer = (text, color) => {
+        const renderTextTimer = (text, color, width, X) => {
 
-            if(text === "Maravilhosa"){
-                context.font = `${this.width * 0.168}px eurostyle`;
-            } else if (text === "Perfeccionista") {
-                context.font = `${this.width * 0.145}px eurostyle`; 
-            } else if (text === "Desmatamento") {
-                context.font = `${this.width * 0.135}px eurostyle`; 
+            if(text === "Rio de Janeiro"){
+                context.font = `${width * 0.138}px eurostyle`;
+            } else if (text === "Brinquedo") {
+                context.font = `${width * 0.145}px eurostyle`; 
+            } else if (text === "Limpar") {
+                context.font = `${width * 0.135}px eurostyle`; 
             }
 
             context.fillStyle = color; 
             context.globalAlpha = this.opacity;
             let thisText = text; 
-            context.fillText(thisText, this.textX , this.textY);  
+            context.fillText(thisText, X, this.textY);  
         }
+
         if(number === 1){
-            renderTextTimer('Desmatamento', "#FF0000");
+            renderTextTimer('Limpar', "#CC33CC", this.width, this.textX * 1.5);
         } else if(number === 2){
-            renderTextTimer('Perfeccionista', "#0066FF");
+            renderTextTimer('Brinquedo', "#FF0000", this.width, this.textX * 1.01);
         } else if(number === 3){
-            renderTextTimer('Maravilhosa', "#009966");
+            renderTextTimer('Rio de Janeiro', "#0066FF", this.width, this.textX * 1);
         }
  
     }
@@ -733,11 +734,13 @@ class WordPanel {
 
         if(number === 1){
             if(!word1Discovered){ word1Discovered = true;}
-            if(word1Discovered){
-                magicianPoints = 5;
+            if(word1Discovered && !word2Discovered){
+                playerPoints = 5;
+            } else if (word1Discovered && word2Discovered){
+                playerPoints = 10;
             }
-            showWrongAnswerModal = true;
-            showRightAnswerModal = false;
+            showWrongAnswerModal = false;
+            showRightAnswerModal = true;
             showDoubtModal = false;
 
 
@@ -747,10 +750,10 @@ class WordPanel {
                 word2Discovered = true;
             }
 
-            if(word2Discovered && !word3Discovered){
+            if(word2Discovered && !word1Discovered){
                 playerPoints = 5;
 
-            } else if (word2Discovered && word3Discovered){
+            } else if (word2Discovered && word1Discovered){
                 playerPoints = 10;
             }
 
@@ -766,15 +769,13 @@ class WordPanel {
                 word3Discovered = true;
             }
 
-            if(word3Discovered && !word2Discovered){
-                playerPoints = 5;
+            if(word3Discovered){
+                magicianPoints = 5;
 
-            } else if (word2Discovered && word3Discovered){
-                playerPoints = 10;
             }
 
-            showWrongAnswerModal = false;
-            showRightAnswerModal = true;
+            showWrongAnswerModal = true;
+            showRightAnswerModal = false;
             showDoubtModal = false;
 
         }
@@ -998,7 +999,7 @@ const BeginPlay = () => {
         });
     
         /**CALL THIS FUNCTION WILL ACTIVATE THE HOVERING EFFECT ON THE ELEMENT PASSED AS PARAMETER */
-        hover_on_element(continue_button_hover, canvas, "../scene_5/");
+        hover_on_element(continue_button_hover, canvas, "../scene_12/");
     
     
     })
