@@ -268,7 +268,7 @@ class Cartola extends Image {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -314,7 +314,7 @@ class WordPanel1 {
             this.opacity = 0;
             this.id = 1;
     
-            this.speed = 4.5;
+            this.speed = 10;
         
             this.number = 1;
 
@@ -561,7 +561,7 @@ class WordPanel1 {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -683,7 +683,7 @@ class WordPanel2 {
             this.opacity = 0;
             this.id = 2;
     
-            this.speed = 4.5;
+            this.speed = 10;
         
             this.number = 2;
 
@@ -931,7 +931,7 @@ class WordPanel2 {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -1052,7 +1052,7 @@ class WordPanel3 {
             this.opacity = 0;
             this.id = 3;
     
-            this.speed = 4.5;
+            this.speed = 10;
         
             this.number = 3;
 
@@ -1293,7 +1293,7 @@ class WordPanel3 {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -1414,7 +1414,7 @@ class WordPanel4 {
             this.opacity = 0;
             this.id = 4;
     
-            this.speed = 4.5;
+            this.speed = 10;
         
             this.number = 4;
 
@@ -1656,7 +1656,7 @@ class WordPanel4 {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -1778,7 +1778,7 @@ class WordPanel5 {
             this.opacity = 0;
             this.id = 5;
     
-            this.speed = 4.5;
+            this.speed = 10;
         
             this.number = 5;
 
@@ -2023,7 +2023,7 @@ class WordPanel5 {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }

@@ -90,7 +90,7 @@ class ButtonBack {
 
         this.x = (window.innerWidth / 100);
         this.y = window.innerHeight - this.height * 0.01 ;
-        this.speed = 0.4;
+        this.speed = 10;
 
     }
 
@@ -129,7 +129,7 @@ class ButtonContinue {
         this.initialWidth = this.width; /**INITIAL WIDTH IS USED TO HOVER ANIMATIONS */
         this.x = (window.innerWidth - this.width * 1.10);
         this.y = window.innerHeight - this.height * 0.01 ;
-        this.speed = 0.4;
+        this.speed = 10;
 
     }
     
@@ -192,7 +192,7 @@ class ImageMagician {
 
         this.x = 0
         this.y = window.innerHeight - this.height ;
-        this.speed = 4.5;
+        this.speed = 10;
 
         this.opacity = 0;
 
@@ -209,7 +209,7 @@ class ImageMagician {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -227,7 +227,7 @@ class Rabbit {
 
         this.x = (window.innerWidth * 0.35) 
         this.y = 0 ;
-        this.speed = 4.5;
+        this.speed = 10;
 
         this.opacity = 0;
 
@@ -245,7 +245,7 @@ class Rabbit {
     
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
