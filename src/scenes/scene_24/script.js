@@ -4,6 +4,9 @@ import { ResolutionMessage } from "../../../lib/Messages/ResolutionMessage.js";
 import { ScorePanel } from "../../../lib/Panels/ScorePanel.js";
 import { TimerPanel } from "../../../lib/Timer/Timer.js";
 
+let savedPlayerPoints = localStorage.getItem("playerPoints");
+let savedMagicianPoints = localStorage.getItem("magicianPoints");
+
 let GameData = {
     doubtButton: document.getElementById("doubt_button"),
     continueButton: document.getElementById("continue_button"),
@@ -42,8 +45,8 @@ let GameData = {
     Word5Visible: true,
 
 
-    playerPoints: 0,
-    magicianPoints: 0,
+    playerPoints: savedPlayerPoints ? parseInt(savedPlayerPoints) : 0,
+    magicianPoints: savedMagicianPoints ? parseInt(savedMagicianPoints) : 0,
 
     word1Discovered: false,
     word2Discovered: false,
@@ -1448,7 +1451,7 @@ class WordPanel4 {
     
         // Draw the text inside the panel
         const renderTextTimer = (text, color, width, X) => {
-            if (text === "Passado") {
+            if (text === "Passar") {
                 context.font = `${width * 0.138}px eurostyle`;
             } else if (text === "Marmelada") {
                 context.font = `${width * 0.145}px eurostyle`;
@@ -1465,7 +1468,7 @@ class WordPanel4 {
             context.fillText(thisText, textX, textY);
         };
     
-        renderTextTimer('Passado', "#CC33CC", this.width, this.textX * 1);
+        renderTextTimer('Passar', "#CC33CC", this.width, this.textX * 1);
     }
     
     HoverTransformScale(GameData, params){
@@ -1883,7 +1886,7 @@ class WordPanel5 {
     
         // Draw the text inside the panel
         const renderTextTimer = (text, color, width, X) => {
-            if (text === "Limparam") {
+            if (text === "Limpar") {
                 context.font = `${width * 0.138}px eurostyle`;
             } else if (text === "Marmelada") {
                 context.font = `${width * 0.145}px eurostyle`;
@@ -1900,7 +1903,7 @@ class WordPanel5 {
             context.fillText(thisText, textX, textY);
         };
     
-        renderTextTimer('Limparam', "#FF6600", this.width, this.textX * 1);
+        renderTextTimer('Limpar', "#FF6600", this.width, this.textX * 1);
     }
     
     
@@ -2409,7 +2412,7 @@ class Game {
 
             this.Word2.RenderModalWrong(context); 
 
-            if(GameData.playerPoints === 10) {
+            if(GameData.playerPoints === 65) {
                 this.ContinueButton.BeginPlay(context);
                 this.ContinueButton.Tick();
             } else {
@@ -2439,11 +2442,11 @@ class Game {
                 this.Word2.YouPointAdded = true;
             }
 
-            if(GameData.playerPoints < 10) {
+            if(GameData.playerPoints < 65) {
                 this.Word4.RenderModalRight(context);
                 this.BackButtonModal.BeginPlay(context);
                 this.BackButtonModal.Tick();
-            } else if(GameData.playerPoints === 10) {
+            } else if(GameData.playerPoints === 65) {
                 this.Word4.RenderModalTheEnd(context);
                 this.RestartButton.BeginPlay(context);
                 this.RestartButton.Tick();
@@ -2457,11 +2460,11 @@ class Game {
                 this.Word5.YouPointAdded = true;
             }
 
-            if (GameData.playerPoints < 10) {
+            if (GameData.playerPoints < 65) {
                 this.Word5.RenderModalRight(context); 
                 this.BackButtonModal.BeginPlay(context);
                 this.BackButtonModal.Tick();
-            } else if(GameData.playerPoints === 10) {
+            } else if(GameData.playerPoints === 65) {
                 this.Word4.RenderModalTheEnd(context);
                 this.RestartButton.BeginPlay(context);
                 this.RestartButton.Tick();

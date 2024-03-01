@@ -4,6 +4,9 @@ import { ResolutionMessage } from "../../../lib/Messages/ResolutionMessage.js";
 import { ScorePanel } from "../../../lib/Panels/ScorePanel.js";
 import { TimerPanel } from "../../../lib/Timer/Timer.js";
 
+let savedPlayerPoints = localStorage.getItem("playerPoints");
+let savedMagicianPoints = localStorage.getItem("magicianPoints");
+
 let GameData = {
     doubtButton: document.getElementById("doubt_button"),
     continueButton: document.getElementById("continue_button"),
@@ -32,8 +35,8 @@ let GameData = {
     Word5Visible: true,
 
 
-    playerPoints: 0,
-    magicianPoints: 0,
+    playerPoints: savedPlayerPoints ? parseInt(savedPlayerPoints) : 0,
+    magicianPoints: savedMagicianPoints ? parseInt(savedMagicianPoints) : 0,
 
     word1Discovered: false,
     word2Discovered: false,
@@ -2275,6 +2278,7 @@ class Game {
 
             if(this.Word1.MagicianPointAdded === false){
                 GameData.magicianPoints += 5;
+                localStorage.setItem("magicianPoints", GameData.magicianPoints)
                 this.Word1.MagicianPointAdded = true;
             }
 
@@ -2287,12 +2291,13 @@ class Game {
 
             if(this.Word2.YouPointAdded === false){
                 GameData.playerPoints += 5;
+                localStorage.setItem("playerPoints", GameData.playerPoints)
                 this.Word2.YouPointAdded = true;
             }
 
             this.Word2.RenderModalRight(context); 
 
-            if(GameData.playerPoints === 10) {
+            if(GameData.playerPoints > 45) {
                 this.ContinueButton.BeginPlay(context);
                 this.ContinueButton.Tick();
             } else {
@@ -2306,6 +2311,7 @@ class Game {
 
             if(this.Word3.MagicianPointAdded === false){
                 GameData.magicianPoints += 5;
+                localStorage.setItem("magicianPoints", GameData.magicianPoints)
                 this.Word3.MagicianPointAdded = true;
             }
 
@@ -2318,6 +2324,7 @@ class Game {
 
             if(this.Word4.MagicianPointAdded === false){
                 GameData.magicianPoints += 5;
+                localStorage.setItem("magicianPoints", GameData.magicianPoints)
                 this.Word4.MagicianPointAdded = true;
             }
 
@@ -2330,11 +2337,12 @@ class Game {
 
             if(this.Word5.YouPointAdded === false){
                 GameData.playerPoints += 5;
+                localStorage.setItem("playerPoints", GameData.playerPoints)
                 this.Word5.YouPointAdded = true;
             }
 
             this.Word5.RenderModalRight(context); 
-            if(GameData.playerPoints === 10) {
+            if(GameData.playerPoints > 45) {
                 this.ContinueButton.BeginPlay(context);
                 this.ContinueButton.Tick();
             } else {

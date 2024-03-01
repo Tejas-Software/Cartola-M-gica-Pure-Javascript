@@ -52,8 +52,12 @@ let showWrongAnswerModal = false;
 let showRightAnswerModal = false;
 let modalBackButton = document.getElementById("back_button");
 let modalText = document.getElementById("modal_message");
-let playerPoints = 0;
-let magicianPoints = 0;
+
+let savedPlayerPoints = localStorage.getItem("playerPoints");
+let playerPoints = savedPlayerPoints ? parseInt(savedPlayerPoints) : 0;
+
+let savedMagicianPoints = localStorage.getItem("magicianPoints");
+let magicianPoints = savedMagicianPoints ? parseInt(savedMagicianPoints) : 0;
 
 let word1Discovered = false;
 let word2Discovered = false;
@@ -222,8 +226,12 @@ class TimePanel {
             this.speed = 10;
 
             this.milliseconds = 0;
-            this.seconds = 0;
-            this.minutes = 0;
+
+            const savedSeconds = localStorage.getItem('seconds');
+            const savedMinutes = localStorage.getItem('minutes');
+        
+            this.seconds = savedSeconds ? parseInt(savedSeconds) : 0;
+            this.minutes = savedMinutes ? parseInt(savedMinutes) : 0;
     
             this.opacity = 0;
         }
@@ -243,14 +251,16 @@ class TimePanel {
             let text;
             context.font = `4vw agency`; 
             context.fillStyle = 'white'; 
-            if(this.seconds < 10 && this.minutes < 10){
-                text = `0${this.minutes}:0${this.seconds}`; 
-            } else if (this.seconds >= 10 && this.minutes < 10) {
-                text = `0${this.minutes}:${this.seconds}`
-            }
-
+        
+            // Adicionando zeros à esquerda para minutos e segundos
+            const formattedMinutes = (this.minutes < 10) ? `0${this.minutes}` : `${this.minutes}`;
+            const formattedSeconds = (this.seconds < 10) ? `0${this.seconds}` : `${this.seconds}`;
+        
+            text = `${formattedMinutes}:${formattedSeconds}`; 
+        
             context.fillText(text, (this.width * 0.8) , this.height * 0.95);
         }
+        
         renderTextTimer();
         
 
@@ -264,11 +274,13 @@ class TimePanel {
         if(this.milliseconds >= 1000){
             this.seconds += 1;
             this.milliseconds = 0;
+            localStorage.setItem('seconds', this.seconds);
         }
 
         if(this.seconds === 60){
             this.minutes += 1;
             this.seconds = 0;
+            localStorage.setItem('minutes', this.minutes);
         }
 
         const begginingAnimation = (origin) => {
@@ -342,7 +354,7 @@ class MagicianPanel {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -407,7 +419,7 @@ class YouPanel {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -442,7 +454,7 @@ class Cartola {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -729,12 +741,12 @@ class WordPanel {
     RenderModalAnswer(number, context){
 
         if(number === 1){
-            if(!word1Discovered){ word1Discovered = true;}
-            if(word1Discovered && !word2Discovered){
-                playerPoints = 5;
-            } else if (word1Discovered && word2Discovered){
-                playerPoints = 10;
+            if(!word1Discovered){ 
+                word1Discovered = true;
+                playerPoints += 5;
+                localStorage.setItem("playerPoints", playerPoints)
             }
+
             showWrongAnswerModal = false;
             showRightAnswerModal = true;
             showDoubtModal = false;
@@ -744,13 +756,8 @@ class WordPanel {
 
             if(!word2Discovered){
                 word2Discovered = true;
-            }
-
-            if(word2Discovered && !word1Discovered){
-                playerPoints = 5;
-
-            } else if (word2Discovered && word1Discovered){
-                playerPoints = 10;
+                playerPoints += 5;
+                localStorage.setItem("playerPoints", playerPoints)
             }
 
             showWrongAnswerModal = false;
@@ -763,11 +770,8 @@ class WordPanel {
 
             if(!word3Discovered){
                 word3Discovered = true;
-            }
-
-            if(word3Discovered){
-                magicianPoints = 5;
-
+                magicianPoints += 5;
+                localStorage.setItem("magicianPoints", magicianPoints)
             }
 
             showWrongAnswerModal = true;
@@ -789,7 +793,7 @@ class WordPanel {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -905,7 +909,7 @@ class Game {
         if(showRightAnswerModal){
             this.Word1.RenderModalRight(context);
 
-            if(playerPoints >= 10){
+            if(playerPoints >= 30){
                 this.ContinueButton.BeginPlay(context);
                 this.ContinueButton.Tick();
             } else {
