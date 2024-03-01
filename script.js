@@ -88,7 +88,7 @@ class BrandLogo {
         this.height = this.width * 0.20;
         this.x = (window.innerWidth / 100);
         this.y = window.innerWidth /  window.innerWidth * window.innerHeight ;
-        this.speed = 1.5;
+        this.speed = 10;
 
     }
 
@@ -125,7 +125,7 @@ class ButtonStart {
         this.initialWidth = this.width; /**INITIAL WIDTH IS USED TO HOVER ANIMATIONS */
         this.x = (window.innerWidth / 1.18);
         this.y = (window.innerHeight * 1.25) ;
-        this.speed = 1.5;
+        this.speed = 10;
 
     }
     
@@ -188,7 +188,7 @@ class ImageCartola {
         this.height = this.width * 0.50;
         this.x = (window.innerWidth * 0.20)
         this.y = (window.innerHeight * -0.5) ;
-        this.speed = 4.5;
+        this.speed = 10;
 
     }
     draw(context){
@@ -216,7 +216,7 @@ class ImageCartas {
         this.height = this.width * 0.50;
         this.x = (window.innerWidth * 0.20)
         this.y = (window.innerHeight * 1.5) ;
-        this.speed = 4.5;
+        this.speed = 10;
 
     }
 
