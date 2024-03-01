@@ -4,6 +4,9 @@ import { ResolutionMessage } from "../../../lib/Messages/ResolutionMessage.js";
 import { ScorePanel } from "../../../lib/Panels/ScorePanel.js";
 import { TimerPanel } from "../../../lib/Timer/Timer.js";
 
+let savedPlayerPoints = localStorage.getItem("playerPoints");
+let savedMagicianPoints = localStorage.getItem("magicianPoints");
+
 let GameData = {
     doubtButton: document.getElementById("doubt_button"),
     continueButton: document.getElementById("continue_button"),
@@ -42,8 +45,8 @@ let GameData = {
     Word5Visible: true,
 
 
-    playerPoints: 0,
-    magicianPoints: 0,
+    playerPoints: savedPlayerPoints ? parseInt(savedPlayerPoints) : 0,
+    magicianPoints: savedMagicianPoints ? parseInt(savedMagicianPoints) : 0,
 
     word1Discovered: false,
     word2Discovered: false,
@@ -281,7 +284,7 @@ class Cartola extends Image {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -327,7 +330,7 @@ class WordPanel1 {
             this.opacity = 0;
             this.id = 1;
     
-            this.speed = 4.5;
+            this.speed = 10;
         
             this.number = 1;
 
@@ -377,7 +380,7 @@ class WordPanel1 {
 
         params.map((param)=>{if(param === true){trueParams+=1;}})
 
-        console.log(GameData.canClickWordPanels())
+ 
 
 
         if(paramsLength === trueParams && GameData.canClickWordPanels()){
@@ -572,7 +575,7 @@ class WordPanel1 {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -693,7 +696,7 @@ class WordPanel2 {
             this.opacity = 0;
             this.id = 2;
     
-            this.speed = 4.5;
+            this.speed = 10;
         
             this.number = 2;
 
@@ -941,7 +944,7 @@ class WordPanel2 {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -1062,7 +1065,7 @@ class WordPanel3 {
             this.opacity = 0;
             this.id = 3;
     
-            this.speed = 4.5;
+            this.speed = 10;
         
             this.number = 3;
 
@@ -1303,7 +1306,7 @@ class WordPanel3 {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -1425,7 +1428,7 @@ class WordPanel4 {
             this.opacity = 0;
             this.id = 4;
     
-            this.speed = 4.5;
+            this.speed = 10;
         
             this.number = 4;
 
@@ -1448,7 +1451,7 @@ class WordPanel4 {
     
         // Draw the text inside the panel
         const renderTextTimer = (text, color, width, X) => {
-            if (text === "Passado") {
+            if (text === "Passar") {
                 context.font = `${width * 0.138}px eurostyle`;
             } else if (text === "Marmelada") {
                 context.font = `${width * 0.145}px eurostyle`;
@@ -1465,7 +1468,7 @@ class WordPanel4 {
             context.fillText(thisText, textX, textY);
         };
     
-        renderTextTimer('Passado', "#CC33CC", this.width, this.textX * 1);
+        renderTextTimer('Passar', "#CC33CC", this.width, this.textX * 1);
     }
     
     HoverTransformScale(GameData, params){
@@ -1737,7 +1740,7 @@ class WordPanel4 {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -1860,7 +1863,7 @@ class WordPanel5 {
             this.opacity = 0;
             this.id = 5;
     
-            this.speed = 4.5;
+            this.speed = 10;
         
             this.number = 5;
 
@@ -1883,7 +1886,7 @@ class WordPanel5 {
     
         // Draw the text inside the panel
         const renderTextTimer = (text, color, width, X) => {
-            if (text === "Limparam") {
+            if (text === "Limpar") {
                 context.font = `${width * 0.138}px eurostyle`;
             } else if (text === "Marmelada") {
                 context.font = `${width * 0.145}px eurostyle`;
@@ -1900,7 +1903,7 @@ class WordPanel5 {
             context.fillText(thisText, textX, textY);
         };
     
-        renderTextTimer('Limparam', "#FF6600", this.width, this.textX * 1);
+        renderTextTimer('Limpar', "#FF6600", this.width, this.textX * 1);
     }
     
     
@@ -2175,7 +2178,7 @@ class WordPanel5 {
         const begginingAnimation = (origin) => {
             if(origin === "AppearGradient"){
                 if(this.opacity < 1){
-                    this.opacity += 0.009;
+                    this.opacity += 0.1;
                 }
             }
         }
@@ -2278,13 +2281,13 @@ class InvisibleDropZone {
 
         let bIsMouseColliding = CheckMouseCollision(this, GameData);
         if (bIsMouseColliding && GameData.isMouseDown)  {
-            console.log("in drop zone")
-            console.log(GameData.selectedWord)
+   
+ 
             GameData.wordInsideDropZone = true;
         } 
 
         if(!bIsMouseColliding || !GameData.isMouseDown) {
-            console.log(GameData.selectedWord)
+ 
             GameData.wordInsideDropZone = false;
         }
 
@@ -2409,7 +2412,7 @@ class Game {
 
             this.Word2.RenderModalWrong(context); 
 
-            if(GameData.playerPoints === 10) {
+            if(GameData.playerPoints === 65) {
                 this.ContinueButton.BeginPlay(context);
                 this.ContinueButton.Tick();
             } else {
@@ -2439,11 +2442,11 @@ class Game {
                 this.Word2.YouPointAdded = true;
             }
 
-            if(GameData.playerPoints < 10) {
+            if(GameData.playerPoints < 65) {
                 this.Word4.RenderModalRight(context);
                 this.BackButtonModal.BeginPlay(context);
                 this.BackButtonModal.Tick();
-            } else if(GameData.playerPoints === 10) {
+            } else if(GameData.playerPoints === 65) {
                 this.Word4.RenderModalTheEnd(context);
                 this.RestartButton.BeginPlay(context);
                 this.RestartButton.Tick();
@@ -2457,11 +2460,11 @@ class Game {
                 this.Word5.YouPointAdded = true;
             }
 
-            if (GameData.playerPoints < 10) {
+            if (GameData.playerPoints < 65) {
                 this.Word5.RenderModalRight(context); 
                 this.BackButtonModal.BeginPlay(context);
                 this.BackButtonModal.Tick();
-            } else if(GameData.playerPoints === 10) {
+            } else if(GameData.playerPoints === 65) {
                 this.Word4.RenderModalTheEnd(context);
                 this.RestartButton.BeginPlay(context);
                 this.RestartButton.Tick();
@@ -2568,7 +2571,7 @@ const BeginPlay = () => {
         GameData.Clicked = true;
         setTimeout(() => {
             GameData.Clicked = false;
-        }, 15);  
+        }, 75);  
 
         
 
@@ -2578,15 +2581,14 @@ const BeginPlay = () => {
         /**GETS IF MOUSE IS DOWN */
         canvas.addEventListener('mousedown', function(event) {
             
-            console.log("mouse is down")
+ 
             GameData.isMouseDown = true;
                  
         });
 
         /**GETS IF MOUSE IS DOWN */
         canvas.addEventListener('mouseup', function(event) {
-            
-            console.log("mouse is up")
+ 
             GameData.isMouseDown = false;
                  
         });
