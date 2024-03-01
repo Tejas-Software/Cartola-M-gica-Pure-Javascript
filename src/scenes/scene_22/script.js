@@ -2412,7 +2412,7 @@ const BeginPlay = () => {
         GameData.Clicked = true;
         setTimeout(() => {
             GameData.Clicked = false;
-        }, 15);  
+        }, 75);  
 
         
 
